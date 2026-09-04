@@ -66,6 +66,8 @@ p { margin: 0 0 0.9rem; }
 }
 
 section { padding: 1.6rem 0; }
+.interests { padding-left: 1.2rem; }
+.interests li { text-align: justify; hyphens: auto; margin-bottom: 0.7rem; }
 .callout {
   border-left: 3px solid var(--accent); background: var(--accent-soft);
   padding: 0.85rem 1rem; border-radius: 6px; margin: 0.6rem 0 0.4rem;
