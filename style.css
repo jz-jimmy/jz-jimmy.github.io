@@ -66,6 +66,7 @@ p { margin: 0 0 0.9rem; }
 }
 
 section { padding: 1.6rem 0; }
+.vision { text-align: justify; hyphens: auto; }
 .interests { padding-left: 1.2rem; }
 .interests li { text-align: justify; hyphens: auto; margin-bottom: 0.7rem; }
 .callout {
