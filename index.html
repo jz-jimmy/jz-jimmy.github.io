@@ -133,7 +133,11 @@
     <div class="grid">
 
       <article class="card">
-        <div class="cover"><img src="assets/img/augsim.jpg" alt="Augmented simulation vs. real gear assembly"></div>
+        <div class="cover">
+          <video autoplay muted loop playsinline poster="assets/img/augsim.jpg" aria-label="Simulation, augmented simulation, and real robot side by side">
+            <source src="assets/img/augsim.mp4" type="video/mp4">
+          </video>
+        </div>
         <div class="body">
           <h3>Augmenting Simulation with World Models for Sim2Real Style Transfer <span class="badge">ongoing</span></h3>
           <div class="meta">Lead author &middot; Prof. Yunzhu Li, Columbia &middot; 2026</div>
@@ -162,6 +166,7 @@
           <h3>DARPA TIAMAT Challenge: Sim-to-Sim Transfer for Boston Dynamics Spot</h3>
           <div class="meta">Perception lead &middot; Columbia team with Prof. Yunzhu Li &middot; 2025–2026</div>
           <p>Train a Spot in a low-fidelity simulator, then transfer within a fixed budget to an unseen high-fidelity one. I led perception: domain randomization for training data and a real-time open-set detector that stays accurate on objects it has never seen, served to the navigation and locomotion stacks.</p>
+          <div class="plinks"><a href="https://sites.mit.edu/tiamat/" target="_blank" rel="noopener">Project page</a></div>
           <div class="tags"><span>Open-set detection</span><span>Domain randomization</span><span>Isaac Sim</span></div>
         </div>
       </article>
