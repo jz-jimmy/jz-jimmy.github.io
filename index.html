@@ -22,8 +22,9 @@
       <li><a href="#publications">Publications</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
+      <!-- Blog: un-comment when the first post is ready
       <li><a href="blog/">Blog</a></li>
-      <li><a href="files/CV_Jiayu_Zhou.pdf">CV</a></li>
+      -->
     </ul>
   </div>
 </nav>
@@ -36,18 +37,15 @@
     <div>
       <h1>Jiayu Zhou</h1>
       <div class="title">
-        M.S. in Computer Engineering, Columbia University<br>
-        Robot learning with <a href="https://yunzhuli.github.io/" target="_blank" rel="noopener">Prof. Yunzhu Li</a>
-        &middot; Agentic RL with <a href="https://www.cs.uic.edu/~psyu/" target="_blank" rel="noopener">Prof. Philip S. Yu</a>
+        M.S. in Computer Engineering, <a href="https://www.columbia.edu/" target="_blank" rel="noopener">Columbia University</a><br>
+        B.S. in Computer Engineering, <a href="https://illinois.edu/" target="_blank" rel="noopener">University of Illinois Urbana-Champaign</a><br>
+        B.E. in Electrical and Computer Engineering, <a href="https://zjui.intl.zju.edu.cn/" target="_blank" rel="noopener">Zhejiang University</a> (ZJU-UIUC Institute)
       </div>
       <div class="links">
-        <a class="primary" href="files/CV_Jiayu_Zhou.pdf">CV</a>
-        <a href="files/CV_Jiayu_Zhou_Robotics.pdf">CV (Robotics)</a>
         <a href="mailto:jz4019@columbia.edu">Email</a>
         <a href="https://scholar.google.com/citations?user=SgtpILMAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
         <a href="https://github.com/jz-jimmy" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/jiayu-zhou-ba09982b2" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="blog/">Blog</a>
       </div>
     </div>
   </section>
@@ -60,13 +58,14 @@
       I am a master's student in Computer Engineering at <strong>Columbia University</strong>, where I work on
       robot learning in <a href="https://yunzhuli.github.io/" target="_blank" rel="noopener">Prof. Yunzhu Li</a>'s group.
       I am interested in making simulation and learned world models trustworthy enough to train and evaluate real robots,
-      and in training LLM agents that improve themselves through verifiable feedback. I also collaborate remotely with
+      and in training LLM agents that improve themselves through verifiable feedback. I also work with
       <a href="https://www.cs.uic.edu/~psyu/" target="_blank" rel="noopener">Prof. Philip S. Yu</a> at UIC on agentic reinforcement learning.
     </p>
     <p>
       Before Columbia, I completed a dual-degree program at the <strong>University of Illinois Urbana-Champaign</strong> (B.S.) and
-      <strong>Zhejiang University</strong> (B.E.), where I worked with Prof. Hanghang Tong on LLM reasoning over knowledge graphs
-      and with Prof. Gaoang Wang on personalized image captioning.
+      <strong>Zhejiang University</strong> (B.E.), where I worked with
+      <a href="http://tonghanghang.org/" target="_blank" rel="noopener">Prof. Hanghang Tong</a> on LLM reasoning over knowledge graphs
+      and with <a href="https://cvnext.github.io/" target="_blank" rel="noopener">Prof. Gaoang Wang</a> on personalized image captioning.
     </p>
     <!-- EDIT: next steps -->
     <div class="callout">
@@ -137,20 +136,23 @@
         <div class="cover"><img src="assets/img/augsim.jpg" alt="Augmented simulation vs. real gear assembly"></div>
         <div class="body">
           <h3>Augmenting Simulation with World Models for Sim2Real Style Transfer <span class="badge">ongoing</span></h3>
-          <div class="meta">Lead author &middot; Prof. Yunzhu Li, Columbia &middot; Jun 2026 – present</div>
-          <p>A simulator augmented by a style-transfer world model can act both as a trustworthy evaluator and as a scalable training-data engine. On a 2.5 mm-tolerance gear-assembly task (MuJoCo, Franka FR3), policy success in augmented sim correlates with real-robot success at Pearson 0.93. A curriculum-PPO teacher with augmented on-policy distillation reaches ~100% success in sim-only training. Style-transfer inference on Cosmos 3 Nano was accelerated 8.4× (2.8 s to 0.33 s per frame on GH200) via DMD2 distillation, context parallelism, and hierarchical sparse attention.</p>
-          <div class="tags"><span>World models</span><span>Sim2Real</span><span>Cosmos</span><span>PPO / OPD</span><span>MuJoCo</span></div>
+          <div class="meta">Lead author &middot; Prof. Yunzhu Li, Columbia &middot; 2026</div>
+          <p>Can a simulator dressed up by a style-transfer world model stand in for the real robot, both as an evaluator and as a training-data engine? On a high-precision gear-assembly task with a Franka FR3, policies trained only in augmented simulation reach real-world-level success, and success rates in sim track those on the real robot.</p>
+          <div class="tags"><span>World models</span><span>Sim2Real</span><span>Cosmos</span><span>MuJoCo</span></div>
         </div>
       </article>
 
       <article class="card">
-        <!-- EDIT: add a cover image, e.g. assets/img/iws.jpg -->
-        <div class="cover placeholder">Cover image coming soon</div>
+        <div class="cover">
+          <video autoplay muted loop playsinline poster="assets/img/iws_poster.jpg" aria-label="Interactive world model rolling out a PushT task">
+            <source src="assets/img/iws.mp4" type="video/mp4">
+          </video>
+        </div>
         <div class="body">
           <h3>Interactive World Model for VLA Imitation Learning and RL Post-Training</h3>
-          <div class="meta">Research assistant &middot; Prof. Yunzhu Li, Columbia &middot; Feb – May 2026</div>
-          <p>A task-specific interactive world model trained on ~4 hours of real-robot data rolls out physically consistent, 10+ minute trajectories at 15 FPS on one RTX 4090. I designed a closed-loop data engine around it (imitation, MPPI warm-starts, replaying RL failures on the real robot), post-trained Diffusion Policy with SAC using VLM-logit rewards, and quantified the model's fidelity as a policy evaluator against real-world rollouts.</p>
-          <div class="tags"><span>World models</span><span>Diffusion Policy</span><span>SAC</span><span>MPPI</span></div>
+          <div class="meta">Research assistant &middot; Prof. Yunzhu Li, Columbia &middot; 2026</div>
+          <p>A world model trained on a few hours of real-robot data that rolls out long-horizon, physically consistent trajectories in real time. I used it as a closed-loop data engine for imitation learning and RL post-training of Diffusion Policy, and measured how faithfully it evaluates policies against real-world rollouts.</p>
+          <div class="tags"><span>World models</span><span>Diffusion Policy</span><span>RL post-training</span></div>
         </div>
       </article>
 
@@ -158,9 +160,9 @@
         <div class="cover"><img src="assets/img/darpa.jpg" alt="DARPA TIAMAT challenge"></div>
         <div class="body">
           <h3>DARPA TIAMAT Challenge: Sim-to-Sim Transfer for Boston Dynamics Spot</h3>
-          <div class="meta">Perception lead &middot; Columbia team with Prof. Yunzhu Li &middot; Dec 2025 – Feb 2026</div>
-          <p>Train a Spot in low-fidelity Habitat-Sim, then transfer within a fixed budget to an unseen high-fidelity Isaac Sim. I owned the perception module: three domain-randomization pipelines, YOLO-World fine-tuning studies, and a real-time open-set detection dual system (YOLO-World proposals verified by DINOv2) reaching 0.97 precision on unseen objects, with round-trip latency cut from 780 ms to 620 ms by overlapping DINOv2 precompute with YOLO inference.</p>
-          <div class="tags"><span>Open-set detection</span><span>Domain randomization</span><span>Isaac Sim</span><span>Docker</span></div>
+          <div class="meta">Perception lead &middot; Columbia team with Prof. Yunzhu Li &middot; 2025–2026</div>
+          <p>Train a Spot in a low-fidelity simulator, then transfer within a fixed budget to an unseen high-fidelity one. I led perception: domain randomization for training data and a real-time open-set detector that stays accurate on objects it has never seen, served to the navigation and locomotion stacks.</p>
+          <div class="tags"><span>Open-set detection</span><span>Domain randomization</span><span>Isaac Sim</span></div>
         </div>
       </article>
 
@@ -168,9 +170,10 @@
         <div class="cover"><img src="assets/img/funcgrasp.jpg" alt="FuncGrasp"></div>
         <div class="body">
           <h3>FuncGrasp: Semantically-Guided Functional Dexterous Grasping</h3>
-          <div class="meta">Course project &middot; Prof. Yunzhu Li, Columbia &middot; Aug – Dec 2025</div>
-          <p>A VLM + diffusion stack for the Shadow Hand: a LoRA-tuned Qwen2-VL-2B maps language, RGB-D, point clouds (PointTransformer), and state to per-subtask contact maps, and a DDPM conditioned on keyframe contact maps predicts 34-D action chunks. Extended DexGraspNet 1.0 with affordance maps and multi-view images in MuJoCo and added collision losses, improving success and semantic following by ~31%.</p>
-          <div class="tags"><span>Dexterous grasping</span><span>VLM</span><span>Diffusion</span><span>Point clouds</span></div>
+          <div class="meta">Course project &middot; Prof. Yunzhu Li, Columbia &middot; 2025</div>
+          <p>Grasping an object the way a task needs it, not just stably. A vision-language model turns instructions and multi-view observations into contact maps, and a diffusion policy turns those into Shadow Hand actions.</p>
+          <div class="plinks"><a href="https://github.com/jz-jimmy/FuncGrasp" target="_blank" rel="noopener">Code</a></div>
+          <div class="tags"><span>Dexterous grasping</span><span>VLM</span><span>Diffusion</span></div>
         </div>
       </article>
 
@@ -178,9 +181,10 @@
         <div class="cover"><img src="assets/img/coevoskills.jpg" alt="CoEvoSkills"></div>
         <div class="body">
           <h3>CoEvoSkills: Self-Evolving Agent Skills via Co-Evolutionary Verification <span class="badge">COLM 2026</span></h3>
-          <div class="meta">With Prof. Philip S. Yu, UIC &middot; Jan – Apr 2026</div>
-          <p>A Skill Generator and an information-isolated Surrogate Verifier co-evolve through generate–verify–refine cycles to build multi-file agent skills without access to ground-truth tests. On SkillsBench the evolved skills reach a 71.1% pass rate (+40.5pp over no skills, +17.6pp over human-curated skills), and skills evolved by one model transfer to six other LLMs with +35–44pp gains.</p>
-          <div class="tags"><span>LLM agents</span><span>Agent skills</span><span>Claude Code / Codex</span><span>Evaluation</span></div>
+          <div class="meta">With Prof. Philip S. Yu, UIC &middot; 2026</div>
+          <p>Agents that write and verify their own multi-file skills. A skill generator and an isolated verifier co-evolve without ever seeing the ground-truth tests, and the resulting skills beat human-written ones on SkillsBench and transfer across model families.</p>
+          <div class="plinks"><a href="https://github.com/Zhang-Henry/CoEvoSkills" target="_blank" rel="noopener">Code</a> <a href="https://arxiv.org/abs/2604.01687" target="_blank" rel="noopener">Paper</a></div>
+          <div class="tags"><span>LLM agents</span><span>Agent skills</span><span>Verification</span></div>
         </div>
       </article>
 
@@ -188,9 +192,9 @@
         <div class="cover"><img src="assets/img/toolturn.jpg" alt="ToolTurn"></div>
         <div class="body">
           <h3>ToolTurn: Multi-Turn Tool-Use Agent RL with Graph-Guided Data Synthesis <span class="badge">IEEE BigData 2026</span></h3>
-          <div class="meta">With Prof. Philip S. Yu, UIC &middot; Aug 2025 – present</div>
-          <p>A Tool-Dependency Graph backend synthesizes and filters multi-turn tool-call trajectories across 14 benchmark tasks, and doubles as a sandbox that emits per-turn verifiable rewards from state matching. Qwen2-7B and Qwen3-8B trained with SFT followed by GRPO/DAPO and curriculum learning gain ~10% over the SFT baseline on BFCL and API-Bank multi-turn.</p>
-          <div class="tags"><span>Agentic RL</span><span>GRPO / DAPO</span><span>Data synthesis</span><span>Verifiable rewards</span></div>
+          <div class="meta">With Prof. Philip S. Yu, UIC &middot; 2025–2026</div>
+          <p>A tool-dependency graph that both synthesizes multi-turn tool-use trajectories and serves as a sandbox with verifiable per-turn rewards, so that RL for tool-using agents no longer depends on a sparse end-of-episode signal.</p>
+          <div class="tags"><span>Agentic RL</span><span>Data synthesis</span><span>Verifiable rewards</span></div>
         </div>
       </article>
 
@@ -198,9 +202,10 @@
         <div class="cover"><img src="assets/img/seniordesign.jpg" alt="VR teleoperation of a UR3e arm"></div>
         <div class="body">
           <h3>VR Teleoperation of a UR3e Arm for Object Grasping</h3>
-          <div class="meta">Senior design &middot; Prof. Liangjing Yang, Zhejiang University &middot; Jan – Jun 2025</div>
-          <p>Real-time remote control (latency under 33 ms, ~20 m range) of a UR3e through a Unity digital twin and a Meta Quest 3S interface. A 3D-printed PLA + TPU gripper closes the loop on contact force with an STM32 + CAN controller on a custom PCB. Open-sourced and reproducible.</p>
-          <div class="tags"><span>Teleoperation</span><span>Unity / VR</span><span>Embedded</span><span>UR3e</span></div>
+          <div class="meta">Senior design &middot; Prof. Liangjing Yang, Zhejiang University &middot; 2025</div>
+          <p>Low-latency remote grasping through a Unity digital twin and a Meta Quest headset, with a 3D-printed gripper that closes the loop on contact force. Open-sourced and reproducible.</p>
+          <div class="plinks"><a href="https://github.com/jz-jimmy/Senior-Design-Human-Robot-Interaction-for-Object-Grasping-with-VR-and-Robotic-Arm" target="_blank" rel="noopener">Code</a></div>
+          <div class="tags"><span>Teleoperation</span><span>Unity / VR</span><span>Embedded</span></div>
         </div>
       </article>
 
@@ -208,9 +213,9 @@
         <div class="cover"><img src="assets/img/embrag.jpg" alt="EmbRAG"></div>
         <div class="body">
           <h3>EmbRAG: LLM Reasoning over Incomplete Temporal Knowledge Graphs</h3>
-          <div class="meta">Research assistant &middot; Prof. Hanghang Tong, UIUC &middot; Sep 2023 – Jan 2025</div>
-          <p>Rules are sampled by random walk and scored by hit frequency and temporal association; a decoder generates new rules from high-confidence prompts. Fuzzy logic and rule-embedding similarity fill missing adjacency entries, which enables end-to-end LoRA fine-tuning of the LLM and reaches state-of-the-art results on multiple temporal knowledge-graph benchmarks.</p>
-          <div class="tags"><span>Knowledge graphs</span><span>LLM reasoning</span><span>LoRA</span></div>
+          <div class="meta">Research assistant &middot; Prof. Hanghang Tong, UIUC &middot; 2023–2025</div>
+          <p>Letting an LLM reason over knowledge graphs that are missing edges: sampled and scored rules guide the model, and embedding-based gap filling makes the whole pipeline end-to-end trainable, reaching state-of-the-art results on temporal knowledge-graph benchmarks.</p>
+          <div class="tags"><span>Knowledge graphs</span><span>LLM reasoning</span></div>
         </div>
       </article>
 
@@ -218,9 +223,9 @@
         <div class="cover"><img src="assets/img/captioning.jpg" alt="Personalized image captioning"></div>
         <div class="body">
           <h3>Personalized Image Captioning for Social Platforms <span class="badge">PRCV 2023</span></h3>
-          <div class="meta">Undergraduate group leader &middot; Prof. Gaoang Wang, Zhejiang University &middot; Jan 2022 – Jul 2023</div>
-          <p>User-specific cues are encoded as a fixed-length query prefix projected into CLIP's visual feature space and injected into GPT-2's key-value layers; the mapping network is trained end to end. Doubled BLEU-4 and other caption-quality metrics over baselines on Instagram-style datasets.</p>
-          <div class="tags"><span>Vision-language</span><span>Prefix tuning</span><span>CLIP / GPT-2</span></div>
+          <div class="meta">Undergraduate group leader &middot; Prof. Gaoang Wang, Zhejiang University &middot; 2022–2023</div>
+          <p>Captions in the user's own voice: user-specific cues become a learned prefix that steers a vision-language captioner, roughly doubling caption quality over generic baselines on social-media data.</p>
+          <div class="tags"><span>Vision-language</span><span>Prefix tuning</span></div>
         </div>
       </article>
 
@@ -235,9 +240,8 @@
       <div>
         <div class="head"><h3>OpenPie — Software Engineer Intern, LLM Applications</h3><span class="when">Jul – Aug 2024 &middot; Shanghai</span></div>
         <ul>
-          <li>Built a government-policy question-answering RAG assistant from 0 to 1 on OpenPie's cloud-native data stack (PieCloudVector, PieAIStudio): OCR ingestion, semantic double-pass chunking, bge-m3 embeddings with an HNSW index, and Qwen2-7B-Instruct grounded with clause-level citations.</li>
-          <li>Created a 120-question multiple-choice benchmark and lifted accuracy from 20.0% to 83.3%; after launch cut p95 latency from 6.1 s to 1.8 s and hallucinated answers from 23% to 4%.</li>
-          <li>Mentored two students through the full RAG lifecycle in OpenPie's AI4AI pair-programming camp.</li>
+          <li>Built a government-policy question-answering RAG assistant from the ground up on OpenPie's cloud-native data stack, from document ingestion and semantic chunking to retrieval, grounding with citations, and cloud deployment.</li>
+          <li>Set up a multiple-choice benchmark to drive the system's accuracy up, and mentored two students through the full RAG lifecycle in OpenPie's AI4AI camp.</li>
         </ul>
       </div>
     </div>
@@ -253,36 +257,10 @@
     <div class="row">
       <div class="logo text">UIC</div>
       <div>
-        <div class="head"><h3>University of Illinois Chicago — Research Assistant (remote)</h3><span class="when">Aug 2025 – present</span></div>
+        <div class="head"><h3>University of Illinois Chicago — Research Assistant</h3><span class="when">Aug 2025 – present</span></div>
         <ul>
           <li>Agentic RL and self-evolving agents with Prof. Philip S. Yu: ToolTurn, CoEvoSkills, and a survey on data synthesis for agent learning.</li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== EDUCATION ===================== -->
-  <section id="education">
-    <h2>Education</h2>
-    <div class="row">
-      <div class="logo text">CU</div>
-      <div>
-        <div class="head"><h3>Columbia University</h3><span class="when">Aug 2025 – May 2027 (expected)</span></div>
-        <div class="muted">M.S. in Computer Engineering</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="logo text">UIUC</div>
-      <div>
-        <div class="head"><h3>University of Illinois Urbana-Champaign</h3><span class="when">Aug 2021 – May 2025</span></div>
-        <div class="muted">B.S. in Computer Engineering, The Grainger College of Engineering</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="logo text">ZJU</div>
-      <div>
-        <div class="head"><h3>Zhejiang University</h3><span class="when">Aug 2021 – Jun 2025</span></div>
-        <div class="muted">B.E. in Electrical and Computer Engineering, ZJU-UIUC Institute</div>
       </div>
     </div>
   </section>
@@ -294,6 +272,11 @@
     &copy; 2026 Jiayu Zhou &middot; <a href="mailto:jz4019@columbia.edu">jz4019@columbia.edu</a> &middot; Last updated September 2026
   </div>
 </footer>
+
+<!-- Private visitor analytics (GoatCounter). Totals and visitor countries are visible only
+     to the account owner at https://jz-jimmy.goatcounter.com. Nothing is shown on the page. -->
+<script data-goatcounter="https://jz-jimmy.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>

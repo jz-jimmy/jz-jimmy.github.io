@@ -45,9 +45,11 @@ p { margin: 0 0 0.9rem; }
 @media (max-width: 640px) { .nav ul { display: none; } }
 
 /* hero */
-.hero { display: grid; grid-template-columns: 220px 1fr; gap: 2.2rem; align-items: center; padding: 3rem 0 2.2rem; }
-.hero img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 28px rgba(0,0,0,0.12); }
-.hero .title { font-size: 1.05rem; color: var(--muted); margin-bottom: 0.9rem; }
+.hero { display: grid; grid-template-columns: 300px 1fr; gap: 2.4rem; align-items: center; padding: 3rem 0 2.2rem; }
+.hero img { width: 300px; height: 300px; border-radius: 22px; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.14); }
+.hero .title { font-size: 1.02rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.55; }
+.hero .title a { color: var(--fg); }
+.card .plinks a { font-size: 0.9rem; margin-right: 0.7rem; }
 .links { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; }
 .links a {
   display: inline-flex; align-items: center; gap: 0.35rem;
@@ -59,7 +61,7 @@ p { margin: 0 0 0.9rem; }
 .links a.primary:hover { background: #0a4cb8; color: #fff; }
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; text-align: center; gap: 1.2rem; padding-top: 2rem; }
-  .hero img { margin: 0 auto; width: 180px; height: 180px; }
+  .hero img { margin: 0 auto; width: 220px; height: 220px; }
   .links { justify-content: center; }
 }
 
@@ -92,7 +94,7 @@ section { padding: 1.6rem 0; }
 }
 .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-1px); }
 .card .cover { aspect-ratio: 16 / 9; background: #e9edf2; overflow: hidden; position: relative; }
-.card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card .cover img, .card .cover video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .card .cover.placeholder { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 0.9rem; }
 .card .body { padding: 0.9rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
 .card .meta { font-size: 0.85rem; color: var(--muted); }

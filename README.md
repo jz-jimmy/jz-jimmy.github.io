@@ -4,7 +4,7 @@ Personal academic homepage of Jiayu Zhou. Static HTML/CSS, served by GitHub Page
 
 - `index.html` / `style.css`: the page
 - `assets/img/`: photo, project covers, logos
-- `files/`: CV PDFs
+- (CV PDFs intentionally not hosted)
 
 Edit `index.html` directly; sections marked `<!-- EDIT -->` are meant to be filled in.
 
