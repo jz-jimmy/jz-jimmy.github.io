@@ -216,6 +216,11 @@
 <p>The split happens at the first chunk. With styled frames the first plan aims about 2 cm differently, and the arm takes about 10 s to reconverge to within a few mm. By then it has closed on the gear at a different spot, so the gear sits differently in the hand. Insertion then engages 80–160 steps later and never seats. After the first chunk, styled and raw frames move the plan by only 2–3 mm.</p>
 <figure><img src="img/query_1000013.svg" alt="Seed 1000013: per-frame action gap and trajectory gap"><figcaption>Seed 1000013: blue, per-frame gap between the chunks planned from raw and from styled frames of the same state; orange, TCP gap between the raw-sim and augsim trajectories.</figcaption></figure>
 <figure><img src="img/query_1000000.svg" alt="Seed 1000000: per-frame action gap and trajectory gap"><figcaption>Seed 1000000, same measures.</figcaption></figure>
+<p>Videos, three columns: the raw-sim episode on its own trajectory | the augsim episode rendered raw | the same augsim state as Nano renders it (the style the policy saw). The overlay shows the per-frame planned-chunk gap between the raw and styled inputs. Rows: wrist2, right static, left static. In the first seconds, compare the left and middle columns: the arms already move apart.</p>
+<p>Seed 1000013:</p>
+<figure><video controls preload="metadata" playsinline src="videos/raw_vs_styled_1000013.mp4" aria-label="Seed 1000013: raw-sim episode, augsim state raw, augsim state Nano"></video></figure>
+<p>Seed 1000000:</p>
+<figure><video controls preload="metadata" playsinline src="videos/raw_vs_styled_1000000.mp4" aria-label="Seed 1000000: raw-sim episode, augsim state raw, augsim state Nano"></video></figure>
 <p>Caveat: per-frame queries use the autoregressive reconstruction, not the static-clip frames the policy consumed during the augsim eval. The recorded policy-view video is lossy, so feeding it back does not reproduce the recorded chunks exactly (largest component off by 0.24 and 0.85). Using that video, the t = 0 gap is 19–21 mm, consistent with the reconstruction.</p>
 <p><strong>What this means for ref_sim.</strong> Matching appearance can remove the first-chunk shift seen in augsim. It cannot remove the ~3.5 mm tracking gap in probe 1. Modelling the real arm's settling bias is a separate, likely necessary fix.</p>
 
