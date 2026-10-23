@@ -70,6 +70,9 @@
       <li><a href="#9-positioning-against-roborender-and-what-this-approach-is-good-for">9. vs RoboRender, outlook</a></li>
       <li><a href="#10-work-plan-and-deliverables">10. Work plan</a></li>
       <li><a href="#11-in-progress-ref-sim">11. In progress: ref_sim</a></li>
+      <li><a href="#12-where-sim-augsim-and-the-rig-part-ways">12. Where they part ways</a></li>
+      <li><a class="sub" href="#probe-1-real-actions-replayed-in-sim">Real actions in sim</a></li>
+      <li><a class="sub" href="#probe-2-same-state-raw-vs-styled-frames">Raw vs styled frames</a></li>
     </ol>
   </details>
   <article class="post">
@@ -175,6 +178,46 @@
 <tr><td>Camera</td><td>Slightly soft focus, compression noise</td><td>Perfectly sharp</td><td>Mild blur and sensor noise</td></tr>
 </tbody></table></div>
 <p>The visuals are a render-only layer: physics and the control contract are unchanged, so the new policy can be evaluated in the old sim, in augsim and on the rig. Per episode, the collection randomizes lights, colours and textures, specularity, camera exposure and white balance, and the camera pose by about 0.5&deg; and 5 mm (the last real failures came from a 0.28&deg; camera rotation). Training adds LeRobot's image transforms (colour jitter, sharpness, small crop and blur).</p>
+<h2 id="12-where-sim-augsim-and-the-rig-part-ways">12. Where sim, augsim and the rig part ways: two probes</h2>
+<p>Augsim and the real rig fail for different reasons. Augsim's failures start at the very first action chunk, where the styled images shift the approach by about 2 cm and the gear ends up in a different place in the hand. The rig differs from sim in dynamics: the real arm tracks the same commands about 3.5 mm differently, enough to break a sub-millimetre insertion.</p>
+
+<h3 id="probe-1-real-actions-replayed-in-sim">Probe 1: the real successes' actions, replayed open-loop in sim</h3>
+<p>For each of the 8 real successes (2026-10-19), the 8-d policy outputs the rig executed were replayed on the same seed in sim. All 8 grasp and lift in sim, but only 2 fully seat. The sim TCP departs from the measured real TCP by more than 5 mm within 2–3 steps and stays 3–4 mm off, with peaks of 6–12 mm during insertion. As a check, feeding the rig's consumed images and state back to the policy reproduces the executed chunks to within 0.006.</p>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Sim grasp</th><th>Lift</th><th>Engage</th><th>Fully seated</th><th>TCP gap median (mm)</th><th>TCP gap max (mm)</th></tr></thead><tbody>
+<tr><td>1000001</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>3.7</td><td>8.0</td></tr>
+<tr><td>1000006</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td><td>3.1</td><td>12.5</td></tr>
+<tr><td>1000007</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td><td>4.4</td><td>8.9</td></tr>
+<tr><td>1000008</td><td>✓</td><td>✓</td><td>✗</td><td>✗</td><td>3.6</td><td>9.1</td></tr>
+<tr><td>1000009</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td><td>3.9</td><td>7.6</td></tr>
+<tr><td>1000011</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>3.6</td><td>6.0</td></tr>
+<tr><td>1000012</td><td>✓</td><td>✓</td><td>✓</td><td>✗</td><td>4.2</td><td>8.1</td></tr>
+<tr><td>1000013</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>3.5</td><td>6.7</td></tr>
+</tbody></table></div>
+<figure><img src="img/real_replay_1000006.svg" alt="Seed 1000006: TCP and gripper gap between sim replay and real over time"><figcaption>Seed 1000006: sim-vs-real TCP gap (blue) and gripper gap (orange); red lines mark the sim's grasp, lift and engagement.</figcaption></figure>
+<p>Seed 1000006: the real gear is on the shaft at 17 s; in sim, the same commands leave it tilted in the hand beside the shaft. Left column real, right column sim replay; rows wrist2, right static, left static.</p>
+<figure><video controls preload="metadata" playsinline src="videos/real_vs_sim_replay_1000006.mp4" aria-label="Seed 1000006: real vs sim replay of the same actions"></video></figure>
+<p>Seed 1000013: one of the two seeds that also seat in sim.</p>
+<figure><video controls preload="metadata" playsinline src="videos/real_vs_sim_replay_1000013.mp4" aria-label="Seed 1000013: real vs sim replay of the same actions"></video></figure>
+<p>Seed 1000001: sim grasps and lifts but never engages.</p>
+<figure><video controls preload="metadata" playsinline src="videos/real_vs_sim_replay_1000001.mp4" aria-label="Seed 1000001: real vs sim replay of the same actions"></video></figure>
+
+<h3 id="probe-2-same-state-raw-vs-styled-frames">Probe 2: same state, raw vs styled frames</h3>
+<p>Two seeds that succeed in raw sim but fail in augsim (1000013, 1000000) were checked. Along each augsim episode, replayed exactly, the policy was queried at every frame twice with the same proprioception: once on the raw sim render, once on the Nano reconstruction of that state. The raw-sim episode of the same seed was replayed alongside.</p>
+<div class="tablewrap"><table><thead><tr><th>Measure</th><th>Seed 1000013</th><th>Seed 1000000</th></tr></thead><tbody>
+<tr><td>Planned-chunk gap at t = 0, raw vs styled</td><td>19.3 mm</td><td>13.4 mm</td></tr>
+<tr><td>Same, at later decision steps (median)</td><td>3.0 mm</td><td>2.4 mm</td></tr>
+<tr><td>Trajectories apart by &gt; 5 mm (TCP)</td><td>step 2</td><td>step 3</td></tr>
+<tr><td>Trajectory TCP gap at 3.3 s / 6.7 s / 10 s / 13.3 s</td><td>19.3 / 11.1 / 4.9 / 2.7 mm</td><td>15.7 / 7.9 / 4.7 / 4.7 mm</td></tr>
+<tr><td>Grasp step, raw sim / augsim</td><td>161 / 157</td><td>160 / 156</td></tr>
+<tr><td>Gear positions apart by &gt; 5 mm</td><td>step 186 (right after the grasp)</td><td>step 181</td></tr>
+<tr><td>Engage step, raw sim / augsim</td><td>298 / 458</td><td>293 / 376</td></tr>
+<tr><td>Fully seated, raw sim / augsim</td><td>step 427 / never</td><td>step 474 / never</td></tr>
+</tbody></table></div>
+<p>The split happens at the first chunk. With styled frames the first plan aims about 2 cm differently, and the arm takes about 10 s to reconverge to within a few mm. By then it has closed on the gear at a different spot, so the gear sits differently in the hand. Insertion then engages 80–160 steps later and never seats. After the first chunk, styled and raw frames move the plan by only 2–3 mm.</p>
+<figure><img src="img/query_1000013.svg" alt="Seed 1000013: per-frame action gap and trajectory gap"><figcaption>Seed 1000013: blue, per-frame gap between the chunks planned from raw and from styled frames of the same state; orange, TCP gap between the raw-sim and augsim trajectories.</figcaption></figure>
+<figure><img src="img/query_1000000.svg" alt="Seed 1000000: per-frame action gap and trajectory gap"><figcaption>Seed 1000000, same measures.</figcaption></figure>
+<p>Caveat: per-frame queries use the autoregressive reconstruction, not the static-clip frames the policy consumed during the augsim eval. The recorded policy-view video is lossy, so feeding it back does not reproduce the recorded chunks exactly (largest component off by 0.24 and 0.85). Using that video, the t = 0 gap is 19–21 mm, consistent with the reconstruction.</p>
+<p><strong>What this means for ref_sim.</strong> Matching appearance can remove the first-chunk shift seen in augsim. It cannot remove the ~3.5 mm tracking gap in probe 1. Modelling the real arm's settling bias is a separate, likely necessary fix.</p>
 
   </article>
 </main>
