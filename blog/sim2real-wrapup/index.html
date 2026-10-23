@@ -179,7 +179,7 @@
 <tr><td>Camera</td><td>Slightly soft focus, compression noise</td><td>Perfectly sharp</td><td>Mild blur and sensor noise</td></tr>
 </tbody></table></div>
 <p>The visuals are a render-only layer: physics and the control contract are unchanged, so the new policy can be evaluated in the old sim, in augsim and on the rig. Per episode, the collection randomizes lights, colours and textures, specularity, camera exposure and white balance, and the camera pose by about 0.5&deg; and 5 mm (the last real failures came from a 0.28&deg; camera rotation). Training adds LeRobot's image transforms (colour jitter, sharpness, small crop and blur).</p>
-<h2 id="12-where-sim-augsim-and-the-rig-part-ways">12. Where sim, augsim and the rig part ways: two probes</h2>
+<h2 id="12-where-sim-augsim-and-the-rig-part-ways">12. Where sim, augsim and the rig part ways: three probes</h2>
 <p>Augsim and the real rig fail for different reasons. Augsim's failures start at the very first action chunk, where the styled images shift the approach by about 2 cm and the gear ends up in a different place in the hand. The rig differs from sim in dynamics: the real arm tracks the same commands about 3.5 mm differently, enough to break a sub-millimetre insertion.</p>
 
 <h3 id="probe-1-real-actions-replayed-in-sim">Probe 1: the real successes' actions, replayed open-loop in sim</h3>
