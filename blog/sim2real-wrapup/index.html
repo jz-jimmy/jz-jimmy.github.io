@@ -73,6 +73,7 @@
       <li><a href="#12-where-sim-augsim-and-the-rig-part-ways">12. Where they part ways</a></li>
       <li><a class="sub" href="#probe-1-real-actions-replayed-in-sim">Real actions in sim</a></li>
       <li><a class="sub" href="#probe-2-same-state-raw-vs-styled-frames">Raw vs styled frames</a></li>
+      <li><a class="sub" href="#probe-3-eval-time-frames-vs-reconstruction">Eval frames vs reconstruction</a></li>
     </ol>
   </details>
   <article class="post">
@@ -221,7 +222,24 @@
 <figure><video controls preload="metadata" playsinline src="videos/raw_vs_styled_1000013.mp4" aria-label="Seed 1000013: raw-sim episode, augsim state raw, augsim state Nano"></video></figure>
 <p>Seed 1000000:</p>
 <figure><video controls preload="metadata" playsinline src="videos/raw_vs_styled_1000000.mp4" aria-label="Seed 1000000: raw-sim episode, augsim state raw, augsim state Nano"></video></figure>
-<p>Caveat: per-frame queries use the autoregressive reconstruction, not the static-clip frames the policy consumed during the augsim eval. The recorded policy-view video is lossy, so feeding it back does not reproduce the recorded chunks exactly (largest component off by 0.24 and 0.85). Using that video, the t = 0 gap is 19–21 mm, consistent with the reconstruction.</p>
+<p>These per-frame queries use the autoregressive reconstruction, not the static-clip frames the policy consumed during the augsim eval. Probe 3 checks that this substitution is safe.</p>
+
+<h3 id="probe-3-eval-time-frames-vs-reconstruction">Probe 3: the frames the policy saw during eval vs the reconstruction</h3>
+<p>The reconstruction is a faithful stand-in. At each decision step, the eval-time styled frames and the reconstructed frames of the same state are about 27 dB PSNR apart. The policy's plans from the two differ by 1.7–1.8 mm (median), while either one differs from the plan on raw frames by 16–20 mm at t = 0.</p>
+<p>The eval client deleted the eval-time styled PNGs after use, so they were regenerated losslessly. The augsim episode was replayed through the same closed-loop Nano server setup (same checkpoint, 10 steps, seed 1, 25-frame static clip, edge + depth from the same render), restyling at every decision step (t = 0, 100, …).</p>
+<div class="tablewrap"><table><thead><tr><th>Decision steps (27 per seed)</th><th>Seed 1000013</th><th>Seed 1000000</th></tr></thead><tbody>
+<tr><td>PSNR eval-time vs reconstruction (median: wrist2 / right / left)</td><td>27.2 / 27.7 / 26.0 dB</td><td>27.3 / 28.1 / 25.9 dB</td></tr>
+<tr><td>PSNR eval-time vs raw render (range)</td><td>8.5–17.9 dB</td><td>8.5–17.4 dB</td></tr>
+<tr><td>Plan gap, eval-time vs reconstruction: t = 0 / median</td><td>3.0 / 1.8 mm</td><td>3.6 / 1.7 mm</td></tr>
+<tr><td>Plan gap, eval-time vs raw: t = 0 / median</td><td>16.5 / 3.2 mm</td><td>16.8 / 3.1 mm</td></tr>
+<tr><td>Plan gap, reconstruction vs raw: median</td><td>3.2 mm</td><td>2.8 mm</td></tr>
+<tr><td>Regenerated frames reproduce the recorded chunk (max abs): t = 0 / other steps</td><td>0.015 / 0.005–1.9</td><td>0.008 / 0.003–1.5</td></tr>
+</tbody></table></div>
+<figure><img src="img/consumed_vs_recon_1000013_t0.png" alt="Seed 1000013 at t = 0: raw render, eval-time Nano frame, AR reconstruction"><figcaption>Seed 1000013, t = 0. Columns: raw render | eval-time Nano frame (what the policy consumed) | AR reconstruction. Rows: wrist2, right static, left static.</figcaption></figure>
+<p>All 27 decision steps, one per second, same three columns:</p>
+<figure><video controls preload="metadata" playsinline src="videos/consumed_vs_recon_1000013.mp4" aria-label="Seed 1000013 decision steps: raw, eval-time Nano, reconstruction"></video></figure>
+<figure><video controls preload="metadata" playsinline src="videos/consumed_vs_recon_1000000.mp4" aria-label="Seed 1000000 decision steps: raw, eval-time Nano, reconstruction"></video></figure>
+<p>Nano is not exactly repeatable run to run. At t = 0 the regenerated frames reproduce the recorded chunk (max abs 0.008–0.015), so those are the true inputs. At later steps the reproduction is off by 0.1–0.8, and up to 1.5–1.9 in the gripper output. Two regenerations of the same t = 0 frame (an earlier, timed-out run) gave plan gaps to raw of 19.5 and 16.5 mm. So Nano's own run-to-run noise moves the plan by about 1–3 mm, the same size as the eval-time vs reconstruction difference. The first-chunk divergence (16–20 mm) is well above that noise.</p>
 <p><strong>What this means for ref_sim.</strong> Matching appearance can remove the first-chunk shift seen in augsim. It cannot remove the ~3.5 mm tracking gap in probe 1. Modelling the real arm's settling bias is a separate, likely necessary fix.</p>
 
   </article>
