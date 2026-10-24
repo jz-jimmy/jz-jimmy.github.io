@@ -407,7 +407,7 @@
 <tr><td>Side-by-side reconstructions</td><td><code>jobs/recon_nano_76k.sbatch</code>, <code>jobs/recon_panel_76k.py</code>; videos in <code>wmrl/real_eval/act_v5_76k_20261019/panels_3x3/</code></td></tr>
 <tr><td>Probes 1–3</td><td><code>jobs/divergence_probe.py</code>, <code>jobs/consumed_regen.sbatch</code>; plots in <code>wmrl/docs/divergence_20261022/</code></td></tr>
 <tr><td>Probes 4–5</td><td><code>jobs/ar_vs_perframe.py</code>, <code>jobs/act_layerwise.py</code></td></tr>
-<tr><td>AR_augsim</td><td><code>augsim/infer/nano_mrc_server.py</code> (<code>NANO_AR=1</code>), <code>augsim/t25/closed_loop.py</code>, <code>wmrl/wmrl/lerobot/envs_mrc.py</code> (<code>WMRL_STYLE_AR=1</code>), <code>jobs/augsim_nano_eval.sbatch AR=1</code></td></tr>
+<tr><td>AR_augsim</td><td><code>augsim/infer/nano_mrc_server.py</code> (<code>NANO_AR=1</code>), <code>augsim/t25/closed_loop.py</code> (<code>WMRL_STYLE_AR=1</code>; it patches the env from outside, since <code>envs_mrc.py</code> is part of the policy's control-contract hash), <code>jobs/augsim_nano_eval.sbatch AR=1</code></td></tr>
 <tr><td>ref_sim</td><td><code>wmrl/wmrl/sim/mrc_gear/ref_sim.py</code>, <code>jobs/refsim_probe.py</code>, <code>jobs/act_refsim_lanes.sh</code>; images in <code>wmrl/docs/ref_sim/</code></td></tr>
 <tr><td>Per-seed tables</td><td><code>wmrl/docs/wrapup/per_seed_76k.tsv</code> and the per-setting TSVs beside it</td></tr>
 </tbody></table></div>
