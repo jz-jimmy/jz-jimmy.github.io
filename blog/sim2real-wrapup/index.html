@@ -90,7 +90,7 @@
 <li><strong>It makes the sim look real, cheaply.</strong> After fine-tuning on about 10 minutes of real video (20 episodes) from one rig, Nano styles sim frames at about 0.06 s per frame in autoregressive mode, without flicker between chunks.</li>
 <li><strong>A styled sim predicts the real robot better than the raw sim, seed by seed, but not reliably in aggregate.</strong> Over two policies, agreement with the real rig per seed (Cohen's κ) was 0.54 vs 0.00 and 0.13 vs −0.38 (styled vs raw sim). The overall success rate, however, can be off in either direction.</li>
 <li><strong>The real gap is mostly not about appearance.</strong> Real failures were grasp misses traced to a 0.28° camera rotation and a ~3 mm arm-settling bias. The same real actions replayed in sim seat the gear only 2 times out of 8: the dynamics differ even when the visuals do not matter.</li>
-<li><strong>Styling changes the policy's very first decision.</strong> For the same state, styled frames move the first planned action chunk by 13–19 mm. Everything downstream (a different grasp, a missed insertion) follows from that one decision.</li>
+<li><strong>Styling changes the policy's very first decision.</strong> For the same state, styled frames move the first planned action chunk by 13–19 mm; the shift comes from how the table and background are rendered, read mainly through the wrist camera, not from the objects. Everything downstream (a different grasp, a missed insertion) follows from that one decision.</li>
 <li><strong>Data beat algorithms.</strong> Behavior cloning on 1024 clean demonstrations (29/32 in sim, 8/16 on the robot) beat residual RL, a reverse curriculum, teacher–student distillation and DAgger.</li>
 </ol>
 <h2 id="1-why-this-question">1. Why this question</h2>
