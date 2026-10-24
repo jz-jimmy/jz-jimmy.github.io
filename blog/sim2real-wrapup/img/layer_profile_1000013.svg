@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 418" font-family="Inter,Arial,sans-serif" font-size="11">
+<rect width="760" height="418" fill="white"/>
+<text x="64" y="20" font-size="13" font-weight="600" fill="#1f2328">Seed 1000013: how different the activations are, stage by stage</text>
+<text x="16" y="147" transform="rotate(-90 16 147)" text-anchor="middle" fill="#59636e">relative difference ||a - b|| / ||a||</text>
+<line x1="64" x2="744" y1="260.0" y2="260.0" stroke="#e6e8eb"/><text x="58" y="264.0" text-anchor="end" fill="#59636e">0</text>
+<line x1="64" x2="744" y1="203.5" y2="203.5" stroke="#e6e8eb"/><text x="58" y="207.5" text-anchor="end" fill="#59636e">0.25</text>
+<line x1="64" x2="744" y1="147.0" y2="147.0" stroke="#e6e8eb"/><text x="58" y="151.0" text-anchor="end" fill="#59636e">0.5</text>
+<line x1="64" x2="744" y1="90.5" y2="90.5" stroke="#e6e8eb"/><text x="58" y="94.5" text-anchor="end" fill="#59636e">0.75</text>
+<line x1="64" x2="744" y1="34.0" y2="34.0" stroke="#e6e8eb"/><text x="58" y="38.0" text-anchor="end" fill="#59636e">1</text>
+<rect x="70.8" y="119.8" width="12.6" height="140.2" fill="#c0392b"/>
+<rect x="84.4" y="112.2" width="12.6" height="147.8" fill="#0b57d0"/>
+<rect x="98.0" y="185.1" width="12.6" height="74.9" fill="#e8710a"/>
+<rect x="111.6" y="159.4" width="12.6" height="100.6" fill="#59636e"/>
+<text x="98.0" y="274" text-anchor="end" transform="rotate(-35 98.0 274)" fill="#1f2328">ResNet layer1</text>
+<rect x="138.8" y="87.9" width="12.6" height="172.1" fill="#c0392b"/>
+<rect x="152.4" y="75.8" width="12.6" height="184.2" fill="#0b57d0"/>
+<rect x="166.0" y="172.5" width="12.6" height="87.5" fill="#e8710a"/>
+<rect x="179.6" y="147.9" width="12.6" height="112.1" fill="#59636e"/>
+<text x="166.0" y="274" text-anchor="end" transform="rotate(-35 166.0 274)" fill="#1f2328">ResNet layer2</text>
+<rect x="206.8" y="108.7" width="12.6" height="151.3" fill="#c0392b"/>
+<rect x="220.4" y="79.8" width="12.6" height="180.2" fill="#0b57d0"/>
+<rect x="234.0" y="152.4" width="12.6" height="107.6" fill="#e8710a"/>
+<rect x="247.6" y="159.5" width="12.6" height="100.5" fill="#59636e"/>
+<text x="234.0" y="274" text-anchor="end" transform="rotate(-35 234.0 274)" fill="#1f2328">ResNet layer3</text>
+<rect x="274.8" y="158.1" width="12.6" height="101.9" fill="#c0392b"/>
+<rect x="288.4" y="95.0" width="12.6" height="165.0" fill="#0b57d0"/>
+<rect x="302.0" y="160.7" width="12.6" height="99.3" fill="#e8710a"/>
+<rect x="315.6" y="157.1" width="12.6" height="102.9" fill="#59636e"/>
+<text x="302.0" y="274" text-anchor="end" transform="rotate(-35 302.0 274)" fill="#1f2328">ResNet layer4</text>
+<rect x="342.8" y="158.4" width="12.6" height="101.6" fill="#c0392b"/>
+<rect x="356.4" y="97.0" width="12.6" height="163.0" fill="#0b57d0"/>
+<rect x="370.0" y="163.3" width="12.6" height="96.7" fill="#e8710a"/>
+<rect x="383.6" y="158.5" width="12.6" height="101.5" fill="#59636e"/>
+<text x="370.0" y="274" text-anchor="end" transform="rotate(-35 370.0 274)" fill="#1f2328">1x1 projection</text>
+<rect x="410.8" y="164.3" width="12.6" height="95.7" fill="#c0392b"/>
+<rect x="424.4" y="95.1" width="12.6" height="164.9" fill="#0b57d0"/>
+<rect x="438.0" y="168.7" width="12.6" height="91.3" fill="#e8710a"/>
+<rect x="451.6" y="136.7" width="12.6" height="123.3" fill="#59636e"/>
+<text x="438.0" y="274" text-anchor="end" transform="rotate(-35 438.0 274)" fill="#1f2328">encoder 1</text>
+<rect x="478.8" y="165.8" width="12.6" height="94.2" fill="#c0392b"/>
+<rect x="492.4" y="124.3" width="12.6" height="135.7" fill="#0b57d0"/>
+<rect x="506.0" y="185.4" width="12.6" height="74.6" fill="#e8710a"/>
+<rect x="519.6" y="139.3" width="12.6" height="120.7" fill="#59636e"/>
+<text x="506.0" y="274" text-anchor="end" transform="rotate(-35 506.0 274)" fill="#1f2328">encoder 2</text>
+<rect x="546.8" y="174.3" width="12.6" height="85.7" fill="#c0392b"/>
+<rect x="560.4" y="147.7" width="12.6" height="112.3" fill="#0b57d0"/>
+<rect x="574.0" y="200.1" width="12.6" height="59.9" fill="#e8710a"/>
+<rect x="587.6" y="135.2" width="12.6" height="124.8" fill="#59636e"/>
+<text x="574.0" y="274" text-anchor="end" transform="rotate(-35 574.0 274)" fill="#1f2328">encoder 3</text>
+<rect x="614.8" y="179.3" width="12.6" height="80.7" fill="#c0392b"/>
+<rect x="628.4" y="173.5" width="12.6" height="86.5" fill="#0b57d0"/>
+<rect x="642.0" y="215.3" width="12.6" height="44.7" fill="#e8710a"/>
+<rect x="655.6" y="148.5" width="12.6" height="111.5" fill="#59636e"/>
+<text x="642.0" y="274" text-anchor="end" transform="rotate(-35 642.0 274)" fill="#1f2328">encoder 4</text>
+<rect x="682.8" y="233.4" width="12.6" height="26.6" fill="#c0392b"/>
+<rect x="696.4" y="233.1" width="12.6" height="26.9" fill="#0b57d0"/>
+<rect x="710.0" y="247.3" width="12.6" height="12.7" fill="#e8710a"/>
+<rect x="723.6" y="221.2" width="12.6" height="38.8" fill="#59636e"/>
+<text x="710.0" y="274" text-anchor="end" transform="rotate(-35 710.0 274)" fill="#1f2328">decoder</text>
+<text x="404" y="340" text-anchor="middle" fill="#59636e">ACT stage (input -> output)</text>
+<rect x="64" y="352" width="10" height="9" fill="#c0392b"/><text x="84" y="360" fill="#1f2328">styled vs raw, t = 0</text>
+<rect x="64" y="368" width="10" height="9" fill="#0b57d0"/><text x="84" y="376" fill="#1f2328">styled vs raw, median over frames</text>
+<rect x="64" y="384" width="10" height="9" fill="#e8710a"/><text x="84" y="392" fill="#1f2328">color-matched raw vs raw, median</text>
+<rect x="64" y="400" width="10" height="9" fill="#59636e"/><text x="84" y="408" fill="#1f2328">raw vs raw 1 s earlier (motion), median</text>
+</svg>
