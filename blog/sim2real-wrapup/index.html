@@ -416,15 +416,30 @@
 <figure><img src="img/refsim_smoke_eval_frames.png" alt="Smoke test: the same checkpoint, frame 100 of one episode, rendered through ref_sim (top) and the original sim (bottom)"><figcaption>Smoke test: the same checkpoint, frame 100 of one episode, rendered through ref_sim (top) and the original sim (bottom)</figcaption></figure>
 <p>ref_sim can at best remove the first-decision shift seen in augsim. It cannot remove the ~3.5 mm tracking gap found in probe 1; modelling the real arm's settling bias is a separate fix.</p>
 <h2 id="9-limitations">9. Limitations</h2>
-<div class="tablewrap"><table><thead><tr><th>Limitation</th><th>Evidence so far</th><th>Test that would settle it</th><th>Cost</th></tr></thead><tbody>
-<tr><td>The task mixes dynamics and rendering errors, so the rendering gap cannot be isolated</td><td>The disjoint failure modes in section 4 and probe 1</td><td>Argued from sections 4, 5 and 7</td><td>none</td></tr>
-<tr><td>Camera-pose shifts make Nano hallucinate (an extra gear appears)</td><td>Seen in individual videos</td><td>Perturb one static camera beyond the training range; count invented or missing objects per offset</td><td>inference only</td></tr>
-<tr><td>Fine-tuning with a fixed prompt removes prompt following</td><td>Seen informally</td><td>The same edited prompts (gear color, lighting, a distractor) on the base and the fine-tuned model; score whether the edit appears</td><td>inference only</td></tr>
-<tr><td>No multiview consistency: each camera is styled on its own</td><td>Not measured</td><td>Style one scene from all three cameras and check that colors and lighting agree</td><td>inference only</td></tr>
-<tr><td>Small evaluation sets (16 seeds)</td><td>Intervals in section 4</td><td>Report intervals everywhere</td><td>none</td></tr>
-<tr><td>The styler's real data comes from one rig and one session</td><td>The training set</td><td>State it as a scope limit</td><td>none</td></tr>
+<div class="tablewrap"><table><thead><tr><th>Limitation</th><th>What we found</th><th>Status</th></tr></thead><tbody>
+<tr><td>The task mixes dynamics and rendering errors, so the rendering gap cannot be isolated</td><td>The disjoint failure modes in section 4 and probe 1</td><td>Argued from sections 4, 5 and 7</td></tr>
+<tr><td>Camera-pose shifts make Nano hallucinate (an extra gear appears)</td><td>Not reproduced: no gear invented or dropped with a static camera turned up to 10° or moved up to 10 cm (test 1)</td><td>Tested on single styled frames; the earlier sightings came from long reconstructions</td></tr>
+<tr><td>Fine-tuning with a fixed prompt removes prompt following</td><td>Confirmed: the fine-tuned model ignores every edit; the base model follows two of three (test 2)</td><td>Tested</td></tr>
+<tr><td>No multiview consistency: each camera is styled on its own</td><td>Not a measurable problem at this level: Nano's color spread across the three cameras is no larger than the real rig's (test 3)</td><td>Tested on one scene, two moments</td></tr>
+<tr><td>Small evaluation sets (16 seeds)</td><td>Intervals in section 4</td><td>Report intervals everywhere</td></tr>
+<tr><td>The styler's real data comes from one rig and one session</td><td>The training set</td><td>A scope limit</td></tr>
 </tbody></table></div>
-<p>Any styler that can add or remove objects also needs a guard before it is used inside a control loop.</p>
+<p><strong>Three inference-only tests (2026-10-27).</strong> Each uses one scene (seed 1000013 of the 76k raw-sim evaluation, at t = 0 and at 8.3 s with the arm over the gear) and the closed-loop server's request: edge and depth controls, a static clip, frame 0.</p>
+<ul>
+<li><strong>Test 1, camera pose.</strong> We turned the right or left static camera by 2°, 5° and 10° about its vertical axis, or moved it 2, 5 and 10 cm sideways, which is far outside the poses the styler was trained on. We then counted gear-colored blobs that match no real gear, and real gears that lost their color. Across 28 styled frames Nano invented 0 gears and dropped 0. It keeps the scene's layout; its weak spot in these frames is the gripper, whose fingers it sometimes draws as curved black hooks.</li>
+<li><strong>Test 2, prompts.</strong> We edited the prompt three ways (the carried gear red, warm sunset light, a yellow mug on the table) and styled the same controls with the base and the fine-tuned model. The base model turns the gear red and adds sunset light; the fine-tuned model produces the same image for every prompt. Neither adds the mug, because the edge and depth controls leave no room for an object that is not in the scene. Fine-tuning on a fixed caption has removed the text lever that RoboRender uses to vary textures and distractors.</li>
+<li><strong>Test 3, multiview.</strong> We styled the same moment from all three cameras independently and measured how much the median color of the table and of the gears differs across the cameras (the largest minus the smallest value, averaged over R, G and B; 0–255 levels).</li>
+</ul>
+<div class="tablewrap"><table><thead><tr><th>Color spread across the 3 cameras (0–255 levels)</th><th>Real rig</th><th>Raw sim</th><th>Nano</th></tr></thead><tbody>
+<tr><td>Table, t = 0</td><td>8.0</td><td>11.7</td><td>6.7</td></tr>
+<tr><td>Gears, t = 0</td><td>32.8</td><td>57.5</td><td>28.3</td></tr>
+<tr><td>Table, 8.3 s</td><td>15.0</td><td>19.0</td><td>13.3</td></tr>
+<tr><td>Gears, 8.3 s</td><td>34.7</td><td>14.0</td><td>19.7</td></tr>
+</tbody></table></div>
+<p>The real frames are measured with the sim's object masks for the same seed, which line up at t = 0 but only roughly at 8.3 s, when the real arm is elsewhere. Styling the cameras independently does not make Nano's colors disagree across views more than the real cameras do.</p>
+<figure><img src="img/nano_limits_T1_right_static_t250.png" alt="Test 1, right static camera at 8.3 s. Rows: the camera at its nominal pose, turned 2°, 5° and 10°, and moved 2, 5 and 10 cm sideways. Left: raw render; right: fine-tuned Nano. No gear is invented or dropped"><figcaption>Test 1, right static camera at 8.3 s. Rows: the camera at its nominal pose, turned 2°, 5° and 10°, and moved 2, 5 and 10 cm sideways. Left: raw render; right: fine-tuned Nano. No gear is invented or dropped</figcaption></figure>
+<figure><img src="img/nano_limits_T2_wrist2_t250.png" alt="Test 2, wrist camera at 8.3 s. Rows: default prompt, red gear, sunset light, yellow mug. Left: base Nano; right: fine-tuned Nano, which renders the same image for every prompt"><figcaption>Test 2, wrist camera at 8.3 s. Rows: default prompt, red gear, sunset light, yellow mug. Left: base Nano; right: fine-tuned Nano, which renders the same image for every prompt</figcaption></figure>
+<p>Any styler that can add or remove objects would still need a guard before it is used inside a control loop; in these tests Nano did neither.</p>
 <h2 id="10-related-work-and-outlook">10. Related work and outlook</h2>
 <p>RoboRender (Huang, Ai, …, Li Fei-Fei, Jiajun Wu; arXiv 2610.09254, 2026-10-07) asks whether a video model can make simulated data good enough to train real policies, at scale, and answers yes for visually driven tasks. Our project asks different questions: how little real data is enough, whether a styled simulator can evaluate a policy, and what remains when the task is contact-rich.</p>
 <div class="tablewrap"><table><thead><tr><th></th><th>RoboRender</th><th>This project</th></tr></thead><tbody>
@@ -453,10 +468,9 @@
 <p>For the record: the cameras or the rig moved at least 9 times (7/28, 8/11, the room move on 8/21–22, 8/29, 9/08, 9/30, 10/03, 10/09, 10/18). On 9/27 two of three compute accounts had no hours left; batch waits ran 16–28 hours in October, and two waits of ~29 and ~21 hours were lost to crashes within seconds of starting.</p>
 <h2 id="appendix-a-open-items">Appendix A. Open items</h2>
 <ul>
-<li><strong>Train on styled data.</strong> Style the 1024 demonstrations with Nano, retrain ACT, and evaluate in raw sim, augsim and on the robot next to the 76k policy. This answers whether closing the rendering gap in training raises real success. Optional variants exploit Nano's architecture: distil into a student that reads Nano's latents instead of decoded pixels, style only every k-th frame, or use autoregressive styling during distillation.</li>
+<li><strong>Train on styled data (running at 128 demonstrations).</strong> Styling all 1024 demonstrations was judged too costly, so 128 fresh demonstrations are trained twice: once raw, once with every frame styled by autoregressive Nano (same actions and states). Both policies get the same checkpoint selection and are evaluated in raw sim, in augsim and then on the robot. This answers whether closing the rendering gap in training raises real success. Optional variants exploit Nano's architecture: distil into a student that reads Nano's latents instead of decoded pixels, style only every k-th frame, or use autoregressive styling during distillation.</li>
 <li><strong>Finish ref_sim</strong> (section 8); add its results here.</li>
 <li><strong>A matched backbone comparison</strong> for section 3 (img2img-turbo and Nano under the same policy, protocol and realism metrics).</li>
-<li><strong>The three inference-only limitation tests</strong> in section 9.</li>
 </ul>
 <h2 id="appendix-b-reproducibility">Appendix B. Reproducibility</h2>
 <div class="tablewrap"><table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>
