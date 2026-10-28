@@ -70,6 +70,7 @@
       <li><a class="sub" href="#55-probe-5-where-inside-the-policy-the-styled-image-becomes-a-different-plan">5.5 Probe 5: inside the policy</a></li>
       <li><a class="sub" href="#56-araugsim-closed-loop-augsim-with-autoregressive-styling">5.6 AR_augsim</a></li>
       <li><a href="#6-getting-a-policy-that-works-in-sim">6. Getting a sim policy</a></li>
+      <li><a class="sub" href="#61-training-on-nano-styled-demonstrations-128-raw-vs-128-styled-2026-10-28">6.1 Training on Nano-styled demonstrations: 128 raw vs 128 styled (2026-10-28)</a></li>
       <li><a href="#7-the-sim-to-real-gap-stage-by-stage">7. The gap, stage by stage</a></li>
       <li><a href="#8-refsim-matching-the-simulators-appearance-by-hand-in-progress">8. ref_sim</a></li>
       <li><a href="#9-limitations">9. Limitations</a></li>
@@ -358,6 +359,35 @@
 <tr><td><strong>Behavior cloning, 1024 full-insertion demonstrations</strong></td><td><strong>Oct 17–19</strong></td><td><strong>29/32 raw sim, 8/16 real</strong></td><td>Remaining failures: 3 seeds in sim; grasp misses on the robot (section 4)</td></tr>
 </tbody></table></div>
 <p>Two lessons carry beyond this task. Data quality (only full insertions, no recovery behavior, gripper timing matched to the real hand) mattered more than any algorithm on top. And reinforcement learning in a high-fidelity contact simulator costs about 1.4 s per step, which has to be budgeted before RL is chosen. By demonstration count: 128 → 28/48, 512 → 59–62%, 1024 → 48/48 (an earlier sim) and 29/32 (the current one); these come from different simulators and protocols and are indicative only.</p>
+<h3 id="61-training-on-nano-styled-demonstrations-128-raw-vs-128-styled-2026-10-28">6.1 Training on Nano-styled demonstrations: 128 raw vs 128 styled (2026-10-28)</h3>
+<p><strong>Motivation.</strong> Every policy so far was trained on raw-sim images. If the world model closes the appearance gap, a policy trained on styled demonstrations should be at home in the styled sim and, ideally, on the real rig. Styling all 1024 demonstrations was judged too costly, so the comparison runs at 128.</p>
+<p><strong>Method.</strong> We collected 128 fresh scripted demonstrations on the current sim (seeds 9000–9127, round-29 cameras; 128 of 128 kept), together with the full-resolution render, depth and part labels of every frame. One copy of the dataset is left raw. In the other, every frame of all three cameras is restyled by autoregressive Nano (121-frame chunks, edge and depth controls, the same checkpoint and settings as everywhere else) and resized to 224 px; actions and states are identical. Both datasets train ACT for 40k steps with the same recipe. Checkpoints are selected with the same plan, in raw sim, for both: raw128 picked step 20k (18/32 on the confirmation seeds) and nano128 step 24k (11/32). Both are then evaluated on the 16 standard seeds in raw sim and in per-frame Nano augsim.</p>
+<p><strong>Result.</strong> Each policy works in the look it was trained on and fails in the other: switching the look costs 7 to 8 seeds either way.</p>
+<div class="tablewrap"><table><thead><tr><th>Evaluated in</th><th>raw128 (trained on raw sim)</th><th>nano128 (trained on Nano-styled)</th></tr></thead><tbody>
+<tr><td>Raw sim</td><td><strong>10/16</strong> (grasp 16, lift 15, engage 13)</td><td>3/16 (grasp 16, lift 16, engage 11)</td></tr>
+<tr><td>Augsim (per-frame Nano)</td><td>2/16 (grasp 13, lift 13, engage 9)</td><td><strong>9/16</strong> (grasp 16, lift 16, engage 14)</td></tr>
+<tr><td>Real rig</td><td>not yet run</td><td>not yet run</td></tr>
+</tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>raw128: raw sim</th><th>raw128: augsim</th><th>nano128: raw sim</th><th>nano128: augsim</th></tr></thead><tbody>
+<tr><td>1000000</td><td>✓</td><td>engaged</td><td>✓</td><td>engaged</td></tr>
+<tr><td>1000001</td><td>engaged</td><td>engaged</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000002</td><td>lifted</td><td>lifted</td><td>lifted</td><td>engaged</td></tr>
+<tr><td>1000003</td><td>✓</td><td>✓</td><td>engaged</td><td>✓</td></tr>
+<tr><td>1000004</td><td>✓</td><td>engaged</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000005</td><td>engaged</td><td>lifted</td><td>lifted</td><td>✓</td></tr>
+<tr><td>1000006</td><td>✓</td><td>no grasp</td><td>engaged</td><td>✓</td></tr>
+<tr><td>1000007</td><td>grasped</td><td>no grasp</td><td>lifted</td><td>engaged</td></tr>
+<tr><td>1000008</td><td>✓</td><td>lifted</td><td>lifted</td><td>✓</td></tr>
+<tr><td>1000009</td><td>✓</td><td>engaged</td><td>engaged</td><td>✓</td></tr>
+<tr><td>1000010</td><td>✓</td><td>no grasp</td><td>✓</td><td>✓</td></tr>
+<tr><td>1000011</td><td>✓</td><td>engaged</td><td>engaged</td><td>✓</td></tr>
+<tr><td>1000012</td><td>lifted</td><td>lifted</td><td>engaged</td><td>engaged</td></tr>
+<tr><td>1000013</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>1000014</td><td>engaged</td><td>engaged</td><td>engaged</td><td>engaged</td></tr>
+<tr><td>1000015</td><td>✓</td><td>engaged</td><td>lifted</td><td>✓</td></tr>
+</tbody></table></div>
+<p>✓ = inserted fully; otherwise the furthest stage reached. Both policies are evaluated with the rig's round-29 cameras.</p>
+<p>Three points follow. First, Nano styling keeps what the policy needs: trained on styled images, the policy reaches 9/16 in the styled sim, close to raw128's 10/16 in its own look. Second, the appearance gap alone is large enough to break a policy: raw128 even misses three grasps in augsim, which it never does in raw sim. Third, the selection was run in raw sim for both arms, which favors raw128; nano128 might do better in augsim with a checkpoint chosen there. The deciding test is the real rig: if appearance is what separates sim from the rig, nano128 should do better there than raw128. Both checkpoints are ready (<code>act_mrc_style128/release/raw128_20k</code> and <code>release/nano128_24k</code>).</p>
 <h2 id="7-the-sim-to-real-gap-stage-by-stage">7. The sim-to-real gap, stage by stage</h2>
 <p>No single stage explains the real failures; they appear where several small errors compound (camera pose → aim error → grasp miss). The table puts each stage's remaining error next to the effort it took.</p>
 <div class="tablewrap"><table><thead><tr><th>Stage</th><th>What went wrong</th><th>Fix</th><th>Remaining error</th><th>Effort</th></tr></thead><tbody>
@@ -468,7 +498,7 @@
 <p>For the record: the cameras or the rig moved at least 9 times (7/28, 8/11, the room move on 8/21–22, 8/29, 9/08, 9/30, 10/03, 10/09, 10/18). On 9/27 two of three compute accounts had no hours left; batch waits ran 16–28 hours in October, and two waits of ~29 and ~21 hours were lost to crashes within seconds of starting.</p>
 <h2 id="appendix-a-open-items">Appendix A. Open items</h2>
 <ul>
-<li><strong>Train on styled data (running at 128 demonstrations).</strong> Styling all 1024 demonstrations was judged too costly, so 128 fresh demonstrations are trained twice: once raw, once with every frame styled by autoregressive Nano (same actions and states). Both policies get the same checkpoint selection and are evaluated in raw sim, in augsim and then on the robot. This answers whether closing the rendering gap in training raises real success. Optional variants exploit Nano's architecture: distil into a student that reads Nano's latents instead of decoded pixels, style only every k-th frame, or use autoregressive styling during distillation.</li>
+<li><strong>Train on styled data.</strong> Run the 128-vs-128 policies (section 6.1) on the real rig. This answers whether closing the rendering gap in training raises real success. Optional variants exploit Nano's architecture: distil into a student that reads Nano's latents instead of decoded pixels, style only every k-th frame, or use autoregressive styling during distillation.</li>
 <li><strong>Finish ref_sim</strong> (section 8); add its results here.</li>
 <li><strong>A matched backbone comparison</strong> for section 3 (img2img-turbo and Nano under the same policy, protocol and realism metrics).</li>
 </ul>
