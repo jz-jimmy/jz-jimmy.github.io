@@ -479,7 +479,7 @@
 <tr><td>Multiview</td><td>Views stacked into one latent, consistent across cameras</td><td>Each camera styled independently</td></tr>
 <tr><td>Prompt following</td><td>Kept; the prompt sets textures, background and distractors</td><td>Lost after fine-tuning with a fixed prompt</td></tr>
 <tr><td>Speed</td><td>A 3-view, 81-frame clip in 4.29 s on one H200 after distillation (6 steps), 416×240</td><td>16.9 frames/s at 10 steps, 256² (not like-for-like)</td></tr>
-<tr><td>How the renderer is used</td><td>Train π0.5 on rendered sim; evaluate only on the real robot</td><td>Evaluate policies in the styled sim against the robot; training on styled data not yet run</td></tr>
+<tr><td>How the renderer is used</td><td>Train π0.5 on rendered sim; evaluate only on the real robot</td><td>Evaluate policies in the styled sim against the robot; training on styled data tested at 128 demonstrations (section 6.1)</td></tr>
 <tr><td>Tasks</td><td>Pick-and-place, opening a drawer or fridge, mobile pick</td><td>Tight-tolerance gear insertion</td></tr>
 <tr><td>Real results</td><td>71% average vs 10% raw sim and 20% domain randomization; 10 rollouts per task</td><td>76k: 8/16 real vs 16/16 raw sim</td></tr>
 </tbody></table></div>
