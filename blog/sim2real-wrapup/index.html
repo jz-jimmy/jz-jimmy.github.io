@@ -112,7 +112,7 @@
 <tr><td>Evaluation</td><td>The same 16 seeded initial states (seeds 1000000–1000015) in raw sim, augsim and in the real world</td></tr>
 <tr><td>Compute</td><td>NCSA Delta GH200 nodes; most jobs ran in 2-hour interactive slots</td></tr>
 </tbody></table></div>
-<figure><img src="pipeline.png" alt="Pipeline diagram"><figcaption>The pipeline: real rig, calibrated sim, scripted demonstrations, ACT training, and evaluation in raw sim, augsim and on the real rig.</figcaption></figure>
+<figure><img src="pipeline.png" alt="Pipeline diagram"><figcaption>The pipeline: real-world calibration, calibrated sim, scripted demonstrations, ACT training, and evaluation in raw sim, augsim and the real world.</figcaption></figure>
 <p>The top row builds the policy. The styler sits on a side branch, so the same policy and seeds can be scored in raw sim, in augsim and in the real world.</p>
 <h2 id="3-a-world-model-as-a-sim-to-real-renderer">3. A world model as a sim-to-real renderer</h2>
 <p>Cosmos3-Nano gave the best trade-off we found between image quality, speed and temporal consistency. It measurably brings the sim closer to the real cameras (below), though still far from indistinguishable, and the backbones were compared under different settings.</p>
