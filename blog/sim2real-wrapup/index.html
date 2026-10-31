@@ -84,7 +84,7 @@
       <li><a class="sub" href="#e9-can-a-hand-matched-sim-replace-the-world-model-refsim">E9 Hand-matched sim (ref_sim)</a></li>
       <li><a class="sub" href="#e10-does-augsim-rank-new-policies-correctly">E10 Ranking new policies</a></li>
       <li><a class="sub" href="#e11-where-does-the-styler-break">E11 Limits of the styler</a></li>
-      <li><a class="sub" href="#e12-why-does-augsim-agree-with-the-real-world-better-than-raw-sim-designed-not-yet-run">E12 Where it looks vs what it sees</a></li>
+      <li><a class="sub" href="#e12-why-does-augsim-agree-with-the-real-world-better-than-raw-sim-where-the-policy-looks-vs-what-it-sees">E12 Where it looks vs what it sees</a></li>
       <li><a href="#5-where-the-sim-to-real-gap-comes-from">5. Sources of the gap</a></li>
       <li><a href="#6-discussion">6. Discussion</a></li>
       <li><a href="#7-practical-lessons">7. Practical lessons</a></li>
@@ -106,6 +106,7 @@
 <li><strong>Finding 2, evaluation.</strong> Across four policies, augsim ranks policies in the real-world order while raw sim does not, and agrees better with the real outcome per seed when pooled (κ 0.37 vs 0.07 over 48 episodes). Absolute success rates are still off in both directions.</li>
 <li><strong>Finding 3, training.</strong> Training on Nano-styled demonstrations beats training on the same raw demonstrations in the real world (7/16 vs 5/16 with 128 demonstrations). Matching the sim's appearance by hand does the opposite (0/16).</li>
 <li><strong>Finding 4, the remaining gap.</strong> Most real failures happen before contact: empty grasps from 5–15 mm aim errors and a ~3 mm arm-settling offset. Appearance explains part of the gap, dynamics and calibration the rest.</li>
+<li><strong>Finding 5, why augsim helps.</strong> On the same states, styled frames bring the policy's plan within 3–6 mm of its real-image plan (raw sim 7–18 mm). The policy looks at the same places either way; what changes is what it reads there, mainly the table, background and gripper (E12).</li>
 </ul>
 <h2 id="at-a-glance">At a glance</h2>
 <div class="tablewrap"><table><thead><tr><th>#</th><th>Question</th><th>Short answer</th></tr></thead><tbody>
@@ -120,7 +121,7 @@
 <tr><td>E9</td><td>Can a hand-matched sim replace the world model?</td><td>No: 15/16 in its own sim, 0/16 in the real world</td></tr>
 <tr><td>E10</td><td>Does augsim rank new policies correctly?</td><td>Yes, all three; raw sim gets the order wrong</td></tr>
 <tr><td>E11</td><td>Where does the styler break?</td><td>Not with camera shifts; it ignores prompts after fine-tuning</td></tr>
-<tr><td>E12</td><td>Why does augsim agree with the real world better? Where the policy looks, or what it sees there?</td><td>Designed, not yet run</td></tr>
+<tr><td>E12</td><td>Why does augsim agree with the real world better? Where the policy looks, or what it sees there?</td><td>What it sees: attention barely moves; styled table, background and gripper features carry 48–66% of the plan gap</td></tr>
 </tbody></table></div>
 <h2 id="1-introduction">1. Introduction</h2>
 <ul class="exp">
@@ -306,7 +307,7 @@
 <li>The control seed shows the same 18.5 mm shift and still succeeds: the shift alone does not decide the outcome.</li>
 </ul>
 </li>
-<li><strong>Takeaway.</strong> The hypothesis was wrong: the policy is steered by the styled <em>background</em>, not the objects. This predicts the failure in E9. E12 asks the same question against real frames.</li>
+<li><strong>Takeaway.</strong> The hypothesis was wrong: the policy is steered by the styled <em>background</em>, not the objects. This predicts the failure in E9. E12 confirms it against real frames.</li>
 </ul>
 <div class="tablewrap"><table><thead><tr><th>Planned-chunk gap to the raw plan at t = 0 (mm)</th><th>1000013</th><th>1000000</th><th>1000001 (control)</th></tr></thead><tbody>
 <tr><td>Styled vs raw (full gap)</td><td>19.3</td><td>13.4</td><td>18.5</td></tr>
@@ -466,35 +467,50 @@
 </ul>
 <figure><img src="img/nano_limits_T1_right_static_t250.png" alt="Test 1, right static camera at 8.3 s. Rows: nominal pose, turned 2°, 5° and 10°, moved 2, 5 and 10 cm. Left: raw render; right: fine-tuned Nano"><figcaption>Test 1, right static camera at 8.3 s. Rows: nominal pose, turned 2°, 5° and 10°, moved 2, 5 and 10 cm. Left: raw render; right: fine-tuned Nano</figcaption></figure>
 <figure><img src="img/nano_limits_T2_wrist2_t250.png" alt="Test 2, wrist camera at 8.3 s. Rows: default prompt, red gear, sunset light, yellow mug. Left: base Nano; right: fine-tuned Nano"><figcaption>Test 2, wrist camera at 8.3 s. Rows: default prompt, red gear, sunset light, yellow mug. Left: base Nano; right: fine-tuned Nano</figcaption></figure>
-<h3 id="e12-why-does-augsim-agree-with-the-real-world-better-than-raw-sim-designed-not-yet-run">E12. Why does augsim agree with the real world better than raw sim? (designed, not yet run)</h3>
+<h3 id="e12-why-does-augsim-agree-with-the-real-world-better-than-raw-sim-where-the-policy-looks-vs-what-it-sees">E12. Why does augsim agree with the real world better than raw sim? Where the policy looks vs what it sees</h3>
 <ul class="exp">
 <li><strong>Question.</strong> Per seed, augsim predicts the real outcome better than raw sim (E2, E10). Given the same scene, what does the policy do differently with a styled frame that brings its plan closer to the one it makes from the real frame?</li>
 <li><strong>Hypotheses.</strong><ul>
-<li>H1, <em>where it looks</em>: on raw-sim frames the policy attends to different places than on real frames (for example the table when it should watch the gear); styled frames move its attention back to where it looks in the real world.</li>
+<li>H1, <em>where it looks</em>: on raw-sim frames the policy attends to different places than on real frames (for example the table when it should watch the gear); styling moves its attention back to where it looks in the real world.</li>
 <li>H2, <em>what it sees</em>: attention is about the same for all three inputs, but inside the attended regions the styled texture, material and lighting give image features closer to the real ones, so the actions come out closer too.</li>
-<li>Prior: E5 compared raw sim with augsim only. Attention barely moved (r 0.87–0.94), and the table and background tokens carried the shift. That points to H2, but E5 had no real frames.</li>
 </ul>
 </li>
 <li><strong>Design.</strong><ul>
-<li><em>Matched triplets.</em> Real rollouts store the exact images the policy consumed at each decision and the measured joint state. For every decision before the grasp (the gear is untouched, so the scene is the seed's nominal layout), set the sim arm and gripper to the measured state and render the three cameras with the real-camera calibration (round 29): <strong>raw sim</strong>. Style those frames per-frame with Nano, as the closed loop does: <strong>augsim</strong>. The consumed real images: <strong>real</strong>. All three share the same state input, so only pixels differ.</li>
-<li><em>Scope.</em> Policies with stored real rollouts: 76k (10/19), raw128 and ref_sim 52k (10/30); nano128 once its rollout folder is recovered. 16 seeds × 2–3 pre-grasp decisions ≈ 100–150 triplets per policy, 3 cameras each. The first decision (t = 0) is reported separately, since E4 shows it is decisive.</li>
-<li><em>Alignment gate.</em> Overlay the renderer's part masks on the real frames; drop triplets whose gear outline is off by more than ~4 px (camera drift, placement error).</li>
-<li><em>Step 0, premise.</em> Plan gap to the real-input plan, d(x) = ‖chunk(x) − chunk(real)‖ in mm of tool-center motion, for x = sim, aug. Go on only if d(aug) &lt; d(sim) on most triplets (paired Wilcoxon). If not, augsim's per-seed agreement does not come from the decision frames, and neither hypothesis applies.</li>
-<li><em>Test H1 (where).</em> Three maps per input: decoder cross-attention over image tokens (as in E5), attention rollout through the encoder, and integrated gradients of the first 20 actions with respect to pixels (attention weights need not explain the output). Compare with the real map by correlation, Jensen–Shannon divergence and attention mass per region (gear and plate, gripper, arm, table and background; regions from the renderer). H1 predicts JS(sim, real) &gt; JS(aug, real), with sim's mass pulled off the gear.</li>
-<li><em>Test H2 (what).</em> Image-feature similarity to the real tokens, restricted to the tokens that hold 80% of the real attention. H2 predicts aug closer than sim there.</li>
-<li><em>Decisive test, a 2 × 2 swap.</em> In every attention layer, take the attention weights from one input and the token content (values) from another: (A_x, V_x), (A_real, V_x), (A_x, V_real), (A_real, V_real), for x = sim and aug. "Where" effect = gap closed by giving x the real attention; "what" effect = gap closed by giving x the real content. H1: the attention swap closes most of d(sim). H2: it closes little and the content swap closes most. Either way, augsim's advantage should sit in the factor that matters.</li>
-<li><em>Yardsticks.</em> Nano run-to-run noise (the same frame styled twice; 1–3 mm in E4); raw frames 1 s apart; consumed images vs the compressed videos.</li>
-<li><em>Link to outcomes.</em> Per seed, does d(aug) &lt; d(sim) at t = 0 pick out the seeds where augsim agrees with the real outcome and raw sim does not?</li>
+<li><em>Matched triplets.</em> Real rollouts store the exact images the policy consumed at each decision and the measured joint state. For every decision before the first close command (the gear is untouched, so the scene is the seed's nominal layout), set the sim arm and fingers to the measured state and render the three cameras with the real-camera calibration (round 29): <strong>raw sim</strong>. Style those frames per-frame with Nano through the closed-loop client, with the depth windows of that policy's own augsim evaluation: <strong>augsim</strong>. The consumed real images: <strong>real</strong>. All three share the same state input, so only pixels differ.</li>
+<li><em>Scope.</em> Four policies (76k, raw128, nano128, ref_sim 52k) × 16 seeds × 2 decisions (t = 0 and t = 3.3 s; every real rollout closed the gripper before the third) = 128 triplets, 3 cameras each. All passed the alignment gate: in the static cameras the sim gear outline lies 1.0–1.9 px from the real frame's edges (wrist camera, not gated: up to 6.8 px).</li>
+<li><em>Measures.</em> Plan gap d(x) = mean tool-center distance (mm) between the 100-step chunks planned from x and from real. H1: decoder cross-attention, attention rollout through the encoder and integrated gradients, compared with the real map (Jensen–Shannon divergence, correlation, share per region). H2: cosine similarity of image tokens to the real ones. Decisive: a 2 × 2 swap in every attention layer, giving x either the real attention weights or the real token content.</li>
+<li><em>Checks.</em> Real frames reproduce the executed chunk (max error 0.004 rad); injecting a run's own attention reproduces it exactly. Yardsticks: the same frame styled twice (4 seeds per policy) and raw sim with the image 1 s later.</li>
 </ul>
 </li>
-<li><strong>Cost.</strong> One 1-GPU job under an hour: rendering, ~2,000 styled frames at 0.06 s, and ~10,000 policy forward passes. No training.</li>
+<li><strong>Result.</strong><ul>
+<li><em>Premise holds.</em> For every policy the augsim plan is closer to the real-frame plan than the raw-sim plan: 25–29 of 32 triplets, Wilcoxon p ≤ 4 × 10⁻⁶. At t = 0 the raw-sim plan is 7–38 mm off, the augsim plan 3–5 mm (nano128: 21 mm).</li>
+<li><em>H1 is small.</em> Raw sim already looks where real looks: decoder attention differs from real by JS ≤ 0.017 (correlation 0.80–0.99), and the share on gears and plate is the same within one point (5–11%). Styling still tightens the maps (decoder-attention JS 2–4× lower, on all 128 triplets), but there is no "table instead of the gear" pattern. In the gradient maps raw sim leans <em>more</em> on the gears than real does (15–32% vs 11–17%); augsim is in between.</li>
+<li><em>H2 carries most of it.</em> On the tokens holding 80% of the real attention, raw-sim features match real at cosine 0.72–0.86, augsim at 0.87–0.95. The gain sits in the table and background (0.59–0.79 → 0.85–0.92) and the gripper (0.41–0.67 → 0.71–0.85); the gears already matched (0.91–0.95).</li>
+<li><em>Swap.</em> Giving raw sim the real attention closes 17–21% of its gap (nano128 38%); giving it the real content closes 48–66% (nano128 51%).</li>
+<li><em>Not seed-specific.</em> At t = 0 the plan improvement d(sim) − d(aug) is as large on seeds where augsim gets the outcome right and raw sim wrong as on the others (76k 15 vs 17 mm, raw128 28 vs 28, ref_sim 2.5 vs 3.5). Plan distance at the decision frames does not by itself pick out the seeds whose outcome flips.</li>
 </ul>
-<div class="tablewrap"><table><thead><tr><th>If the result is</th><th>Reading</th></tr></thead><tbody>
-<tr><td>d(aug) ≈ d(sim) at matched states</td><td>Agreement comes from later phases or chance (16 seeds), not the decision frames</td></tr>
-<tr><td>Attention maps differ; the attention swap closes most of the gap</td><td>H1: styling fixes <em>where</em> the policy looks</td></tr>
-<tr><td>Maps already match; the content swap closes most of the gap</td><td>H2: styling fixes <em>what</em> the policy reads in the same places</td></tr>
-<tr><td>Both swaps close part of it</td><td>Both; report the shares, per region and per camera</td></tr>
+</li>
+<li><strong>Takeaway.</strong> H2: styling changes <em>what</em> the policy reads in the same places, mostly the texture of the table, background and gripper, not <em>where</em> it looks. This matches E5. The closer plans are a broad effect; which seeds flip is decided later in the closed loop. To compare stylers (TODO), plan distance to a reference action is the informative score; attention location alone is weak.</li>
+</ul>
+<div class="tablewrap"><table><thead><tr><th>Policy</th><th>Plan gap, raw sim (mm)</th><th>Plan gap, augsim (mm)</th><th>Augsim closer</th><th>Same frame styled twice (mm)</th><th>Raw sim, 1 s later (mm)</th></tr></thead><tbody>
+<tr><td>76k</td><td>9.4</td><td>3.4</td><td>29/32</td><td>1.7</td><td>38.1</td></tr>
+<tr><td>raw128</td><td>13.6</td><td>4.5</td><td>29/32</td><td>2.2</td><td>49.1</td></tr>
+<tr><td>nano128</td><td>17.5</td><td>5.6</td><td>25/32</td><td>6.6</td><td>40.6</td></tr>
+<tr><td>ref_sim 52k</td><td>6.7</td><td>3.3</td><td>28/32</td><td>0.5</td><td>17.9</td></tr>
 </tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Policy</th><th>Attention JS to real, raw sim / augsim</th><th>Gear-and-plate share, raw sim / augsim / real</th><th>Feature cosine on attended tokens, raw sim / augsim</th><th>Raw-sim gap closed by real attention / real content</th></tr></thead><tbody>
+<tr><td>76k</td><td>0.008 / 0.002</td><td>5.0 / 5.1 / 5.4%</td><td>0.80 / 0.92</td><td>17% / 48%</td></tr>
+<tr><td>raw128</td><td>0.011 / 0.003</td><td>6.3 / 6.4 / 6.5%</td><td>0.72 / 0.87</td><td>18% / 62%</td></tr>
+<tr><td>nano128</td><td>0.017 / 0.004</td><td>10.0 / 10.4 / 10.6%</td><td>0.72 / 0.92</td><td>38% / 51%</td></tr>
+<tr><td>ref_sim 52k</td><td>0.006 / 0.003</td><td>5.5 / 5.5 / 5.5%</td><td>0.86 / 0.95</td><td>21% / 66%</td></tr>
+</tbody></table></div>
+<ul>
+<li>Medians over the 32 triplets of each policy. Attention = decoder cross-attention of the first 20 action queries over the 147 image tokens; rollout and gradient maps agree in direction.</li>
+<li>nano128's own styling noise (6.6 mm) is as large as its augsim gap: a policy trained on Nano frames reacts more to Nano's sampling noise.</li>
+</ul>
+<figure><img src="img/e12_gap.svg" alt="Median over 32 matched states per policy. x: policy. y: distance between the 100-step plan made from each input and the plan made from the real image (tool-center mm). Gray: raw-sim frame; blue: augsim frame; orange: the same augsim frame styled again (noise floor); light gray: raw sim with the image 1 s later (scale of motion)"><figcaption>Median over 32 matched states per policy. x: policy. y: distance between the 100-step plan made from each input and the plan made from the real image (tool-center mm). Gray: raw-sim frame; blue: augsim frame; orange: the same augsim frame styled again (noise floor); light gray: raw sim with the image 1 s later (scale of motion)</figcaption></figure>
+<figure><img src="img/e12_swap.svg" alt="2 × 2 swap, median over 32 states. x: policy and input. y: distance to the real-image plan (tool-center mm). Gray: unchanged; orange: the input computed with the real frame's attention weights in every layer; blue: the real frame's token content computed with the input's own attention"><figcaption>2 × 2 swap, median over 32 states. x: policy and input. y: distance to the real-image plan (tool-center mm). Gray: unchanged; orange: the input computed with the real frame's attention weights in every layer; blue: the real frame's token content computed with the input's own attention</figcaption></figure>
+<figure><img src="img/e12_attention_76k_1000013_t0.png" alt="The 76k policy, seed 1000013, t = 0, with decoder attention overlaid (shared color scale). Rows: wrist2, right static, left static cameras. Columns: raw sim, augsim, real. Attention covers the same regions in all three; the raw-sim plan is 37.4 mm from the real-image plan, the augsim plan 3.1 mm"><figcaption>The 76k policy, seed 1000013, t = 0, with decoder attention overlaid (shared color scale). Rows: wrist2, right static, left static cameras. Columns: raw sim, augsim, real. Attention covers the same regions in all three; the raw-sim plan is 37.4 mm from the real-image plan, the augsim plan 3.1 mm</figcaption></figure>
 <h2 id="5-where-the-sim-to-real-gap-comes-from">5. Where the sim-to-real gap comes from</h2>
 <ul class="exp">
 <li><strong>Real failures happen before contact.</strong> Across four policies, the real world loses seeds to empty grasps (76k 6, raw128 6, nano128 4, ref_sim 13); the simulators lose them later, at the shaft.</li>
@@ -564,6 +580,7 @@
 <tr><td>E8</td><td><code>jobs/act_style128_lanes.sh</code>, <code>jobs/demo_nano_src.py</code>, <code>jobs/style128.sbatch</code>, <code>jobs/assemble_parts.py</code></td></tr>
 <tr><td>E9</td><td><code>wmrl/wmrl/sim/mrc_gear/ref_sim.py</code>, <code>jobs/act_refsim_lanes.sh</code></td></tr>
 <tr><td>E11</td><td><code>jobs/nano_limits.py</code></td></tr>
+<tr><td>E12</td><td><code>jobs/e12_where_what.py</code>, <code>jobs/e12_where_what.sbatch</code>; results in <code>wmrl/docs/wrapup/e12/</code></td></tr>
 <tr><td>Figures and videos</td><td><code>jobs/gap_attribution.awk</code>, <code>jobs/combine_videos.py</code>; per-seed TSVs in <code>wmrl/docs/wrapup/</code></td></tr>
 </tbody></table></div>
 <h2 id="todo">TODO</h2>
@@ -573,8 +590,7 @@
 <li><strong>A better first frame for augsim.</strong> Condition the first styled frame on a real-world image (E7).</li>
 <li><strong>Matched backbone comparison.</strong> img2img-turbo vs Nano under the same policy, protocol and realism metrics.</li>
 <li><strong>Dynamics.</strong> Model the real arm's ~3 mm settling offset (E3).</li>
-<li><strong>Run E12.</strong> Matched sim / augsim / real triplets: where the policy looks vs what it sees.</li>
-<li><strong>Score style-transfer methods against a golden action (later).</strong> An RL teacher in sim gives a golden action for every state. For each styler (raw, ref_sim, Transfer2.5, img2img-turbo, Nano), feed the styled frames of many sim states to the policy and measure two things: whether its attention falls on the right region for the phase (gear before the grasp, shaft and plate during insertion), and how far its action strays from the golden action. This is a cheap, real-free score of how well a styler suits the task; check it against real success on the four policies first.</li>
+<li><strong>Score style-transfer methods against a golden action (later).</strong> An RL teacher in sim gives a golden action for every state. For each styler (raw, ref_sim, Transfer2.5, img2img-turbo, Nano), feed the styled frames of many sim states to the policy and measure two things: whether its attention falls on the right region for the phase (gear before the grasp, shaft and plate during insertion), and how far its action strays from the golden action. This is a cheap, real-free score of how well a styler suits the task; check it against real success on the four policies first. E12 suggests the action distance is the informative half; attention location barely separates stylers.</li>
 </ul>
   </article>
 </main>
