@@ -545,6 +545,7 @@
 <li><strong>What the world model is good for.</strong><ul>
 <li>Evaluation: ranking policies (E10) and catching failures that raw sim and hand-matched sims miss (E9).</li>
 <li>Training data: styled demonstrations transfer better than raw ones (E8), at 2.7 GPU-hours per 128 demonstrations.</li>
+<li>Diagnosis: matched states (the same joint state rendered raw, styled and real) show what a renderer changes inside the policy (E12); the same probe can score other renderers without the robot.</li>
 </ul>
 </li>
 <li><strong>What it is not good for.</strong><ul>
@@ -553,11 +554,12 @@
 <li>30 Hz control loops: ~2 s per styled frame in the closed loop.</li>
 </ul>
 </li>
-<li><strong>Hand-matching vs learned appearance.</strong> Matching color without texture made the policy worse than no matching (E9). Randomization must cover what the real images contain; the learned renderer supplies it.</li>
+<li><strong>Why the learned renderer helps.</strong> The policy looks at the same places on raw, styled and real frames; what differs is the texture it reads there, mostly table, background and gripper (E5, E12). Matching color without texture therefore made the policy worse than no matching (E9): randomization must cover what the real images contain, and the learned renderer supplies it.</li>
 <li><strong>Limitations.</strong><ul>
 <li>16 seeds per setting; intervals span about ±20 points.</li>
 <li>The styler's real data comes from one real-world setup and one session.</li>
 <li>The task mixes dynamics and rendering errors; E3 and E8 separate them only partly.</li>
+<li>E12 covers the decisions before contact; after the grasp the sim and real scenes no longer match, so what styling does there is unmeasured.</li>
 <li>Fine-tuning removed prompt control (E11).</li>
 </ul>
 </li>
@@ -585,12 +587,13 @@
 </tbody></table></div>
 <h2 id="todo">TODO</h2>
 <ul class="exp">
+<li><strong>PPO teacher policy (first).</strong> The golden-action score below and any teacher–student distillation need an end-to-end teacher that solves the whole task in sim. The June staged state-based PPO reached 94.5% on the chained task on the old environment; the August stage-1 PPO and the residual PPO on the mrc sim (69–77%, flat) did not reach it. Next steps: review the archived RL code and the saved runs to locate where training collapsed; those runs used the old arm and hand controller logic (before the Polymetis port and the mrc sim), so the recipe has to be re-validated on the current environment; compare with a reference PPO implementation trained under a smaller domain-randomization range (to be provided).</li>
+<li><strong>Score style-transfer methods against a golden action (after the teacher).</strong> The teacher gives a golden action for every state. For each styler (raw, ref_sim, Transfer2.5, img2img-turbo, Nano), feed the styled frames of many sim states to the policy and measure two things: whether its attention falls on the right region for the phase (gear before the grasp, shaft and plate during insertion), and how far its action strays from the golden action. This is a cheap, real-free score of how well a styler suits the task; check it against real success on the four policies first. E12 suggests the action distance is the informative half; attention location barely separates stylers.</li>
 <li><strong>Styled training at scale.</strong> Repeat E8 with more demonstrations (for example 512) and checkpoint selection in augsim; optionally distil from Nano latents or style every k-th frame.</li>
+<li><strong>Matched backbone comparison.</strong> img2img-turbo vs Nano under the same policy, protocol and realism metrics; E12's matched-state probe gives the per-state score.</li>
 <li><strong>ref_sim, round 2.</strong> Randomize table texture or restore a realistic grain; check in augsim before the real world.</li>
-<li><strong>A better first frame for augsim.</strong> Condition the first styled frame on a real-world image (E7).</li>
-<li><strong>Matched backbone comparison.</strong> img2img-turbo vs Nano under the same policy, protocol and realism metrics.</li>
 <li><strong>Dynamics.</strong> Model the real arm's ~3 mm settling offset (E3).</li>
-<li><strong>Score style-transfer methods against a golden action (later).</strong> An RL teacher in sim gives a golden action for every state. For each styler (raw, ref_sim, Transfer2.5, img2img-turbo, Nano), feed the styled frames of many sim states to the policy and measure two things: whether its attention falls on the right region for the phase (gear before the grasp, shaft and plate during insertion), and how far its action strays from the golden action. This is a cheap, real-free score of how well a styler suits the task; check it against real success on the four policies first. E12 suggests the action distance is the informative half; attention location barely separates stylers.</li>
+<li><strong>A better first frame for augsim (low priority).</strong> Condition the first styled frame on a real-world image (E7). E12 lowers the expected gain: the styled first plan is already within 3–5 mm of the real-image plan, and the seeds that flip are decided later in the loop.</li>
 </ul>
   </article>
 </main>
