@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260904e">
+  <link rel="stylesheet" href="style.css?v=20261030a">
   <link rel="icon" href="assets/img/profile.jpg">
 </head>
 <body>
@@ -58,7 +58,8 @@
       robot learning in <a href="https://yunzhuli.github.io/" target="_blank" rel="noopener">Prof. Yunzhu Li</a>'s group.
       I am interested in making simulation and learned world models trustworthy enough to train and evaluate real robots,
       and in training LLM agents that improve themselves through verifiable feedback. I also work with
-      <a href="https://www.cs.uic.edu/~psyu/" target="_blank" rel="noopener">Prof. Philip S. Yu</a> at the <strong>University of Illinois Chicago</strong> on agentic reinforcement learning.
+      <a href="https://www.cs.uic.edu/~psyu/" target="_blank" rel="noopener">Prof. Philip S. Yu</a> at the <strong>University of Illinois Chicago</strong> on agentic reinforcement learning,
+      and with <a href="https://yilundu.github.io/" target="_blank" rel="noopener">Prof. Yilun Du</a>'s group at <strong>Harvard University</strong> on memory for embodied agents.
     </p>
     <p>
       Before Columbia, I completed a dual-degree program at the <strong>University of Illinois Urbana-Champaign</strong> (B.S.) and
@@ -76,7 +77,7 @@
     </p>
     <!-- EDIT: next steps -->
     <div class="callout">
-      <p><strong>Next steps.</strong> I am broadly exploring opportunities in World Models and World Action Models, Robot Learning, and Self-Improving Agents.
+      <p><strong>Next steps.</strong> I am broadly exploring opportunities in World Models, Sim2Real Data Generation, and World Action Models for Robot Learning.
       If my work looks relevant to yours, please reach out: <a href="mailto:jz4019@columbia.edu">jz4019@columbia.edu</a>.</p>
     </div>
   </section>
@@ -86,9 +87,8 @@
     <h2>Research Interests</h2>
     <!-- EDIT: adjust the list below -->
     <ul class="interests">
-      <li><strong>World models as the substrate for robot learning.</strong> Making learned dynamics and style-augmented simulators faithful enough to train, post-train, and evaluate policies, and characterizing when they can be trusted.</li>
-      <li><strong>Self-evolving agents.</strong> Code World Models in which agents evolve their own skills against verifiable feedback, and tool-developer agents that build the simulators and harnesses robotics is bottlenecked on.</li>
-      <li><strong>Infrastructure for generative models.</strong> Sparse and linear attention fitted to the spatiotemporal structure of world models so they run at control rate; contributing to open-source <a href="https://github.com/sgl-project/sglang-omni" target="_blank" rel="noopener">SGLang-Omni</a>.</li>
+      <li><strong>Controllable Sim2Real style transfer.</strong> Simulators can mass-produce trajectories, but the images they render are not worth pretraining on. I want style-transfer world models that are controllable enough, in geometry, contact, and appearance, to turn simulated rollouts into high-quality pretraining data at scale, so that robot foundation models stop being bottlenecked on teleoperated demonstrations.</li>
+      <li><strong>World action code models.</strong> An agent that predicts video and actions while, in real time, reasoning out code as its policy: the planning and generalization of a foundation LLM, with the closed-loop latency of an end-to-end policy. The code it writes is inspectable, reusable, and verifiable against the world model's own predictions.</li>
     </ul>
   </section>
 
@@ -97,6 +97,7 @@
     <h2>News</h2>
     <!-- EDIT: keep this list short and recent -->
     <ul class="news">
+      <li><time>Oct 2026</time><span>Our robot memory benchmark study (<a href="https://memout-robot.github.io/" target="_blank" rel="noopener">Memout</a>) is accepted to a <strong>CoRL 2026 workshop</strong>.</span></li>
       <li><time>Aug 2026</time><span>CoEvoSkills is accepted to <strong>COLM 2026</strong>.</span></li>
       <li><time>Jun 2026</time><span>Started leading a new project on augmenting simulation with world models for Sim2Real style transfer.</span></li>
       <li><time>Dec 2025</time><span>Joined Columbia's team for the DARPA TIAMAT challenge as perception lead.</span></li>
@@ -121,8 +122,11 @@
         <div class="venue">IEEE International Conference on Big Data (BigData), 2026</div>
       </li>
       <li>
-        <div class="ptitle">Scaling LLM Agent Learning with Data Synthesis: A Comprehensive Survey</div>
-        <div class="venue">Under review at Transactions on Machine Learning Research (TMLR), 2026</div>
+        <div class="ptitle">How Hard Are Current Robot Memory Benchmarks for Agentic Harnesses?</div>
+        <div class="venue">Conference on Robot Learning (CoRL) Workshop, 2026</div>
+        <div class="plinks">
+          <a href="https://memout-robot.github.io/" target="_blank" rel="noopener">Project page</a>
+        </div>
       </li>
       <li>
         <div class="ptitle">User-Aware Prefix-Tuning is a Good Learner for Personalized Image Captioning</div>
@@ -160,10 +164,21 @@
           </video>
         </div>
         <div class="body">
-          <h3>Interactive World Model for VLA Imitation Learning and RL Post-Training</h3>
-          <div class="meta">Research assistant &middot; Prof. Yunzhu Li, Columbia &middot; 2026</div>
-          <p>A world model trained on a few hours of real-robot data that rolls out long-horizon, physically consistent trajectories in real time. I used it as a closed-loop data engine for imitation learning and RL post-training of Diffusion Policy, and measured how faithfully it evaluates policies against real-world rollouts.</p>
-          <div class="tags"><span>World models</span><span>Diffusion Policy</span><span>RL post-training</span></div>
+          <h3>Interactive World Simulator for Planning and VLA RL Post-Training <span class="badge">ongoing</span></h3>
+          <div class="meta">Co-first author &middot; Prof. Yunzhu Li, Columbia &middot; 2026</div>
+          <p>A world simulator trained on a few hours of real ALOHA data that rolls out long-horizon, physically consistent trajectories in real time. Model-predictive planning in its latent space generates demonstrations for behavior cloning, Diffusion Policy is post-trained with RL inside it, and a set of probes maps where the simulator stops being trustworthy during RL exploration.</p>
+          <div class="tags"><span>World models</span><span>MPC planning</span><span>RL post-training</span><span>OOD detection</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="cover"><img src="assets/img/memout.jpg" alt="Memout: robot memory benchmarks under agentic harnesses"></div>
+        <div class="body">
+          <h3>How Hard Are Current Robot Memory Benchmarks for Agentic Harnesses? <span class="badge">CoRL 2026 Workshop</span></h3>
+          <div class="meta">With Yilun Du's group, Harvard &middot; 2026</div>
+          <p>A diagnostic harness that gives a frontier multimodal model one memory source at a time: nothing, a text event log, or the log plus past camera frames. With a skill controller written by a coding agent and frozen before evaluation, visual history alone lifts RoboMME success by 14 to 16 points and the event log nearly saturates RMBench, showing that current benchmarks test memory supply rather than memory selection, compression, or retrieval.</p>
+          <div class="plinks"><a href="https://memout-robot.github.io/" target="_blank" rel="noopener">Project page</a></div>
+          <div class="tags"><span>Robot memory</span><span>Agentic harness</span><span>Benchmarks</span><span>VLM</span></div>
         </div>
       </article>
 
