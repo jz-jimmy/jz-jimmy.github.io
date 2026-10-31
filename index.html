@@ -54,24 +54,25 @@
     <p>
       I am a master's student in Computer Engineering at <strong>Columbia University</strong>, where I work on
       robot learning in <a href="https://yunzhuli.github.io/" target="_blank" rel="noopener">Prof. Yunzhu Li</a>'s group.
-      I am interested in making simulation and learned world models trustworthy enough to train and evaluate real robots,
-      and in training LLM agents that improve themselves through verifiable feedback. I also work with
+      I am interested in making simulation and learned world models trustworthy enough to train and evaluate real robots.
+      I also work with
       <a href="https://www.cs.uic.edu/~psyu/" target="_blank" rel="noopener">Prof. Philip S. Yu</a> at the <strong>University of Illinois Chicago</strong> on agentic reinforcement learning.
     </p>
     <p>
-      Before Columbia, I completed a dual-degree program at the <strong>University of Illinois Urbana-Champaign</strong> (B.S.) and
-      <strong>Zhejiang University</strong> (B.E.), where I worked with
+      Before Columbia, I completed a dual-degree program at the <strong>University of Illinois Urbana-Champaign</strong> and
+      <strong>Zhejiang University</strong>, where I worked with
       <a href="http://tonghanghang.org/" target="_blank" rel="noopener">Prof. Hanghang Tong</a> on LLM reasoning over knowledge graphs
       and with <a href="https://cvnext.github.io/" target="_blank" rel="noopener">Prof. Gaoang Wang</a> on personalized image captioning.
     </p>
-    <!-- EDIT: vision -->
-    <p class="vision">
+    <!-- vision paragraph, hidden for now
+        <p class="vision">
       <strong>Where I want this to go.</strong> In the medium term, I want world models running on wearables such as smart glasses:
       reading intent from gaze and pupil dynamics as the action condition, then predicting and rendering the next moments fast enough
       to sharpen a person's own reactions. In the long run, I see world models coupled to brain&ndash;computer interfaces as a way for
       people to foresee the consequences of their choices, and eventually to inhabit generated worlds whose inhabitants can, in turn,
       build worlds of their own.
     </p>
+    -->
     <!-- EDIT: next steps -->
     <div class="callout">
       <p><strong>Next steps.</strong> I am broadly exploring opportunities in World Models, Sim2Real Data Generation, and World Action Models for Robot Learning.
@@ -84,8 +85,8 @@
     <h2>Research Interests</h2>
     <!-- EDIT: adjust the list below -->
     <ul class="interests">
-      <li><strong>Controllable Sim2Real style transfer.</strong> Simulators can mass-produce trajectories, but the images they render are not worth pretraining on. I want style-transfer world models that are controllable enough, in geometry, contact, and appearance, to turn simulated rollouts into high-quality pretraining data at scale, so that robot foundation models stop being bottlenecked on teleoperated demonstrations.</li>
-      <li><strong>World action code models.</strong> An agent that predicts video and actions while, in real time, reasoning out code as its policy: the planning and generalization of a foundation LLM, with the closed-loop latency of an end-to-end policy. The code it writes is inspectable, reusable, and verifiable against the world model's own predictions.</li>
+      <li><strong>Controllable Sim2Real style transfer.</strong> Conditioning generative world models on simulator state to convert large volumes of simulated rollouts into photorealistic, physically faithful pretraining data for robot foundation models.</li>
+      <li><strong>World action code models.</strong> Jointly predicting future video and actions while reasoning in real time to generate code as policy, combining the planning ability of foundation LLMs with the closed-loop latency of end-to-end policies.</li>
     </ul>
   </section>
 
