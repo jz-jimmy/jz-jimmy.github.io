@@ -88,6 +88,7 @@
       <li><a href="#5-where-the-sim-to-real-gap-comes-from">5. Sources of the gap</a></li>
       <li><a href="#6-discussion">6. Discussion</a></li>
       <li><a href="#7-practical-lessons">7. Practical lessons</a></li>
+      <li><a href="#8-next-study-a-short-training-metric-for-choosing-the-styler-odlg">8. Next: choosing the styler (ODLG)</a></li>
       <li><a href="#appendix-reproducibility">Appendix. Reproducibility</a></li>
       <li><a href="#todo">TODO</a></li>
     </ol>
@@ -95,7 +96,7 @@
   <article class="post">
     <header>
       <h1>Can a video world model close the sim-to-real gap? Lessons from a contact-rich insertion task</h1>
-      <p class="muted"><time datetime="2026-10-31">October 31, 2026</time> &middot; Jiayu Zhou</p>
+      <p class="muted"><time datetime="2026-11-05">November 5, 2026</time> &middot; Jiayu Zhou</p>
     </header>
 
 <h2 id="abstract">Abstract</h2>
@@ -574,6 +575,27 @@
 <tr><td>Long jobs on shared login nodes</td><td>Drivers in tmux (user services die when sessions close); build datasets in resumable parallel parts</td></tr>
 <tr><td>Shared-filesystem quota and outages</td><td>Tolerate missing clips; checkpoint often</td></tr>
 </tbody></table></div>
+<h2 id="8-next-study-a-short-training-metric-for-choosing-the-styler-odlg">8. Next study: a short-training metric for choosing the styler (ODLG)</h2>
+<ul class="exp">
+<li><strong>Question.</strong> Which renderer (raw sim, hand-matched sim, Nano, other stylers, or a mixture) produces the most useful training images for <em>this</em> task, decided without fully training and deploying a policy per candidate?</li>
+<li><strong>Why a single action-error number is not enough.</strong> How far a policy's action on a styled frame is from the expert's action (E12's plan gap) mixes the policy's competence with the renderer's quality. The proposal is to measure a <em>controlled learning process</em> instead: clone one initial policy, train each clone for the same short budget on the same simulated states rendered by a different candidate, and track the clone's action error on real images as training proceeds. The renderer whose clone's real error falls fastest and furthest scores highest. We call the score Oracle Deviation Learning Gain (ODLG): the normalized area under the real-error curve over a fixed budget.</li>
+<li><strong>Hypotheses.</strong><ul>
+<li>H1: the short-training score predicts the real success of a fully trained policy better than the error before training and better than image-realism metrics (E1).</li>
+<li>H2: picking or mixing candidates by the score beats any fixed renderer and uniform randomization at equal data and compute.</li>
+</ul>
+</li>
+<li><strong>What already exists.</strong> The expert that labels every state we train on (the scripted controller of the mrc sim; the PPO teacher now training in the Newton port will extend it to states off the demonstrations). 128 demonstrations stored as states, already rendered raw and Nano-styled with identical labels (E8); every other candidate is a re-render of the same states, so labels agree by construction. Checkpoints every 4k steps of all four trained policies. Real images with a known expert action: at the decisions before the first close command, the scene is the seed's nominal layout, so the sim expert can be queried at the measured joint state (the E12 construction) on the 64 stored real rollouts; and the scripted expert runs on the real robot, so recorded expert episodes label whole episodes with the same mechanism as in sim.</li>
+<li><strong>Design.</strong><ul>
+<li>Error D = weighted distance between the policy's 100-step chunk and the expert's on the same real image and joint state; reported in tool-center mm (as E12), in joint space, and as a gripper-event mismatch rate.</li>
+<li>Candidates on the 128 matched states: raw, Nano autoregressive, Nano per-frame, ref_sim matched, ref_sim with randomization, img2img-turbo. Screened for invented objects (E11), rejection rate reported.</li>
+<li>Clones: one initial policy, one minibatch order, 16k steps with a checkpoint every 2k, three training seeds. ODLG at budgets 4k / 8k / 16k; rankings must hold across budgets and seeds.</li>
+<li>Validation: a predefined high / middle / low-ranked subset is trained in full (40k, selection in augsim) and run on the locked 16 real test seeds. Report rank correlation with uncertainty and the selection regret of the ODLG pick, against the same numbers for the before-training error and the realism metrics.</li>
+<li>Mixtures: uniform mixture vs weights chosen by a small search that maximizes ODLG, vs the best single candidate; retrained with new seeds and tested on the robot. Baselines with the same real-data access: synthetic plus fine-tuning on the real validation episodes, and mixed synthetic–real training.</li>
+</ul>
+</li>
+<li><strong>Where the proposal was corrected.</strong> The teacher is not a prerequisite: the scripted expert labels the training states now; the teacher adds on-policy states later. Real labels need no state reconstruction (pre-grasp decisions use the nominal layout; recorded expert episodes cover the rest). ACT has no history input and executes the whole chunk. A budget of 1% of a run (400 steps) is below one epoch of 128 demonstrations; budgets start at 2k. No gradients through the generator or through the policy's training in the first rounds: selection, elimination and a search over mixture weights answer the questions at the same cost. The project has one real-robot task, so claims across tasks are out of reach here. Seeds 1000000–1000015 stay the locked test set; selection uses real episodes on other seeds.</li>
+<li><strong>Steps and cost.</strong> (0) Retrospective check on the four existing runs: does real pre-grasp error during training order them like their real success (8, 5, 7, 0 of 16)? About 1 GPU-hour, no robot. If the final error cannot separate ref_sim (0/16) from the rest, the metric fails on the easiest case and the study stops there. (1) About 32 recorded expert episodes on the real robot, on new seeds. (2) Candidate renders, about 3 GPU-hours per Nano candidate. (3) Branched short training, about 10 GPU-hours. (4) Full validation, 3 policies and 48 real trials. (5) Mixtures, about 15 GPU-hours and 32 real trials. Roughly 40 GPU-hours and 80 real trials in all, every step resumable in 2-hour slots. Working plan with gates: <code>Augmented_Sim2Real/docs/plan_odlg_20261105.md</code>.</li>
+</ul>
 <h2 id="appendix-reproducibility">Appendix. Reproducibility</h2>
 <div class="tablewrap"><table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>
 <tr><td>Raw-sim and augsim evaluations</td><td><code>jobs/sim_eval_mrc.sbatch</code>, <code>jobs/augsim_nano_eval.sbatch</code> (<code>AR=1</code> for E7)</td></tr>
@@ -589,8 +611,8 @@
 </tbody></table></div>
 <h2 id="todo">TODO</h2>
 <ul class="exp">
-<li><strong>PPO teacher policy (first).</strong> The golden-action score below and any teacher–student distillation need an end-to-end teacher that solves the whole task in sim. The June staged state-based PPO reached 94.5% on the chained task on the old environment; the August stage-1 PPO and the residual PPO on the mrc sim (69–77%, flat) did not reach it. Next steps: review the archived RL code and the saved runs to locate where training collapsed; those runs used the old arm and hand controller logic (before the Polymetis port and the mrc sim), so the recipe has to be re-validated on the current environment; compare with a reference PPO implementation trained under a smaller domain-randomization range. Review of the archived lines, the saved runs, what changed underneath, and the reference recipe (kywind/sim2real G5: no curriculum, demo-state reset pool, one bounded stage potential, decision-time grasp credit, σ = 1 on small-authority delta targets): <code>wmrl/docs/ppo_teacher_review_20261030.md</code>.</li>
-<li><strong>Score style-transfer methods against a golden action (after the teacher).</strong> The teacher gives a golden action for every state. For each styler (raw, ref_sim, Transfer2.5, img2img-turbo, Nano), feed the styled frames of many sim states to the policy and measure two things: whether its attention falls on the right region for the phase (gear before the grasp, shaft and plate during insertion), and how far its action strays from the golden action. This is a cheap, real-free score of how well a styler suits the task; check it against real success on the four policies first. E12 suggests the action distance is the informative half; attention location barely separates stylers.</li>
+<li><strong>PPO teacher policy (running).</strong> Teacher–student distillation and the on-policy part of §8 need an end-to-end teacher that solves the whole task in sim. The June staged state-based PPO reached 94.5% on the chained task on the old environment; the August stage-1 PPO and the residual PPO on the mrc sim (69–77%, flat) did not. Since 11/04 the reference recipe (kywind/sim2real G5: no curriculum, demo-state reset pool, one bounded stage potential, decision-time grasp credit, σ = 1 on small-authority delta targets) is training on our scene in the Newton port: 48 h, 1024 GPU environments, judged against the G5 milestones (26 M steps ≈ 90% from the start). Review of the archived lines and the recipe: <code>wmrl/docs/ppo_teacher_review_20261030.md</code>; port plan and results: <code>wmrl/docs/plan_teacher_newton_20261102.md</code>.</li>
+<li><strong>Choosing the styler with a short-training metric (§8).</strong> Replaces the earlier "golden-action score": the retrospective check on the four existing runs needs no robot and decides whether the study continues; plan <code>Augmented_Sim2Real/docs/plan_odlg_20261105.md</code>.</li>
 <li><strong>Styled training at scale.</strong> Repeat E8 with more demonstrations (for example 512) and checkpoint selection in augsim; optionally distil from Nano latents or style every k-th frame.</li>
 <li><strong>Matched backbone comparison.</strong> img2img-turbo vs Nano under the same policy, protocol and realism metrics; E12's matched-state probe gives the per-state score.</li>
 <li><strong>ref_sim, round 2.</strong> Randomize table texture or restore a realistic grain; check in augsim before the real world.</li>
