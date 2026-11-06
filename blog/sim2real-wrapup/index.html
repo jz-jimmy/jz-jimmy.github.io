@@ -374,7 +374,7 @@
 <h3 id="f-reproducibility">F. Reproducibility</h3>
 <div class="tablewrap"><table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>
 <tr><td>Raw-sim and augsim evaluations</td><td><code>jobs/sim_eval_mrc.sbatch</code>, <code>jobs/augsim_nano_eval.sbatch</code> (<code>AR=1</code> for the autoregressive loop)</td></tr>
-<tr><td>Real evaluations</td><td><code>wmrl/eval-logs/real_eval_20261019.md</code> (sim1024), <code>real_eval_20261013.md</code> (mix512), <code>real_eval_20261028_nano128_24k.md</code>, <code>real_eval_20261030_raw128_20k.md</code>, <code>real_eval_20261030_refsim_52k.md</code></td></tr>
+<tr><td>Real evaluations</td><td><code>wmrl/eval-logs/real_eval_20261019.md</code> (sim1024), <code>real_eval_20261013.md</code> (mix512), <code>real_eval_20261028_nano128_24k.md</code> (augsim128), <code>real_eval_20261030_raw128_20k.md</code> (sim128), <code>real_eval_20261030_refsim_52k.md</code> (ref_sim1024)</td></tr>
 <tr><td>Realism metrics</td><td><code>jobs/realism_metrics.py</code></td></tr>
 <tr><td>Replay, first-decision and layer probes</td><td><code>jobs/divergence_probe.py</code>, <code>jobs/consumed_regen.sbatch</code>, <code>jobs/act_layerwise.py</code></td></tr>
 <tr><td>Flicker and the autoregressive loop</td><td><code>jobs/ar_vs_perframe.py</code>; <code>augsim/infer/nano_mrc_server.py</code> (<code>NANO_AR=1</code>), <code>augsim/t25/closed_loop.py</code></td></tr>
