@@ -159,15 +159,16 @@
 <aside class="takeaway"><p>Ten minutes of footage are enough to move the model to this scene. The result is clearly closer to the real cameras and clearly not the same; the remaining distance is twenty times what two halves of the real data have between them.</p></aside>
 <h2 id="4-does-augmented-simulation-predict-the-real-robot">4. Does augmented simulation predict the real robot?</h2>
 <p class="lede">For choosing between policies, yes. For predicting a success rate, no.</p>
-<p>We evaluated four policies of different quality on the same 16 scenes in all three settings. They differ in training images and data size, which is what makes them a test of ranking.</p>
+<p>We evaluated five policies of different quality on the same 16 scenes in all three settings. They differ in training images and data size, which is what makes them a test of ranking.</p>
 <div class="tablewrap"><table><thead><tr><th>Policy</th><th>Training images</th><th>Demonstrations</th><th>Checkpoint chosen in</th></tr></thead><tbody>
 <tr><td>76k</td><td>raw sim</td><td>1024</td><td>raw sim</td></tr>
 <tr><td>raw128</td><td>raw sim</td><td>128</td><td>raw sim</td></tr>
 <tr><td>nano128</td><td>Nano-repainted sim</td><td>128</td><td>raw sim</td></tr>
 <tr><td>ref_sim 52k</td><td>hand-matched sim with randomization</td><td>1024</td><td>its own sim</td></tr>
+<tr><td>52k (Transfer2.5)</td><td>raw sim</td><td>512</td><td>raw sim</td></tr>
 </tbody></table></div>
-<p>Every simulated number is the one measured before its real test, with the cameras that policy was trained and evaluated with. For 76k that is its own calibration (round 27b, raw sim 16 of 16); its augsim run is the exception: it was made after the real test, with the recalibrated cameras (round 29), the only augsim run of that policy. The three newer policies were trained and evaluated under round 29 throughout.</p>
-<figure><img src="img/real_vs_sim_scatter_v3.svg" alt="What to look for. Each point is one policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left, raw sim; right, augsim. With 16 scenes, each coordinate carries an interval of about plus or minus 20 points. The raw-sim points sit far off the line in both directions; the augsim points sit nearer to it and in the real order."><figcaption><strong>What to look for.</strong> Each point is one policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left, raw sim; right, augsim. With 16 scenes, each coordinate carries an interval of about plus or minus 20 points. The raw-sim points sit far off the line in both directions; the augsim points sit nearer to it and in the real order.</figcaption></figure>
+<p>Every simulated number is the one measured before its real test, with the cameras that policy was trained and evaluated with. For 76k that is its own calibration (round 27b, raw sim 16 of 16); its augsim run is the exception: it was made after the real test, with the recalibrated cameras (round 29), the only augsim run of that policy. The three newer policies were trained and evaluated under round 29 throughout. The fifth policy, 52k, is an earlier 512-demonstration ACT (October 13): its sim and augsim runs warp the cameras to that day's real poses, and its augsim used Cosmos-Transfer2.5, the renderer before Nano.</p>
+<figure><img src="img/real_vs_sim_scatter_v4.svg" alt="What to look for. Each point is one policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left, raw sim; right, augsim. With 16 scenes, each coordinate carries an interval of about plus or minus 20 points. The raw-sim points sit far off the line in both directions; the augsim points sit nearer to it and in the real order."><figcaption><strong>What to look for.</strong> Each point is one policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left, raw sim; right, augsim. With 16 scenes, each coordinate carries an interval of about plus or minus 20 points. The raw-sim points sit far off the line in both directions; the augsim points sit nearer to it and in the real order.</figcaption></figure>
 <p><strong>Ranking.</strong> The robot ordered the three newer policies nano128, raw128, ref_sim. Augsim gave exactly that order. Raw sim gave the reverse: it put the policy that never grasped a gear in the real world in first place, and the best real policy last.</p>
 <p><strong>Per scene.</strong> Pooled over the three policies, augsim agreed with the real outcome on 37 of 48 scenes and raw sim on 27. The agreement is not uniform: on nano128, whose training images are themselves Nano frames, raw sim agreed slightly more often.</p>
 <p><strong>Absolute rates.</strong> Both simulators miss them, in both directions. For the 76k policy raw sim was optimistic (16 of 16 against 8 on the robot) and augsim pessimistic (3 of 16). For nano128 augsim was optimistic (9 against 7).</p>
@@ -282,17 +283,38 @@
 <tr><td><strong>Seated</strong></td><td><strong>10/16</strong></td><td><strong>2/16</strong></td><td><strong>5/16</strong></td><td><strong>3/16</strong></td><td><strong>9/16</strong></td><td><strong>7/16</strong></td></tr>
 </tbody></table></div>
 </details>
+<details class="more"><summary>52k (Transfer2.5), 16 scenes: raw sim, augsim, real</summary>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim (cameras warped to the real poses)</th><th>Augsim (Transfer2.5)</th><th>Real</th></tr></thead><tbody>
+<tr><td>1000000</td><td>engaged</td><td>engaged</td><td>seated</td></tr>
+<tr><td>1000001</td><td>engaged</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000002</td><td>engaged</td><td>seated</td><td>no grasp</td></tr>
+<tr><td>1000003</td><td>engaged</td><td>engaged</td><td>grasped</td></tr>
+<tr><td>1000004</td><td>engaged</td><td>seated</td><td>lifted</td></tr>
+<tr><td>1000005</td><td>engaged</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000006</td><td>engaged</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000007</td><td>seated</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000008</td><td>seated</td><td>engaged</td><td>lifted</td></tr>
+<tr><td>1000009</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000010</td><td>lifted</td><td>engaged</td><td>grasped</td></tr>
+<tr><td>1000011</td><td>engaged</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000012</td><td>seated</td><td>engaged</td><td>pre-insert</td></tr>
+<tr><td>1000013</td><td>engaged</td><td>engaged</td><td>pre-insert</td></tr>
+<tr><td>1000014</td><td>engaged</td><td>engaged</td><td>no grasp</td></tr>
+<tr><td>1000015</td><td>engaged</td><td>lifted</td><td>lifted</td></tr>
+<tr><td><strong>Seated</strong></td><td><strong>4/16</strong></td><td><strong>5/16</strong></td><td><strong>4/16</strong></td></tr>
+</tbody></table></div>
+</details>
 <details class="more"><summary>Per-seed agreement with the real outcome</summary>
 <div class="tablewrap"><table><thead><tr><th>Policy</th><th>Raw sim</th><th>Augsim</th></tr></thead><tbody>
 <tr><td>76k</td><td>8/16 (predicts every seed seated, κ 0)</td><td>9/16 (κ 0.13)</td></tr>
 <tr><td>raw128</td><td>9/16 (κ 0.20)</td><td>13/16 (κ 0.48)</td></tr>
 <tr><td>nano128</td><td>10/16 (κ 0.19)</td><td>8/16 (κ 0.02)</td></tr>
 <tr><td>ref_sim 52k</td><td>8/16</td><td>16/16</td></tr>
+<tr><td>52k (Transfer2.5)</td><td>κ 0.00</td><td>κ 0.54</td></tr>
 <tr><td><strong>Pooled, three newer policies</strong></td><td><strong>27/48 (κ 0.07)</strong></td><td><strong>37/48 (κ 0.37)</strong></td></tr>
 </tbody></table></div>
-<p>An earlier replicate with a 52k policy (512 demonstrations, Transfer2.5 as the renderer) gave κ 0.54 for augsim against 0.00 for raw sim.</p>
 </details>
-<figure><img src="img/real_vs_sim_violins_v3.svg" alt="What to look for. Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. Raw sim loses scenes late, where the robot loses them early; the augsim shapes sit closer to the real ones."><figcaption><strong>What to look for.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. Raw sim loses scenes late, where the robot loses them early; the augsim shapes sit closer to the real ones.</figcaption></figure>
+<figure><img src="img/real_vs_sim_violins_v4.svg" alt="What to look for. Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. Raw sim loses scenes late, where the robot loses them early; the augsim shapes sit closer to the real ones."><figcaption><strong>What to look for.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. Raw sim loses scenes late, where the robot loses them early; the augsim shapes sit closer to the real ones.</figcaption></figure>
 <h3 id="b-where-the-pipeline-loses-accuracy">B. Where the pipeline loses accuracy</h3>
 <p>Across the four policies the robot loses scenes to empty grasps (76k 6, raw128 6, nano128 4, ref_sim 13); the simulators lose them later, at the shaft.</p>
 <figure><img src="img/gap_attribution_v4.svg" alt="What to look for. For each setting, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated. Real rows are gray-heavy; simulated rows are light-blue-heavy."><figcaption><strong>What to look for.</strong> For each setting, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated. Real rows are gray-heavy; simulated rows are light-blue-heavy.</figcaption></figure>
