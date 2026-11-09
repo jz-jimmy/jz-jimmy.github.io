@@ -21,7 +21,7 @@
 <circle cx="85.0" cy="190.0" r="8" fill="#1a7f37" fill-opacity="0.85" stroke="#1f2328" stroke-width="0.8"/>
 <circle cx="152.5" cy="257.5" r="8" fill="#8250df" fill-opacity="0.85" stroke="#1f2328" stroke-width="0.8"/>
 <circle cx="338.1" cy="139.4" r="8" fill="white" stroke="#bf3989" stroke-width="2.2" stroke-dasharray="3 2"/>
-<text x="82" y="62" font-size="12" font-style="italic" fill="#1f2328">r = 0.14 (n = 5 measured)</text><text x="82" y="78" font-size="12" font-style="italic" fill="#bf3989">r = 0.35 with the hypothetical point</text>
+<text x="82" y="62" font-size="12" font-style="italic" fill="#1f2328">r = 0.28 (n = 5 measured)</text><text x="82" y="78" font-size="12" font-style="italic" fill="#bf3989">r = 0.35 with the hypothetical point</text>
 <text x="580" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#1f2328">Augsim (styled sim)</text>
 <line x1="445.0" x2="445.0" y1="40" y2="340" stroke="#d0d7de" stroke-dasharray="3 3"/><line x1="430" x2="730" y1="325.0" y2="325.0" stroke="#d0d7de" stroke-dasharray="3 3"/>
 <text x="445.0" y="356" text-anchor="middle" font-size="11" fill="#59636e">0.0</text><text x="424" y="329.0" text-anchor="end" font-size="11" fill="#59636e">0.0</text>
@@ -43,7 +43,7 @@
 <circle cx="445.0" cy="325.0" r="8" fill="#1a7f37" fill-opacity="0.85" stroke="#1f2328" stroke-width="0.8"/>
 <circle cx="512.5" cy="240.6" r="8" fill="#8250df" fill-opacity="0.85" stroke="#1f2328" stroke-width="0.8"/>
 <circle cx="698.1" cy="55.0" r="8" fill="white" stroke="#bf3989" stroke-width="2.2" stroke-dasharray="3 2"/>
-<text x="442" y="62" font-size="13" font-style="italic" fill="#1f2328">r = 0.88  (n = 6 policies)</text>
+<text x="442" y="62" font-size="12" font-style="italic" fill="#1f2328">r = 0.61 (n = 5 measured)</text><text x="442" y="78" font-size="12" font-style="italic" fill="#bf3989">r = 0.88 with the hypothetical point</text>
 <text x="400" y="384" text-anchor="middle" font-size="13" fill="#0b57d0">success rate, real world (16 seeds per policy)</text>
 <text x="22" y="190" transform="rotate(-90 22 190)" text-anchor="middle" font-size="13" fill="#e8710a">success rate in the simulator</text>
 <circle cx="40" cy="405" r="6" fill="#0b57d0"/><text x="52" y="409" font-size="12" fill="#1f2328">sim1024</text>
