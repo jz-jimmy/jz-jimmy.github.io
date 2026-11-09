@@ -20,7 +20,7 @@
     .post .byline { font-size: 0.92rem; color: var(--muted); }
     .post h2 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.015em; border: 0; padding: 0; margin: 3.4rem 0 0.9rem; }
     .post h3 { font-size: 1.12rem; font-weight: 650; margin: 2.4rem 0 0.7rem; padding: 0; border: 0; }
-    .post p { margin: 0 0 1.05rem; }
+    .post p { margin: 0 0 1.05rem; line-height: 1.75; }
     .post p.lede { font-size: 1.32rem; line-height: 1.45; font-weight: 600; letter-spacing: -0.01em; color: var(--fg); margin: 0 0 1.4rem; }
     .post ul, .post ol { padding-left: 1.3rem; margin: 0 0 1.1rem; }
     .post li { margin: 0.3rem 0; }
@@ -29,7 +29,7 @@
     .post code { font-size: 0.86em; background: var(--tag); padding: 0.08em 0.35em; border-radius: 4px; }
     .post hr { border: 0; border-top: 1px solid var(--line); margin: 2.4rem 0; }
     .post aside.takeaway { margin: 1.4rem 0 1.6rem; padding: 1rem 1.25rem 1.05rem; background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 8px; font-size: 1.08rem; line-height: 1.55; font-weight: 500; }
-    .post aside.takeaway::before { content: "Takeaway"; display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+    .post aside.takeaway::before { content: "Finding"; display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
     .post aside.takeaway p { margin: 0; }
     .post aside.takeaway + aside.takeaway { margin-top: -0.8rem; }
     .post .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.8rem; margin: 1.4rem 0 1.6rem; }
@@ -39,7 +39,7 @@
     .post figure { margin: 1.6rem 0 2rem; }
     .post figure img { width: 100%; height: auto; display: block; border-radius: 8px; }
     .post video { width: 100%; max-width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: #000; }
-    .post figcaption { font-size: 0.94rem; line-height: 1.5; color: var(--fg); opacity: 0.85; margin-top: 0.6rem; }
+    .post figcaption { text-align: left; font-size: 0.94rem; line-height: 1.6; color: var(--fg); opacity: 0.85; margin-top: 0.6rem; }
     .post figcaption strong { color: var(--accent); font-weight: 700; }
     .post .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.6rem 0 2rem; }
     .post .pair figure { margin: 0; }
@@ -93,22 +93,22 @@
     <summary>Contents</summary>
     <ol>
       <li><a href="#summary">Summary</a></li>
-      <li><a href="#1-why-improve-simulated-visual-observations">1. Why improve simulated visuals</a></li>
-      <li><a href="#2-building-augmented-simulation">2. Building augmented simulation</a></li>
-      <li><a href="#3-why-video-models-and-scene-adaptation">3. Why video models and scene adaptation</a></li>
-      <li><a class="sub" href="#making-inference-fast-enough">Making inference fast enough</a></li>
-      <li><a href="#4-predicting-real-world-performance">4. Predicting real-world performance</a></li>
-      <li><a href="#5-training-policies-that-transfer">5. Training policies that transfer</a></li>
-      <li><a href="#6-how-visual-transfer-changes-policy-decisions">6. How transfer changes decisions</a></li>
-      <li><a href="#7-findings-and-next-steps">7. Findings and next steps</a></li>
+      <li><a href="#1-problem-the-visual-domain-gap-in-simulation-based-policy-evaluation">1. Problem: the visual domain gap</a></li>
+      <li><a href="#2-method-augmented-simulation-with-a-fine-tuned-video-world-model">2. Method: augmented simulation</a></li>
+      <li><a href="#3-scene-adaptation-of-the-video-world-model">3. Scene adaptation of the video world model</a></li>
+      <li><a class="sub" href="#31-inference-latency-and-optimization">3.1 Inference latency and optimization</a></li>
+      <li><a href="#4-evaluation-fidelity-does-augmented-simulation-predict-real-world-performance">4. Evaluation fidelity</a></li>
+      <li><a href="#5-training-transfer-policies-trained-on-style-transferred-observations">5. Training transfer</a></li>
+      <li><a href="#6-mechanism-how-appearance-transfer-changes-policy-outputs">6. Mechanism</a></li>
+      <li><a href="#7-conclusions-limitations-and-future-work">7. Conclusions, limitations and future work</a></li>
       <li><a href="#appendix">Appendix</a></li>
-      <li><a class="sub" href="#a-outcome-of-every-scene">A. Outcome of every scene</a></li>
-      <li><a class="sub" href="#b-failure-stages-and-sim-to-real-fixes">B. Failure stages and sim-to-real fixes</a></li>
-      <li><a class="sub" href="#c-style-transfer-backends-latency">C. Style transfer backends: latency</a></li>
-      <li><a class="sub" href="#d-limit-tests-of-the-adapted-model">D. Limit tests of the adapted model</a></li>
-      <li><a class="sub" href="#e-image-and-video-realism-metrics">E. Image and video realism metrics</a></li>
+      <li><a class="sub" href="#a-per-scene-outcomes">A. Per-scene outcomes</a></li>
+      <li><a class="sub" href="#b-failure-stage-analysis-and-sim-to-real-calibration">B. Failure stages and calibration</a></li>
+      <li><a class="sub" href="#c-style-transfer-baselines-inference-latency">C. Style transfer baselines: inference latency</a></li>
+      <li><a class="sub" href="#d-robustness-of-the-adapted-model-to-camera-perturbation-and-prompts">D. Robustness of the adapted model</a></li>
+      <li><a class="sub" href="#e-image-and-video-fidelity-metrics">E. Image and video fidelity metrics</a></li>
       <li><a class="sub" href="#f-comparison-with-roborender">F. Comparison with RoboRender</a></li>
-      <li><a class="sub" href="#g-scripts-and-logs">G. Scripts and logs</a></li>
+      <li><a class="sub" href="#g-reproducibility">G. Reproducibility</a></li>
     </ol>
   </details>
   <article class="post">
@@ -117,138 +117,140 @@
       <p class="byline"><time datetime="2026-11-09">November 9, 2026</time> &middot; Jiayu Zhou</p>
     </header>
 
-<p class="dek">A video world model fine-tuned on a few minutes of real footage repaints every simulated frame in the style of the real cameras. Does that turn the simulator into a realistic space for evaluating and training robot policies? On a tight-tolerance insertion task, it does.</p>
+<p class="dek">We ask whether a video world model fine-tuned on a few minutes of real footage can serve as the renderer of a physics simulator, closing the visual domain gap for policy evaluation and policy training. On a tight-tolerance gear insertion task, it can.</p>
 <h2 id="summary">Summary</h2>
-<p class="lede">Yes. Fine-tuned on ten minutes of real video, the world model repaints the simulator realistically enough that it ranks policies as the real world does and trains policies that transfer better than raw or hand-matched simulation.</p>
-<p>The idea is to keep the physics simulator as the source of states and actions and let a video world model (Cosmos3-Nano), fine-tuned on a small amount of footage from our own cameras, replace what the policy sees: every frame is repainted in the real cameras' style. We call the result augmented simulation, or augsim. The test bed is tight-tolerance gear insertion with a Franka FR3, three cameras and ACT policies trained on scripted demonstrations; every policy runs on the same 16 scenes in raw sim, in augsim and on the real robot.</p>
+<p class="lede">Fine-tuned on ten minutes of real video, the world model renders the simulator realistically enough that simulated evaluation ranks policies as real-world evaluation does, and that policies trained on its output transfer better than policies trained on native or manually calibrated renderings.</p>
+<p><strong>Setting.</strong> The physics simulator remains the source of states and actions.<br>A video world model (Cosmos3-Nano), fine-tuned on footage from our own cameras, replaces the rendered observation of every frame.<br>We call this augmented simulation (augsim).<br>The task is tight-tolerance gear insertion with a Franka FR3, three cameras, and ACT policies trained by behavior cloning on scripted demonstrations.<br>Every policy is evaluated on the same 16 scenes in raw sim, in augsim, and in the real world.</p>
 <div class="pair">
-<figure><video controls preload="metadata" playsinline src="videos/case_a_mix512_1000006_17s.mp4" aria-label="How to read. One scene, one policy, three settings side by side: raw sim, augsim, real. Rows are the wrist camera and the two fixed cameras. Watch for: raw sim stalls at the shaft; augsim and the real robot both seat the gear."></video><figcaption><strong>How to read.</strong> One scene, one policy, three settings side by side: raw sim, augsim, real. Rows are the wrist camera and the two fixed cameras. <strong>Watch for:</strong> raw sim stalls at the shaft; augsim and the real robot both seat the gear.</figcaption></figure>
-<figure><video controls preload="metadata" playsinline src="videos/case_b_sim128_1000010_20s.mp4" aria-label="How to read. Same layout, another scene and policy. Watch for: raw sim grasps and seats the gear; in augsim and on the real robot the fingers close beside the gear and the arm moves on empty-handed. The repainted simulator fails the way the real rollout fails."></video><figcaption><strong>How to read.</strong> Same layout, another scene and policy. <strong>Watch for:</strong> raw sim grasps and seats the gear; in augsim and on the real robot the fingers close beside the gear and the arm moves on empty-handed. The repainted simulator fails the way the real rollout fails.</figcaption></figure>
+<figure><video controls preload="metadata" playsinline src="videos/case_a_mix512_1000006_17s.mp4" aria-label="One scene and one policy under the three evaluation conditions: raw sim, augsim and real world (columns); wrist camera and two fixed cameras (rows). Observe: raw sim stalls at the shaft, while augsim and the real rollout both seat the gear."></video><figcaption><strong>Video 1.</strong> One scene and one policy under the three evaluation conditions: raw sim, augsim and real world (columns); wrist camera and two fixed cameras (rows).<br><strong>Observe:</strong> raw sim stalls at the shaft, while augsim and the real rollout both seat the gear.</figcaption></figure>
+<figure><video controls preload="metadata" playsinline src="videos/case_b_sim128_1000010_20s.mp4" aria-label="A second scene and policy in the same layout. Observe: raw sim grasps and seats the gear; in augsim and in the real world the gripper closes beside the gear and the arm continues without it. Augsim reproduces the real failure mode."></video><figcaption><strong>Video 2.</strong> A second scene and policy in the same layout.<br><strong>Observe:</strong> raw sim grasps and seats the gear; in augsim and in the real world the gripper closes beside the gear and the arm continues without it.<br>Augsim reproduces the real failure mode.</figcaption></figure>
 </div>
-<aside class="takeaway"><p><strong>As an evaluation space.</strong> Augsim orders policies as the real-world evaluation does and flags the one that fails on the robot; raw sim orders them backwards. Neither predicts the success rate itself.</p></aside>
-<aside class="takeaway"><p><strong>As a training space.</strong> The same demonstrations, repainted, produce a policy that transfers better than the one trained on raw frames, and far better than one trained in a simulator matched to the cameras by hand.</p></aside>
-<h2 id="1-why-improve-simulated-visual-observations">1. Why improve simulated visual observations</h2>
-<p class="lede">A simulator can be right about the physics and still mislead you, because the policy never sees physics. It sees pixels.</p>
-<p>Our first policy seated the gear in every simulated scene and in half of the real ones. Worse, when three policies had to be compared, the simulator ordered them backwards and would have shipped the one that never grasped a gear in the real world.</p>
-<p>Hand-built realism did not help. We matched the simulator's table, light and camera response to the real frames, randomized around them, and got our worst real policy: the real table has wood grain, and nothing we randomized produced texture. A video model paints texture, keeps it steady across frames and, conditioned on edges and depth, leaves the geometry alone. If such a model can be adapted to one scene from a few minutes of footage, every simulated frame can be made to look like that scene, and the simulator becomes a realistic space for training and evaluation. The rest of this post tests that claim.</p>
-<aside class="takeaway"><p>We chose a sub-millimeter insertion on purpose. Every error source shows up, so we can separate what appearance fixes from what it cannot.</p></aside>
-<h2 id="2-building-augmented-simulation">2. Building augmented simulation</h2>
-<p class="lede">The simulator keeps the state; the world model only replaces what the cameras would see.</p>
-<figure><img src="pipeline.png" alt="Pipeline diagram"><figcaption><strong>The pipeline.</strong> Real-world calibration, a calibrated simulator, scripted demonstrations and ACT training on the top row; the world model sits on a side branch, so the same policy and scenes are scored in raw sim, in augsim and on the robot.</figcaption></figure>
-<div class="tablewrap"><table><thead><tr><th>Piece</th><th>Choice</th></tr></thead><tbody>
-<tr><td>Simulator</td><td>MuJoCo with a port of the real robot's Polymetis controller, signed-distance-field contacts for the gear and shaft, cameras from the current real calibration</td></tr>
-<tr><td>Policy</td><td>ACT: three 224-pixel views plus proprioception, chunks of 100 joint targets at 30 Hz, behavior cloning on scripted full-insertion demonstrations</td></tr>
-<tr><td>Real footage</td><td>20 scripted episodes on the real robot, about ten minutes across three cameras, separate from the policy data</td></tr>
-<tr><td>Renderer</td><td>Cosmos3-Nano (8 B parameters) post-trained at 256 pixels, conditioned on simulator-rendered edges and inverse depth with a fixed caption</td></tr>
-<tr><td>Generation</td><td>Training streams repainted autoregressively at 0.06 s per frame; in the closed loop each decision frame is repainted on its own in about 2 s while the simulator waits</td></tr>
-<tr><td>Protocol</td><td>16 seeds fix the gear placement; the same seeds run in raw sim, in augsim and on the robot; success is the gear fully seated</td></tr>
+<aside class="takeaway"><p><strong>Evaluation fidelity.</strong> Augsim ranks policies in the same order as real-world evaluation and identifies the policy that fails in the real world.<br>Raw sim ranks them in reverse.<br>Neither predicts the absolute success rate.</p></aside>
+<aside class="takeaway"><p><strong>Training transfer.</strong> With identical demonstrations and actions, the policy trained on style-transferred observations achieves the highest real-world success, and the policy trained in the manually calibrated renderer never grasps the gear.</p></aside>
+<h2 id="1-problem-the-visual-domain-gap-in-simulation-based-policy-evaluation">1. Problem: the visual domain gap in simulation-based policy evaluation</h2>
+<p class="lede">A simulator with correct physics can still mislead policy evaluation, because a visuomotor policy observes pixels, not physics.</p>
+<p>Our first policy seated the gear in all simulated scenes and in half of the real ones.<br>When three policies were compared, the simulator ranked them in the reverse of the real-world order and would have selected the policy that never grasped a gear.</p>
+<p>Manual appearance calibration did not close the gap.<br>We matched the simulator's table, lighting and camera response to the real frames and applied domain randomization around them.<br>The resulting policy was the worst in the real world: the real table has wood grain, and no randomized parameter produced texture.</p>
+<p>A video world model conditioned on edges and depth renders texture, keeps it temporally consistent, and preserves geometry.<br>If such a model can be adapted to one scene from a few minutes of footage, the simulator can render that scene and become a realistic space for training and evaluation.<br>The rest of this post tests that claim.</p>
+<aside class="takeaway"><p>We chose a sub-millimeter insertion task deliberately.<br>Every error source is exposed, so the contribution of appearance can be separated from the contribution of geometry and dynamics.</p></aside>
+<h2 id="2-method-augmented-simulation-with-a-fine-tuned-video-world-model">2. Method: augmented simulation with a fine-tuned video world model</h2>
+<p class="lede">The simulator keeps the state; the world model replaces only the rendered observation.</p>
+<figure><img src="pipeline.png" alt="Pipeline diagram"><figcaption><strong>Figure 1.</strong> Overview.<br>Real-world calibration, a calibrated simulator, scripted demonstrations and ACT training (top row).<br>The world model renders the simulator's observations, so the same policy and scenes are evaluated in raw sim, in augsim and in the real world.</figcaption></figure>
+<p><strong>Terminology.</strong> Raw sim is the simulator's native rendering.<br>Augsim is the simulator rendered through the adapted world model.<br>Ref_sim is the manually calibrated renderer with domain randomization.</p>
+<div class="tablewrap"><table><thead><tr><th>Component</th><th>Choice</th></tr></thead><tbody>
+<tr><td>Simulator</td><td>MuJoCo with a port of the real robot's Polymetis controller, signed-distance-field contacts for gear and shaft, cameras from the current real-world calibration</td></tr>
+<tr><td>Policy</td><td>ACT with three 224-pixel views and proprioception, predicting chunks of 100 joint targets at 30 Hz; behavior cloning on scripted full-insertion demonstrations</td></tr>
+<tr><td>Real footage</td><td>20 scripted episodes recorded by the three cameras, about ten minutes in total, disjoint from the policy data</td></tr>
+<tr><td>World model</td><td>Cosmos3-Nano (8 B parameters), post-trained at 256 pixels; conditioned on simulator-rendered edges and inverse depth with a fixed caption</td></tr>
+<tr><td>Inference</td><td>Demonstration streams rendered autoregressively at 0.06 s per frame; in closed-loop evaluation each decision frame is rendered on its own in about 2 s while the simulator waits</td></tr>
+<tr><td>Protocol</td><td>16 seeds fix the gear placement; the same seeds are run in raw sim, in augsim and in the real world; success is the gear fully seated</td></tr>
 </tbody></table></div>
-<details class="more"><summary>What we tried and dropped</summary>
+<details class="more"><summary>Design alternatives rejected</summary>
 <ul>
-<li>Controls estimated from real video instead of rendered: lower fidelity and invented grippers.</li>
-<li>A segmentation channel: merged gripper and gear.</li>
-<li>Training windows from episode centers with a bad wrist mask: the gear vanished from repainted frames. Sampling windows across whole episodes fixed it.</li>
+<li>Control signals estimated from real video instead of rendered by the simulator: lower fidelity and hallucinated grippers.</li>
+<li>A segmentation control channel: gripper and gear merged.</li>
+<li>Training windows sampled from episode centers with a defective wrist mask: the gear vanished from stylized frames.<br>Sampling windows across whole episodes fixed it.</li>
 </ul>
 </details>
-<h2 id="3-why-video-models-and-scene-adaptation">3. Why video models and scene adaptation</h2>
-<p class="lede">Ten minutes of footage are enough to adapt the world model to this scene: it paints our table, our light and our gripper, and holds them steady across frames.</p>
-<figure><img src="img/realism_kid.svg" alt="How to read. Distance to the real cameras per frame (KID on Inception features, lower is closer), one bar per camera: raw sim, hand-matched sim, Nano, and at the far left the floor, one half of the real data against the other. Takeaway: Nano halves the distance; what remains is still about twenty times the floor."><figcaption><strong>How to read.</strong> Distance to the real cameras per frame (KID on Inception features, lower is closer), one bar per camera: raw sim, hand-matched sim, Nano, and at the far left the floor, one half of the real data against the other. <strong>Takeaway:</strong> Nano halves the distance; what remains is still about twenty times the floor.</figcaption></figure>
-<figure><video controls preload="metadata" playsinline src="videos/ar_vs_perframe.mp4" aria-label="How to read. Raw render, per-frame Nano, autoregressive Nano on two scenes. Watch for: in the middle column the table texture and the glare on the gripper change every frame; on the right they hold still while the arm moves."></video><figcaption><strong>How to read.</strong> Raw render, per-frame Nano, autoregressive Nano on two scenes. <strong>Watch for:</strong> in the middle column the table texture and the glare on the gripper change every frame; on the right they hold still while the arm moves.</figcaption></figure>
-<aside class="takeaway"><p>Scene adaptation from a few minutes of video works. The repainted stream is clearly closer to the real cameras, not identical to them, and autoregressive repainting keeps it stable. Whether that is close enough is what sections 4 and 5 test.</p></aside>
-<h3 id="making-inference-fast-enough">Making inference fast enough</h3>
-<p>For the repainted simulator to be a usable training and evaluation space, repainting has to be cheap enough to run on every frame of every demonstration and on every decision in the closed loop. Out of the box it was not: our first closed-loop renderer, Cosmos-Transfer2.5 at 720 pixels and 35 denoising steps, took 7 s per decision frame.</p>
-<p>What made the difference, in order of effect:</p>
+<h2 id="3-scene-adaptation-of-the-video-world-model">3. Scene adaptation of the video world model</h2>
+<p class="lede">Ten minutes of footage are sufficient to adapt the world model to this scene.<br>It renders our table, lighting and gripper, and holds them steady across frames.</p>
+<figure><img src="img/realism_kid.svg" alt="Per-frame distance to the real cameras (Kernel Inception Distance, lower is closer), one bar per camera, for raw sim, ref_sim and the adapted model. The leftmost group is the floor: one half of the real data against the other. Finding: the adapted model halves the distance; the remainder is still about twenty times the floor."><figcaption><strong>Figure 2.</strong> Per-frame distance to the real cameras (Kernel Inception Distance, lower is closer), one bar per camera, for raw sim, ref_sim and the adapted model.<br>The leftmost group is the floor: one half of the real data against the other.<br><strong>Finding:</strong> the adapted model halves the distance; the remainder is still about twenty times the floor.</figcaption></figure>
+<figure><video controls preload="metadata" playsinline src="videos/ar_vs_perframe.mp4" aria-label="Raw rendering, per-frame stylization and autoregressive stylization on two scenes. Observe: in the middle column the table texture and the glare on the gripper change from frame to frame; in the right column they stay fixed while the arm moves."></video><figcaption><strong>Video 3.</strong> Raw rendering, per-frame stylization and autoregressive stylization on two scenes.<br><strong>Observe:</strong> in the middle column the table texture and the glare on the gripper change from frame to frame; in the right column they stay fixed while the arm moves.</figcaption></figure>
+<aside class="takeaway"><p>Scene adaptation from a few minutes of video works.<br>The stylized stream is clearly closer to the real cameras, not identical to them, and autoregressive rendering keeps it temporally consistent.<br>Whether that is close enough is the subject of sections 4 and 5.</p></aside>
+<h3 id="31-inference-latency-and-optimization">3.1 Inference latency and optimization</h3>
+<p>For augmented simulation to be usable, rendering must be cheap enough for every frame of every demonstration and every decision of a closed-loop evaluation.<br>Our first renderer, Cosmos-Transfer2.5 at 720 pixels and 35 denoising steps, took 7 s per decision frame.</p>
+<p>Four changes, in order of effect:</p>
 <ul>
-<li><strong>Fewer denoising steps.</strong> 35 to 10, the count the training data was repainted with. The largest single gain, and it made the closed loop consistent with training.</li>
-<li><strong>A smaller model at the policy's resolution.</strong> Cosmos3-Nano at 256 pixels, the size the policy consumes, instead of Transfer2.5 at 720.</li>
-<li><strong>Repainting streams, not frames.</strong> An autoregressive window amortizes the fixed cost of a request over its frames: 0.05 s per frame against 1.8 s for a single decision frame repainted on its own. This is what makes repainting whole demonstration sets affordable.</li>
-<li><strong>Caching across diffusion steps.</strong> cache_dit removes 14 percent of the model time at 34 dB PSNR against the uncached output. Flash attention and torch.compile were already on in the serving stack. Request batching is unsupported by the Cosmos3 pipeline, so throughput scales only by running one server per GPU.</li>
+<li><strong>Fewer denoising steps.</strong> From 35 to 10, the count used for the training data.<br>The largest single gain; it also made closed-loop rendering consistent with training.</li>
+<li><strong>A smaller model at the policy's resolution.</strong> Cosmos3-Nano at 256 pixels instead of Cosmos-Transfer2.5 at 720 pixels.</li>
+<li><strong>Rendering streams instead of frames.</strong> An autoregressive window amortizes the fixed cost of a request: 0.05 s per frame against 1.8 s for a single decision frame.</li>
+<li><strong>Caching across denoising steps.</strong> cache_dit removes 14 percent of model time at 34 dB PSNR against the uncached output.<br>Flash attention and torch.compile were already enabled in the serving stack.<br>The Cosmos3 pipeline does not support request batching, so throughput scales only with one server per GPU.</li>
 </ul>
-<figure><img src="img/nano_latency_v1.svg" alt="How to read. Left: GPU seconds per output frame for each renderer and mode, log scale, lower is faster; blue bars are the adapted Cosmos3-Nano. Right: how one closed-loop request splits between preparing the control images and running the diffusion model. Takeaway: streaming autoregressive repainting at 256 pixels is two orders of magnitude cheaper than the first renderer, which is what made repainting 128 demonstrations a matter of GPU-hours. Control preparation is a tenth of a request or less; the model is the cost, and a single decision frame in the closed loop still takes about 2 s."><figcaption><strong>How to read.</strong> Left: GPU seconds per output frame for each renderer and mode, log scale, lower is faster; blue bars are the adapted Cosmos3-Nano. Right: how one closed-loop request splits between preparing the control images and running the diffusion model. <strong>Takeaway:</strong> streaming autoregressive repainting at 256 pixels is two orders of magnitude cheaper than the first renderer, which is what made repainting 128 demonstrations a matter of GPU-hours. Control preparation is a tenth of a request or less; the model is the cost, and a single decision frame in the closed loop still takes about 2 s.</figcaption></figure>
-<p>Inside the model we did not profile further: the step count is the lever we have measured, and the per-step cost dominates everything else. One operational finding: sharing a GPU between the style server and a second evaluation lane slowed each request from 1.9 to about 5 s, so each server needs its own GPU.</p>
-<details class="more"><summary>Other style transfer backends we tried</summary>
-<div class="tablewrap"><table><thead><tr><th>Method</th><th>What it gave us</th></tr></thead><tbody>
-<tr><td>Raw sim, matched by hand (ref_sim)</td><td>Color and lighting close to the real cameras after nine calibration rounds; no texture</td></tr>
-<tr><td>Image-to-image (img2img-turbo)</td><td>Fast, but every frame re-samples the texture; the stream flickers</td></tr>
-<tr><td>Cosmos-Transfer2.5, no scene adaptation</td><td>Our first closed-loop renderer; geometry mostly preserved, the lab it paints is generic</td></tr>
-<tr><td>Cosmos3-Nano, base model</td><td>Follows prompts (a red gear, sunset light) but the scene is not ours</td></tr>
+<figure><img src="img/nano_latency_v1.svg" alt="Left: GPU seconds per output frame for each renderer and mode, log scale; blue bars are the adapted Cosmos3-Nano. Right: the split of one closed-loop request between control preparation and the diffusion model. Finding: autoregressive rendering at 256 pixels is two orders of magnitude cheaper than the first renderer, which made rendering 128 demonstrations a matter of GPU-hours. Control preparation is at most a tenth of a request; the model dominates, and a single decision frame still costs about 2 s."><figcaption><strong>Figure 3.</strong> Left: GPU seconds per output frame for each renderer and mode, log scale; blue bars are the adapted Cosmos3-Nano.<br>Right: the split of one closed-loop request between control preparation and the diffusion model.<br><strong>Finding:</strong> autoregressive rendering at 256 pixels is two orders of magnitude cheaper than the first renderer, which made rendering 128 demonstrations a matter of GPU-hours.<br>Control preparation is at most a tenth of a request; the model dominates, and a single decision frame still costs about 2 s.</figcaption></figure>
+<p>We have not profiled inside the model.<br>The denoising step count is the measured lever, and per-step cost dominates.<br>Sharing a GPU between the rendering server and a second evaluation process slowed each request from 1.9 s to about 5 s, so each server requires a dedicated GPU.</p>
+<details class="more"><summary>Style transfer baselines</summary>
+<div class="tablewrap"><table><thead><tr><th>Method</th><th>Outcome</th></tr></thead><tbody>
+<tr><td>Ref_sim (manual calibration and domain randomization)</td><td>Color and lighting close to the real cameras after nine calibration rounds; no texture</td></tr>
+<tr><td>Image-to-image translation (img2img-turbo)</td><td>Fast, but every frame re-samples the texture; the stream flickers</td></tr>
+<tr><td>Cosmos-Transfer2.5 without scene adaptation</td><td>Our first closed-loop renderer; geometry mostly preserved; a generic laboratory</td></tr>
+<tr><td>Cosmos3-Nano, base model</td><td>Follows prompts (a red gear, sunset lighting) but renders a different scene</td></tr>
 <tr><td>Cosmos3-Nano, post-trained on ten minutes</td><td>Halves the per-frame distance to the real cameras; loses prompt following</td></tr>
 </tbody></table></div>
 </details>
-<h2 id="4-predicting-real-world-performance">4. Predicting real-world performance</h2>
-<p class="lede">As an evaluation space, augsim is trustworthy for comparing policies: it orders them as the real-world evaluation does and flags the one that fails. It is not a success-rate predictor.</p>
-<p>Five policies of different quality, the same 16 scenes, three settings. They differ in training images and data size, which is what makes them a test of ranking.</p>
-<div class="tablewrap"><table><thead><tr><th>Policy</th><th>Training images</th><th>Demonstrations</th></tr></thead><tbody>
+<h2 id="4-evaluation-fidelity-does-augmented-simulation-predict-real-world-performance">4. Evaluation fidelity: does augmented simulation predict real-world performance?</h2>
+<p class="lede">Augsim is a reliable instrument for comparing policies: it ranks them as real-world evaluation does and identifies the policy that fails.<br>It does not predict absolute success rates.</p>
+<p>Five policies of different quality were evaluated on the same 16 scenes under three conditions.<br>They differ in training observations and data size, which makes them a test of ranking.</p>
+<div class="tablewrap"><table><thead><tr><th>Policy</th><th>Training observations</th><th>Demonstrations</th></tr></thead><tbody>
 <tr><td>sim1024</td><td>raw sim</td><td>1024</td></tr>
 <tr><td>sim128</td><td>raw sim</td><td>128</td></tr>
-<tr><td>augsim128</td><td>Nano-repainted sim</td><td>128</td></tr>
-<tr><td>ref_sim1024</td><td>hand-matched sim with randomization</td><td>1024</td></tr>
+<tr><td>augsim128</td><td>augsim (Cosmos3-Nano)</td><td>128</td></tr>
+<tr><td>ref_sim1024</td><td>ref_sim with domain randomization</td><td>1024</td></tr>
 <tr><td>mix512</td><td>raw sim</td><td>512, half of them recovery demonstrations</td></tr>
 </tbody></table></div>
-<figure><img src="img/real_vs_sim_scatter_v5.svg" alt="How to read. One point per policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left raw sim, right augsim. With 16 scenes each coordinate carries about ±20 points. Takeaway: the raw-sim points scatter far from the line on both sides; the augsim points sit nearer to it and in the real order."><figcaption><strong>How to read.</strong> One point per policy; x is its real success rate, y its simulated one; the gray line is perfect agreement. Left raw sim, right augsim. With 16 scenes each coordinate carries about ±20 points. <strong>Takeaway:</strong> the raw-sim points scatter far from the line on both sides; the augsim points sit nearer to it and in the real order.</figcaption></figure>
+<figure><img src="img/real_vs_sim_scatter_v5.svg" alt="One point per policy: real-world success rate on the horizontal axis, simulated success rate on the vertical axis; the gray diagonal is perfect agreement. Left: raw sim. Right: augsim. With 16 scenes each coordinate carries an interval of about ±20 points. Finding: the raw-sim points scatter on both sides of the diagonal; the augsim points lie nearer to it and in the real-world order."><figcaption><strong>Figure 4.</strong> One point per policy: real-world success rate on the horizontal axis, simulated success rate on the vertical axis; the gray diagonal is perfect agreement.<br>Left: raw sim.<br>Right: augsim.<br>With 16 scenes each coordinate carries an interval of about ±20 points.<br><strong>Finding:</strong> the raw-sim points scatter on both sides of the diagonal; the augsim points lie nearer to it and in the real-world order.</figcaption></figure>
 <ul>
-<li><strong>Ranking.</strong> The real-world evaluation ordered the three newer policies augsim128, sim128, ref_sim1024. Augsim gave the same order. Raw sim gave the reverse and put the policy that never grasped a real gear first.</li>
-<li><strong>Per scene.</strong> Augsim agreed with the real outcome on more scenes than raw sim for every policy but augsim128, whose training images are themselves Nano frames.</li>
-<li><strong>Rates.</strong> Both simulators miss them, in both directions.</li>
-<li><strong>Failure types.</strong> Real rollouts fail before contact: the fingers close beside the gear. Raw sim fails late, at the shaft. Augsim fails in between. Neither reproduces the real grasp misses, which come from calibration drift and arm settling (section 6).</li>
+<li><strong>Ranking.</strong> Real-world evaluation ordered the three newer policies augsim128, sim128, ref_sim1024.<br>Augsim reproduced that order.<br>Raw sim reversed it and ranked first the policy that never grasped a gear in the real world.</li>
+<li><strong>Per-scene agreement.</strong> Augsim agreed with the real outcome on more scenes than raw sim for every policy except augsim128, whose training observations are themselves Cosmos3-Nano renderings.</li>
+<li><strong>Absolute rates.</strong> Both simulators miss them, in both directions.</li>
+<li><strong>Failure modes.</strong> Real rollouts fail before contact: the gripper closes beside the gear.<br>Raw sim fails late, at the shaft.<br>Augsim fails in between.<br>Neither reproduces the real grasp misses, which arise from camera calibration drift and arm settling error (section 6).</li>
 </ul>
-<aside class="takeaway"><p>Use augsim to rank candidates and to catch a policy that will fail on the robot. Do not read its success rate as the real one.</p></aside>
-<details class="more"><summary>Camera calibration behind each simulated result</summary>
-<p>Every simulated number is the one measured before its real test, with the cameras that policy was trained and evaluated with. For sim1024 that is its own calibration (round 27b); its augsim run is the exception, made after the real test with the recalibrated cameras (round 29). The three newer policies were trained and evaluated under round 29 throughout. mix512 is an earlier policy (October 13): its sim and augsim runs warp the cameras to that day's real poses, and its augsim used Cosmos-Transfer2.5, the renderer before Nano.</p>
+<aside class="takeaway"><p>Use augsim to rank candidate policies and to detect a policy that will fail in the real world.<br>Do not read its success rate as a prediction of the real one.</p></aside>
+<details class="more"><summary>Camera calibration used for each simulated evaluation</summary>
+<p>Every simulated number is the one measured before the corresponding real-world test, with the camera calibration that policy was trained and evaluated with.<br>For sim1024 that is its own calibration (round 27b); its augsim evaluation is the exception, run after the real-world test with the recalibrated cameras (round 29).<br>The three newer policies were trained and evaluated under round 29 throughout. mix512 is an earlier policy (October 13): its sim and augsim evaluations warp the cameras to that day's real poses, and its augsim used Cosmos-Transfer2.5, the renderer before Cosmos3-Nano.</p>
 </details>
-<h2 id="5-training-policies-that-transfer">5. Training policies that transfer</h2>
-<p class="lede">As a training space, augsim works too: the same demonstrations repainted by the world model produce a policy that transfers better than raw frames or hand-matched rendering.</p>
+<h2 id="5-training-transfer-policies-trained-on-style-transferred-observations">5. Training transfer: policies trained on style-transferred observations</h2>
+<p class="lede">Augsim also works as a training space: the same demonstrations rendered through the world model yield a policy that transfers better than raw or manually calibrated rendering.</p>
 <ul>
-<li><strong>sim128</strong>, the control, trained on the raw renders.</li>
-<li><strong>augsim128</strong>, the treatment, trained on the same frames repainted autoregressively by Nano.</li>
-<li><strong>ref_sim1024</strong>, the hand-matched alternative, trained on 1024 demonstrations rendered in the matched, randomized sim with image augmentation.</li>
+<li><strong>sim128</strong>, the control, trained on raw sim observations.</li>
+<li><strong>augsim128</strong>, the treatment, trained on the same frames rendered autoregressively by Cosmos3-Nano.</li>
+<li><strong>ref_sim1024</strong>, the manual-calibration alternative, trained on 1024 demonstrations rendered in ref_sim with domain randomization and image augmentation.</li>
 </ul>
-<p>All three use the same recipe and the same real test: 16 scenes, same cameras, same placements, within two days of each other.</p>
-<figure><img src="img/train_transfer_v1.svg" alt="How to read. Seated scenes of 16, grouped by where the policy was evaluated; one bar per policy, the real-world group shaded. Takeaway: each policy is best in its own look. Only the shaded group counts, and augsim is the only simulator whose bars resemble it, including the zero for the hand-matched policy."><figcaption><strong>How to read.</strong> Seated scenes of 16, grouped by where the policy was evaluated; one bar per policy, the real-world group shaded. <strong>Takeaway:</strong> each policy is best in its own look. Only the shaded group counts, and augsim is the only simulator whose bars resemble it, including the zero for the hand-matched policy.</figcaption></figure>
-<figure><img src="img/refsim_probe_1000013_t0.png" alt="How to read. The same first frame in six renderings. Columns: real, raw sim, hand-matched sim, three randomized draws. Rows: the three cameras. Takeaway: the matched sim gets the color right and has no wood grain; the randomized draws vary light and tint, never texture. The policy trained there learned to find the gear against a plain table and closes on air on the real one."><figcaption><strong>How to read.</strong> The same first frame in six renderings. Columns: real, raw sim, hand-matched sim, three randomized draws. Rows: the three cameras. <strong>Takeaway:</strong> the matched sim gets the color right and has no wood grain; the randomized draws vary light and tint, never texture. The policy trained there learned to find the gear against a plain table and closes on air on the real one.</figcaption></figure>
-<figure><video controls preload="metadata" playsinline src="videos/real_raw128_vs_refsim.mp4" aria-label="How to read. Two real rollouts on the same scene: left sim128, right ref_sim1024. Watch for: the right-hand gripper closes two to three centimeters beside the gear."></video><figcaption><strong>How to read.</strong> Two real rollouts on the same scene: left sim128, right ref_sim1024. <strong>Watch for:</strong> the right-hand gripper closes two to three centimeters beside the gear.</figcaption></figure>
-<aside class="takeaway"><p>Making the training frames realistic with the world model moved real success in the right direction. The gain over raw frames is within the noise of 16 scenes; the zero of the hand-matched sim is not, and augsim flagged it before the real test.</p></aside>
-<h2 id="6-how-visual-transfer-changes-policy-decisions">6. How visual transfer changes policy decisions</h2>
-<p class="lede">Why it works: from the repainted frame the policy plans almost what it plans from the real frame, because repainting changes the texture the policy reads, not where it looks.</p>
-<p>Real rollouts store the images the policy consumed and the joint state at every decision. Before the first grasp the scene is still the seed's layout, so we put the simulated arm at the measured state, render, repaint, and compare the three plans the policy makes from raw sim, augsim and the real image: 128 matched states over four policies.</p>
-<figure><img src="img/e12_gap.svg" alt="How to read. Per policy, the median distance between the plan made from each input and the plan made from the real image. Gray raw sim, blue repainted, orange the same frame repainted twice (the noise floor), light gray the raw frame one second later (the scale of real motion). Takeaway: blue sits on the floor; gray sits far above it."><figcaption><strong>How to read.</strong> Per policy, the median distance between the plan made from each input and the plan made from the real image. Gray raw sim, blue repainted, orange the same frame repainted twice (the noise floor), light gray the raw frame one second later (the scale of real motion). <strong>Takeaway:</strong> blue sits on the floor; gray sits far above it.</figcaption></figure>
-<p><strong>Where in the image, and what?</strong> Not where we expected. The policy looks at the same places in all three frames. What differs is what it reads there, and the table, background and gripper carry the difference, not the gears.</p>
-<figure><img src="img/e12_attn_s1000013.png" alt="How to read. One state, three inputs (raw sim, repainted, real) and over each the decoder's attention; rows are the three cameras. Takeaway: the three heat maps are nearly identical, yet the plan from the raw frame is 37 mm from the real-image plan and the plan from the repainted frame 3 mm. Where the policy looks is not what changed."><figcaption><strong>How to read.</strong> One state, three inputs (raw sim, repainted, real) and over each the decoder's attention; rows are the three cameras. <strong>Takeaway:</strong> the three heat maps are nearly identical, yet the plan from the raw frame is 37 mm from the real-image plan and the plan from the repainted frame 3 mm. Where the policy looks is not what changed.</figcaption></figure>
-<figure><img src="img/e12_swap.svg" alt="How to read. Raw sim with its own attention and content (gray); raw sim given the real frame's attention (orange); the real frame's content given raw sim's attention (blue). Takeaway: swapping attention closes a fifth of the gap; swapping content closes half to two thirds."><figcaption><strong>How to read.</strong> Raw sim with its own attention and content (gray); raw sim given the real frame's attention (orange); the real frame's content given raw sim's attention (blue). <strong>Takeaway:</strong> swapping attention closes a fifth of the gap; swapping content closes half to two thirds.</figcaption></figure>
-<figure><img src="img/query_1000013.svg" alt="How to read. One scene over time. Blue: distance between the plans made from the raw and the repainted frame at each decision. Orange: distance between the two resulting trajectories. Takeaway: the whole difference is made at the first decision; after it the plans agree, but the arm is already on another path."><figcaption><strong>How to read.</strong> One scene over time. Blue: distance between the plans made from the raw and the repainted frame at each decision. Orange: distance between the two resulting trajectories. <strong>Takeaway:</strong> the whole difference is made at the first decision; after it the plans agree, but the arm is already on another path.</figcaption></figure>
-<p><strong>The part no renderer can fix.</strong> Replaying the real robot's eight successful action sequences open-loop in the simulator grasped eight times and seated twice. The simulated tool center drifts millimeters from the real one, and a sub-millimeter insertion does not forgive that.</p>
-<figure><video controls preload="metadata" playsinline src="videos/real_replay.mp4" aria-label="How to read. Real rollout left, simulated replay of the same actions right, three scenes; the overlay prints the tool-center gap. Watch for: a gap of a few millimeters, and the simulated gear stopping above the shaft."></video><figcaption><strong>How to read.</strong> Real rollout left, simulated replay of the same actions right, three scenes; the overlay prints the tool-center gap. <strong>Watch for:</strong> a gap of a few millimeters, and the simulated gear stopping above the shaft.</figcaption></figure>
-<aside class="takeaway"><p>Repainting changes the texture the policy reads in the table and background, mostly at the first decision, and that brings its plan to the real-image plan. The failures that remain, grasps beside the gear and insertions that stall, are calibration and dynamics.</p></aside>
-<h2 id="7-findings-and-next-steps">7. Findings and next steps</h2>
-<p class="lede">On this task, a world model fine-tuned on ten minutes of real video does turn the simulator into a realistic space for evaluating and training policies. What it cannot fix is geometry and dynamics.</p>
-<p><strong>Findings, for this task and setup.</strong></p>
+<p>All three share the training recipe and the real-world test: 16 scenes, the same cameras and placements, within two days of each other.</p>
+<figure><img src="img/train_transfer_v1.svg" alt="Seated scenes out of 16, grouped by evaluation condition, one bar per policy; the real-world group is shaded. Finding: each policy is best under its own training appearance. Only the shaded group matters, and augsim is the only simulated condition whose bars resemble it, including the zero of the ref_sim policy."><figcaption><strong>Figure 5.</strong> Seated scenes out of 16, grouped by evaluation condition, one bar per policy; the real-world group is shaded.<br><strong>Finding:</strong> each policy is best under its own training appearance.<br>Only the shaded group matters, and augsim is the only simulated condition whose bars resemble it, including the zero of the ref_sim policy.</figcaption></figure>
+<figure><img src="img/refsim_probe_1000013_t0.png" alt="The same first frame under six renderings. Columns: real world, raw sim, ref_sim, three domain-randomization samples. Rows: the three cameras. Finding: ref_sim matches color but has no wood grain, and the randomized samples vary lighting and tint, never texture. The policy trained there learned to locate the gear against a plain table and closes beside it in the real world."><figcaption><strong>Figure 6.</strong> The same first frame under six renderings.<br>Columns: real world, raw sim, ref_sim, three domain-randomization samples.<br>Rows: the three cameras.<br><strong>Finding:</strong> ref_sim matches color but has no wood grain, and the randomized samples vary lighting and tint, never texture.<br>The policy trained there learned to locate the gear against a plain table and closes beside it in the real world.</figcaption></figure>
+<figure><video controls preload="metadata" playsinline src="videos/real_raw128_vs_refsim.mp4" aria-label="Two real-world rollouts on the same scene: left sim128, right ref_sim1024. Observe: the gripper on the right closes two to three centimeters beside the gear."></video><figcaption><strong>Video 4.</strong> Two real-world rollouts on the same scene: left sim128, right ref_sim1024.<br><strong>Observe:</strong> the gripper on the right closes two to three centimeters beside the gear.</figcaption></figure>
+<aside class="takeaway"><p>Rendering the training observations through the world model moved real-world success in the right direction.<br>The gain over raw sim is within the noise of 16 scenes; the zero of ref_sim is not, and augsim predicted it before the real-world test.</p></aside>
+<h2 id="6-mechanism-how-appearance-transfer-changes-policy-outputs">6. Mechanism: how appearance transfer changes policy outputs</h2>
+<p class="lede">From the stylized frame the policy predicts almost the action chunk it predicts from the real frame, because stylization changes the image features the policy reads, not the regions it attends to.</p>
+<p>Real-world rollouts store the observations the policy consumed and the joint state at every decision.<br>Before the first grasp the scene is still the seed's layout, so we place the simulated arm at the measured state, render, stylize, and compare the action chunks the policy predicts from the raw, stylized and real observations: 128 matched states over four policies.</p>
+<figure><img src="img/e12_gap.svg" alt="Per policy, the median distance between the action chunk predicted from each input and the chunk predicted from the real observation. Gray: raw sim. Blue: stylized. Orange: the same frame stylized twice, the noise floor. Light gray: the raw frame one second later, the scale of real motion. Finding: the stylized frame sits on the noise floor; the raw frame sits far above it."><figcaption><strong>Figure 7.</strong> Per policy, the median distance between the action chunk predicted from each input and the chunk predicted from the real observation.<br>Gray: raw sim.<br>Blue: stylized.<br>Orange: the same frame stylized twice, the noise floor.<br>Light gray: the raw frame one second later, the scale of real motion.<br><strong>Finding:</strong> the stylized frame sits on the noise floor; the raw frame sits far above it.</figcaption></figure>
+<p><strong>Spatial attention versus feature content.</strong> The policy attends to the same regions in all three observations.<br>What differs is the feature content at those regions, and the table, background and gripper carry the difference, not the gears.</p>
+<figure><img src="img/e12_attn_s1000013.png" alt="One state, three inputs (raw sim, stylized, real) with the decoder's cross-attention overlaid; rows are the three cameras. Finding: the three attention maps are nearly identical, yet the chunk predicted from the raw frame lies 37 mm from the real-observation chunk and the chunk from the stylized frame 3 mm. Attention is not what changed."><figcaption><strong>Figure 8.</strong> One state, three inputs (raw sim, stylized, real) with the decoder's cross-attention overlaid; rows are the three cameras.<br><strong>Finding:</strong> the three attention maps are nearly identical, yet the chunk predicted from the raw frame lies 37 mm from the real-observation chunk and the chunk from the stylized frame 3 mm.<br>Attention is not what changed.</figcaption></figure>
+<figure><img src="img/e12_swap.svg" alt="Raw sim with its own attention and features (gray); raw sim computed with the real observation's attention weights (orange); the real observation's features computed with raw sim's attention (blue). Finding: swapping attention closes about a fifth of the gap; swapping features closes half to two thirds."><figcaption><strong>Figure 9.</strong> Raw sim with its own attention and features (gray); raw sim computed with the real observation's attention weights (orange); the real observation's features computed with raw sim's attention (blue).<br><strong>Finding:</strong> swapping attention closes about a fifth of the gap; swapping features closes half to two thirds.</figcaption></figure>
+<figure><img src="img/query_1000013.svg" alt="One scene over time. Blue: distance between the chunks predicted from the raw and the stylized frame at each decision. Orange: distance between the two resulting trajectories. Finding: the divergence is created at the first decision; afterwards the chunks agree, but the arm is already on a different path."><figcaption><strong>Figure 10.</strong> One scene over time.<br>Blue: distance between the chunks predicted from the raw and the stylized frame at each decision.<br>Orange: distance between the two resulting trajectories.<br><strong>Finding:</strong> the divergence is created at the first decision; afterwards the chunks agree, but the arm is already on a different path.</figcaption></figure>
+<p><strong>Residual error not attributable to appearance.</strong> Replaying the eight successful real-world action sequences open-loop in the simulator produced eight grasps and two seatings.<br>The simulated tool center drifts by millimeters from the real one, and a sub-millimeter insertion does not tolerate that.</p>
+<figure><video controls preload="metadata" playsinline src="videos/real_replay.mp4" aria-label="Real-world rollout on the left, simulated replay of the same actions on the right, three scenes; the overlay prints the tool-center discrepancy. Observe: a discrepancy of a few millimeters, and the simulated gear stopping above the shaft."></video><figcaption><strong>Video 5.</strong> Real-world rollout on the left, simulated replay of the same actions on the right, three scenes; the overlay prints the tool-center discrepancy.<br><strong>Observe:</strong> a discrepancy of a few millimeters, and the simulated gear stopping above the shaft.</figcaption></figure>
+<aside class="takeaway"><p>Stylization changes the texture the policy reads in the table and background, mostly at the first decision, and that brings its predicted chunk to the real-observation chunk.<br>The remaining failures, grasps beside the gear and stalled insertions, are due to calibration and dynamics.</p></aside>
+<h2 id="7-conclusions-limitations-and-future-work">7. Conclusions, limitations and future work</h2>
+<p class="lede">On this task, a world model fine-tuned on ten minutes of real video turns the simulator into a realistic space for policy evaluation and training.<br>Geometry and dynamics errors remain.</p>
+<p><strong>Conclusions, for this task and setup.</strong></p>
 <ul>
-<li><strong>Evaluation.</strong> Augsim ranks policies in the real-world order and catches the one that will fail on the robot. It does not estimate success rates.</li>
-<li><strong>Training.</strong> Policies trained on repainted demonstrations transferred better than those trained on raw or hand-matched frames: a direction measured on 16 scenes, not an effect size.</li>
-<li><strong>Mechanism.</strong> The repainting changes the texture the policy reads, not where it looks.</li>
-<li><strong>Limit.</strong> The remaining real failures are not visual. A camera drift of a fraction of a degree moves the grasp by a centimeter, and the arm settles millimeters from its command.</li>
+<li><strong>Evaluation.</strong> Augsim ranks policies in the real-world order and identifies the policy that will fail.<br>It does not estimate success rates.</li>
+<li><strong>Training.</strong> Policies trained on stylized demonstrations transferred better than policies trained on raw or manually calibrated renderings: a direction measured on 16 scenes, not an effect size.</li>
+<li><strong>Mechanism.</strong> Stylization changes the image features the policy reads, not the regions it attends to.</li>
+<li><strong>Residual gap.</strong> The remaining real-world failures are not visual.<br>A camera drift of a fraction of a degree displaces the grasp by a centimeter, and the arm settles millimeters from its commanded pose.</li>
 </ul>
 <p><strong>Limitations.</strong></p>
 <ul>
-<li>16 scenes per setting, one task, one setup, one recording session for the model's real data.</li>
-<li>Per-frame repainting in the closed loop flickers, and 2 s per frame rules out online use.</li>
-<li>The adapted model paints the same image for every prompt. The base model's prompt following, the lever RoboRender uses to randomize textures and distractors, is lost.</li>
-<li>Each camera is repainted on its own; multiview consistency is not enforced.</li>
-<li>The renderer is faithful under camera offsets of up to about 20 degrees and 20 centimeters as long as the view stays on the table. Show it the robot pedestal or the empty floor and it paints a plausible lab that is not there.</li>
+<li>16 scenes per condition, one task, one setup, one recording session for the model's real data.</li>
+<li>Per-frame stylization in the closed loop flickers, and 2 s per frame precludes online use.</li>
+<li>The adapted model renders the same image for every prompt.<br>The base model's prompt following, which RoboRender uses to randomize textures and distractors, is lost.</li>
+<li>Each camera is rendered independently; multi-view consistency is not enforced.</li>
+<li>The model is faithful under camera perturbations of up to about 20 degrees and 20 centimeters while the view stays on the table.<br>When the view includes the robot pedestal or the floor, it hallucinates a plausible laboratory.</li>
 </ul>
-<p><strong>Next.</strong></p>
+<p><strong>Future work.</strong></p>
 <ul>
-<li>A state-based teacher that solves the whole task in simulation, distilled into a visuomotor student on repainted frames.</li>
-<li>Pick the renderer by what it does to learning, not by how it looks: train clones of one policy briefly on the same states repainted by each candidate and keep the one whose action error on real images falls fastest.</li>
-<li>Repeat the training comparison at 512 to 1024 demonstrations with checkpoint selection in augsim.</li>
-<li>Model the arm's settling offset in the simulator.</li>
+<li>A state-based teacher policy that solves the task in simulation, distilled into a visuomotor student on stylized observations.</li>
+<li>Renderer selection by learning outcome rather than visual fidelity: fine-tune clones of one policy briefly on the same states rendered by each candidate and select the renderer whose action error on real observations falls fastest.</li>
+<li>The training comparison repeated at 512 to 1024 demonstrations with checkpoint selection in augsim.</li>
+<li>A model of the arm's settling error in the simulator.</li>
 </ul>
 <h2 id="appendix">Appendix</h2>
-<h3 id="a-outcome-of-every-scene">A. Outcome of every scene</h3>
+<h3 id="a-per-scene-outcomes">A. Per-scene outcomes</h3>
 <p>Each cell is the furthest stage reached: no grasp, grasped, lifted, engaged (on the shaft), or seated.</p>
-<figure><img src="img/real_vs_sim_violins_v5.svg" alt="How to read. Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. Takeaway: raw sim loses scenes late, where real rollouts lose them early; the augsim shapes sit closer to the real ones."><figcaption><strong>How to read.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by setting. <strong>Takeaway:</strong> raw sim loses scenes late, where real rollouts lose them early; the augsim shapes sit closer to the real ones.</figcaption></figure>
-<details class="more"><summary>sim1024, 16 scenes: raw sim, augsim, real</summary>
-<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim, its cameras (round 27b)</th><th>Raw sim, recalibrated after the test (round 29)</th><th>Augsim (round 29)</th><th>Real</th></tr></thead><tbody>
+<figure><img src="img/real_vs_sim_violins_v5.svg" alt="Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition. Finding: raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones."><figcaption><strong>Figure 11.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition.<br><strong>Finding:</strong> raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones.</figcaption></figure>
+<details class="more"><summary>sim1024, 16 scenes: raw sim, augsim, real world</summary>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim, its cameras (round 27b)</th><th>Raw sim, recalibrated after the test (round 29)</th><th>Augsim (round 29)</th><th>Real world</th></tr></thead><tbody>
 <tr><td>1000000</td><td>seated</td><td>seated</td><td>engaged</td><td>no grasp</td></tr>
 <tr><td>1000001</td><td>seated</td><td>seated</td><td>seated</td><td>seated</td></tr>
 <tr><td>1000002</td><td>seated</td><td>seated</td><td>lifted</td><td>no grasp</td></tr>
@@ -269,7 +271,7 @@
 </tbody></table></div>
 </details>
 <details class="more"><summary>sim128 and augsim128, 16 scenes</summary>
-<div class="tablewrap"><table><thead><tr><th>Seed</th><th>sim128: raw sim</th><th>sim128: augsim</th><th>sim128: real</th><th>augsim128: raw sim</th><th>augsim128: augsim</th><th>augsim128: real</th></tr></thead><tbody>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>sim128: raw sim</th><th>sim128: augsim</th><th>sim128: real world</th><th>augsim128: raw sim</th><th>augsim128: augsim</th><th>augsim128: real world</th></tr></thead><tbody>
 <tr><td>1000000</td><td>seated</td><td>engaged</td><td>lifted</td><td>seated</td><td>engaged</td><td>seated</td></tr>
 <tr><td>1000001</td><td>engaged</td><td>engaged</td><td>lifted</td><td>engaged</td><td>lifted</td><td>lifted</td></tr>
 <tr><td>1000002</td><td>lifted</td><td>lifted</td><td>no grasp</td><td>lifted</td><td>engaged</td><td>lifted</td></tr>
@@ -289,8 +291,8 @@
 <tr><td><strong>Seated</strong></td><td><strong>10/16</strong></td><td><strong>2/16</strong></td><td><strong>5/16</strong></td><td><strong>3/16</strong></td><td><strong>9/16</strong></td><td><strong>7/16</strong></td></tr>
 </tbody></table></div>
 </details>
-<details class="more"><summary>mix512, 16 scenes: raw sim, augsim, real</summary>
-<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim (cameras warped to the real poses)</th><th>Augsim (Transfer2.5)</th><th>Real</th></tr></thead><tbody>
+<details class="more"><summary>mix512, 16 scenes: raw sim, augsim, real world</summary>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim (cameras warped to the real poses)</th><th>Augsim (Cosmos-Transfer2.5)</th><th>Real world</th></tr></thead><tbody>
 <tr><td>1000000</td><td>engaged</td><td>engaged</td><td>seated</td></tr>
 <tr><td>1000001</td><td>engaged</td><td>engaged</td><td>lifted</td></tr>
 <tr><td>1000002</td><td>engaged</td><td>seated</td><td>no grasp</td></tr>
@@ -310,9 +312,9 @@
 <tr><td><strong>Seated</strong></td><td><strong>4/16</strong></td><td><strong>5/16</strong></td><td><strong>4/16</strong></td></tr>
 </tbody></table></div>
 </details>
-<details class="more"><summary>Agreement with the real outcome, scene by scene</summary>
+<details class="more"><summary>Per-scene agreement with the real-world outcome</summary>
 <div class="tablewrap"><table><thead><tr><th>Policy</th><th>Raw sim</th><th>Augsim</th></tr></thead><tbody>
-<tr><td>sim1024</td><td>8/16 (predicts every seed seated, κ 0)</td><td>9/16 (κ 0.13)</td></tr>
+<tr><td>sim1024</td><td>8/16 (predicts every scene seated, κ 0)</td><td>9/16 (κ 0.13)</td></tr>
 <tr><td>sim128</td><td>9/16 (κ 0.20)</td><td>13/16 (κ 0.48)</td></tr>
 <tr><td>augsim128</td><td>10/16 (κ 0.19)</td><td>8/16 (κ 0.02)</td></tr>
 <tr><td>ref_sim1024</td><td>8/16</td><td>16/16</td></tr>
@@ -320,85 +322,86 @@
 <tr><td><strong>Pooled, three newer policies</strong></td><td><strong>27/48 (κ 0.07)</strong></td><td><strong>37/48 (κ 0.37)</strong></td></tr>
 </tbody></table></div>
 </details>
-<h3 id="b-failure-stages-and-sim-to-real-fixes">B. Failure stages and sim-to-real fixes</h3>
+<h3 id="b-failure-stage-analysis-and-sim-to-real-calibration">B. Failure-stage analysis and sim-to-real calibration</h3>
 <p>Real rollouts lose scenes to empty grasps; the simulators lose them later, at the shaft.</p>
-<figure><img src="img/gap_attribution_v5.svg" alt="How to read. For each setting, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated. Takeaway: real rows are gray-heavy; simulated rows are light-blue-heavy."><figcaption><strong>How to read.</strong> For each setting, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated. <strong>Takeaway:</strong> real rows are gray-heavy; simulated rows are light-blue-heavy.</figcaption></figure>
-<details class="more"><summary>Sim-to-real fixes, stage by stage</summary>
-<div class="tablewrap"><table><thead><tr><th>Stage</th><th>Problem found</th><th>Fix</th><th>What remains</th></tr></thead><tbody>
-<tr><td>Camera calibration</td><td>The cameras moved often; stale poses caused grasp misses</td><td>29 calibration rounds; calibration versioned with each policy</td><td>A 0.28-degree drift still moves the grasp 5 to 14 mm</td></tr>
-<tr><td>Controller</td><td>A policy that was perfect in sim failed on the robot: different control law</td><td>Port of the real Polymetis controller into the simulator</td><td>The real arm settles about 3 mm from its command; 6.75 mm RMS tracking error</td></tr>
-<tr><td>Collision geometry</td><td>Whole-mesh distance fields: false penetration, drifting gear</td><td>Split fields, segmented shafts, no contact hacks</td><td>Drift in micrometers, penetration under 0.02 mm</td></tr>
+<figure><img src="img/gap_attribution_v5.svg" alt="For each evaluation condition, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated. Finding: real-world rows are dominated by gray; simulated rows are dominated by light blue."><figcaption><strong>Figure 12.</strong> For each evaluation condition, 16 scenes split by the furthest stage reached: gray no grasp, orange grasped only, light blue reached the shaft, blue seated.<br><strong>Finding:</strong> real-world rows are dominated by gray; simulated rows are dominated by light blue.</figcaption></figure>
+<details class="more"><summary>Calibration and modeling fixes by stage</summary>
+<div class="tablewrap"><table><thead><tr><th>Stage</th><th>Problem found</th><th>Fix</th><th>Residual</th></tr></thead><tbody>
+<tr><td>Camera calibration</td><td>The cameras moved often; stale poses caused grasp misses</td><td>29 calibration rounds; calibration versioned with each policy</td><td>A 0.28-degree drift still displaces the grasp by 5 to 14 mm</td></tr>
+<tr><td>Controller</td><td>A policy that was perfect in simulation failed in the real world: different control law</td><td>Port of the real Polymetis controller into the simulator</td><td>The real arm settles about 3 mm from its command; 6.75 mm RMS tracking error</td></tr>
+<tr><td>Collision geometry</td><td>Whole-mesh distance fields: false penetration, drifting gear</td><td>Split fields, segmented shafts, no contact heuristics</td><td>Drift in micrometers, penetration under 0.02 mm</td></tr>
 <tr><td>Hand payload</td><td>Mount reconstructed from video</td><td>Mesh reconstruction</td><td>Modelled 81 g against 177 g real</td></tr>
 <tr><td>Gripper</td><td>Grasp gate against a 29 mm stall; integrator windup</td><td>Settle gate; event-style gripper action</td><td>Hysteresis and 5 N force matched</td></tr>
-<tr><td>Initial state</td><td>Real scenes were not the simulated scenes until October</td><td>Seeds from the sim's nominal poses; overlay placement</td><td>Placement error not measured</td></tr>
+<tr><td>Initial state</td><td>Real scenes did not match the simulated scenes until October</td><td>Seeds from the simulator's nominal poses; overlay placement</td><td>Placement error not measured</td></tr>
 <tr><td>Timing</td><td>60 Hz evaluation against 30 Hz demonstrations; slow simulated gripper</td><td>Cadence fix; retimed hand; recollected demonstrations</td><td>Real cameras lag about 5 frames</td></tr>
-<tr><td>Rendering</td><td>Raw sim looks nothing like the cameras</td><td>Nano repainting</td><td>About 20 times the real-vs-real distance</td></tr>
+<tr><td>Rendering</td><td>Raw sim differs strongly from the cameras</td><td>Cosmos3-Nano rendering</td><td>About 20 times the real-vs-real distance</td></tr>
 </tbody></table></div>
 </details>
-<details class="more"><summary>Policy-learning approaches tried before plain behavior cloning</summary>
-<p>Plain behavior cloning on clean full-insertion demonstrations beat every addition we tried.</p>
-<div class="tablewrap"><table><thead><tr><th>Approach</th><th>Best result</th><th>Why it stopped</th></tr></thead><tbody>
+<details class="more"><summary>Policy learning approaches evaluated before behavior cloning</summary>
+<p>Plain behavior cloning on clean full-insertion demonstrations outperformed every addition we tried.</p>
+<div class="tablewrap"><table><thead><tr><th>Approach</th><th>Best result</th><th>Reason for stopping</th></tr></thead><tbody>
 <tr><td>Staged state-based PPO</td><td>94.5 percent on the chained task</td><td>Never distilled to vision under realistic gripper physics</td></tr>
 <tr><td>SERL / RLPD visuomotor RL</td><td>0 percent in three runs</td><td>No signal from the sparse reward</td></tr>
 <tr><td>Residual PPO on ACT</td><td>53 to 66 percent, did not replicate</td><td>Exploration noise larger than the 0.5 mm clearance</td></tr>
 <tr><td>Reverse-curriculum PPO teacher</td><td>78 percent</td><td>Local optimum; grasp-gate defects</td></tr>
-<tr><td>Teacher to student distillation</td><td>37.5 percent</td><td>Plateau, then a dataset bug</td></tr>
+<tr><td>Teacher-student distillation</td><td>37.5 percent</td><td>Plateau, then a dataset bug</td></tr>
 <tr><td>DAgger with the scripted expert</td><td>18 of 32 to 29 of 32 in round one</td><td>Later rounds collapsed: a physics hook broke the expert</td></tr>
 <tr><td>Residual PPO on the ported simulator</td><td>69 to 77 percent, flat</td><td>1.4 s per environment step</td></tr>
-<tr><td><strong>Behavior cloning, 1024 demonstrations</strong></td><td><strong>29 of 32 in sim, 8 of 16 real</strong></td><td>Remaining failures are pre-contact on the robot</td></tr>
+<tr><td><strong>Behavior cloning, 1024 demonstrations</strong></td><td><strong>29 of 32 in simulation, 8 of 16 in the real world</strong></td><td>Remaining failures are pre-contact in the real world</td></tr>
 </tbody></table></div>
 </details>
-<h3 id="c-style-transfer-backends-latency">C. Style transfer backends: latency</h3>
-<details class="more"><summary>Latency of each backend</summary>
-<div class="tablewrap"><table><thead><tr><th>Use</th><th>Latency</th></tr></thead><tbody>
-<tr><td>Autoregressive stream, 121-frame chunks</td><td>0.057 to 0.064 s per frame; 128 demonstrations times three cameras in 2.7 h on one GPU</td></tr>
-<tr><td>Closed-loop decision frame, per-frame</td><td>about 2.0 s</td></tr>
-<tr><td>Closed-loop decision frame, autoregressive 101-frame window</td><td>6.2 s per window</td></tr>
+<h3 id="c-style-transfer-baselines-inference-latency">C. Style transfer baselines: inference latency</h3>
+<details class="more"><summary>Latency by renderer and mode</summary>
+<div class="tablewrap"><table><thead><tr><th>Renderer and mode</th><th>Latency</th></tr></thead><tbody>
+<tr><td>Cosmos3-Nano, autoregressive stream, 121-frame chunks</td><td>0.057 to 0.064 s per frame; 128 demonstrations times three cameras in 2.7 h on one GPU</td></tr>
+<tr><td>Cosmos3-Nano, closed-loop decision frame, per-frame</td><td>about 2.0 s</td></tr>
+<tr><td>Cosmos3-Nano, closed-loop decision frame, autoregressive 101-frame window</td><td>6.2 s per window</td></tr>
+<tr><td>Cosmos3-Nano, closed-loop decision frame with the rendering server sharing its GPU with a second evaluation process</td><td>about 5 s</td></tr>
 <tr><td>Cosmos-Transfer2.5, 35 steps, 720 pixels</td><td>3.6 s per frame (7.2 s in the closed loop)</td></tr>
 <tr><td>img2img-turbo, 1 step, 512 pixels</td><td>0.148 s per frame</td></tr>
-<tr><td>Closed-loop decision frame with the style server sharing its GPU with a second evaluation lane</td><td>about 5 s</td></tr>
 </tbody></table></div>
-<p>Most of the speed came from cutting the sampling steps from 35 to 10, then from caching the transformer's attention (cache_dit, 14 percent faster at 34 dB PSNR against the uncached output).</p>
+<p>Most of the speed-up came from reducing the sampling steps from 35 to 10, then from caching the transformer's attention (cache_dit, 14 percent faster at 34 dB PSNR against the uncached output).</p>
 </details>
-<h3 id="d-limit-tests-of-the-adapted-model">D. Limit tests of the adapted model</h3>
-<p>Two tests on one scene, the right static camera and the wrist camera:</p>
-<figure><img src="img/nano_limits_T1_right_static_t250.png" alt="How to read. The right static camera turned by 2, 5 and 10 degrees and moved by 2, 5 and 10 cm (rows), raw render on the left and the adapted model on the right. Takeaway: the gears stay where the render puts them; no gear is invented or dropped. The fingers occasionally come out as hooks."><figcaption><strong>How to read.</strong> The right static camera turned by 2, 5 and 10 degrees and moved by 2, 5 and 10 cm (rows), raw render on the left and the adapted model on the right. <strong>Takeaway:</strong> the gears stay where the render puts them; no gear is invented or dropped. The fingers occasionally come out as hooks.</figcaption></figure>
-<figure><img src="img/nano_limits_T2_wrist2_t250.png" alt="How to read. The wrist camera with four prompts (rows: default, red gear, sunset light, a yellow mug). Base model on the left, adapted model on the right. Takeaway: the base model changes the gear color and the light; the adapted model paints the same image four times. Neither adds the mug, which has no edges or depth in the render."><figcaption><strong>How to read.</strong> The wrist camera with four prompts (rows: default, red gear, sunset light, a yellow mug). Base model on the left, adapted model on the right. <strong>Takeaway:</strong> the base model changes the gear color and the light; the adapted model paints the same image four times. Neither adds the mug, which has no edges or depth in the render.</figcaption></figure>
-<h3 id="e-image-and-video-realism-metrics">E. Image and video realism metrics</h3>
+<h3 id="d-robustness-of-the-adapted-model-to-camera-perturbation-and-prompts">D. Robustness of the adapted model to camera perturbation and prompts</h3>
+<p>Two tests on one scene, with the right static camera and the wrist camera:</p>
+<figure><img src="img/nano_limits_T1_right_static_t250.png" alt="The right static camera rotated by 2, 5 and 10 degrees and translated by 2, 5 and 10 cm (rows); raw rendering on the left, adapted model on the right. Finding: the gears stay where the rendering places them; no gear is hallucinated or dropped. The fingers occasionally appear as hooks."><figcaption><strong>Figure 13.</strong> The right static camera rotated by 2, 5 and 10 degrees and translated by 2, 5 and 10 cm (rows); raw rendering on the left, adapted model on the right.<br><strong>Finding:</strong> the gears stay where the rendering places them; no gear is hallucinated or dropped.<br>The fingers occasionally appear as hooks.</figcaption></figure>
+<figure><img src="img/nano_limits_T2_wrist2_t250.png" alt="The wrist camera with four prompts (rows: default, red gear, sunset lighting, a yellow mug). Base model on the left, adapted model on the right. Finding: the base model changes the gear color and the lighting; the adapted model renders the same image four times. Neither adds the mug, which has no edges or depth in the rendering."><figcaption><strong>Figure 14.</strong> The wrist camera with four prompts (rows: default, red gear, sunset lighting, a yellow mug).<br>Base model on the left, adapted model on the right.<br><strong>Finding:</strong> the base model changes the gear color and the lighting; the adapted model renders the same image four times.<br>Neither adds the mug, which has no edges or depth in the rendering.</figcaption></figure>
+<h3 id="e-image-and-video-fidelity-metrics">E. Image and video fidelity metrics</h3>
 <details class="more"><summary>Metric values per camera</summary>
-<p>KID (Inception features) and FD-DINOv2 per frame, FVD on 16-frame clips. The floor is one half of the real scenes against the other.</p>
+<p>Kernel Inception Distance and Fréchet DINOv2 distance per frame, Fréchet Video Distance on 16-frame clips, all at 224 pixels against the real frames of the sim1024 rollouts.<br>The floor is one half of the real scenes against the other.</p>
 <div class="tablewrap"><table><thead><tr><th>Source (wrist / right / left camera)</th><th>KID × 1000</th><th>FD-DINOv2</th><th>FVD</th></tr></thead><tbody>
-<tr><td>Real, other half (floor)</td><td>4.6 / 2.8 / 4.5</td><td>66 / 75 / 93</td><td>154 / 47 / 131</td></tr>
+<tr><td>Real world, other half (floor)</td><td>4.6 / 2.8 / 4.5</td><td>66 / 75 / 93</td><td>154 / 47 / 131</td></tr>
 <tr><td>Raw sim</td><td>233 / 168 / 155</td><td>1531 / 2044 / 2090</td><td>1803 / 700 / 1038</td></tr>
-<tr><td>Hand-matched sim</td><td>175 / 185 / 171</td><td>1472 / 1574 / 1505</td><td>1215 / 491 / 683</td></tr>
-<tr><td>Nano, per-frame decision frames</td><td>78 / 87 / 73</td><td>539 / 968 / 894</td><td>—</td></tr>
-<tr><td>Nano, autoregressive stream</td><td>80 / 90 / 100</td><td>551 / 964 / 977</td><td>713 / 255 / 441</td></tr>
+<tr><td>Ref_sim</td><td>175 / 185 / 171</td><td>1472 / 1574 / 1505</td><td>1215 / 491 / 683</td></tr>
+<tr><td>Cosmos3-Nano, per-frame decision frames</td><td>78 / 87 / 73</td><td>539 / 968 / 894</td><td>—</td></tr>
+<tr><td>Cosmos3-Nano, autoregressive stream</td><td>80 / 90 / 100</td><td>551 / 964 / 977</td><td>713 / 255 / 441</td></tr>
 </tbody></table></div>
 </details>
 <h3 id="f-comparison-with-roborender">F. Comparison with RoboRender</h3>
-<p>RoboRender (Huang, Ai, Li Fei-Fei, Jiajun Wu and others, October 2026) asks whether a video model can make simulated data good enough to train real policies at scale, and answers yes for visually driven tasks. This project asks how little real data is enough, whether a repainted sim can evaluate a policy, and what remains when the task is contact-rich.</p>
+<p>RoboRender (Huang, Ai, Li Fei-Fei, Jiajun Wu and others, October 2026) asks whether a video model can make simulated data good enough to train real-world policies at scale, and answers yes for visually driven tasks.<br>This project asks how little real data is sufficient, whether a stylized simulator can evaluate a policy, and what remains when the task is contact-rich.</p>
 <div class="tablewrap"><table><thead><tr><th></th><th>RoboRender</th><th>This project</th></tr></thead><tbody>
 <tr><td>Base model</td><td>Wan2.1-T2V-1.3B</td><td>Cosmos3-Nano 8B</td></tr>
 <tr><td>Real training data</td><td>about 127k samples from AgiBot-World and DROID</td><td>20 episodes, one setup</td></tr>
-<tr><td>Conditioning</td><td>Sim depth, robot RGB and mask, a scene prompt, the preceding frame</td><td>Edges and depth, fixed caption, autoregressive</td></tr>
-<tr><td>Multiview</td><td>Views stacked into one latent</td><td>Each camera on its own</td></tr>
+<tr><td>Conditioning</td><td>Simulated depth, robot RGB and mask, a scene prompt, the preceding frame</td><td>Edges and depth, fixed caption, autoregressive</td></tr>
+<tr><td>Multi-view</td><td>Views stacked into one latent</td><td>Each camera rendered independently</td></tr>
 <tr><td>Prompt following</td><td>Kept</td><td>Lost after fine-tuning</td></tr>
-<tr><td>Use of the renderer</td><td>Train a policy on rendered sim, test on the robot</td><td>Evaluate policies in the repainted sim; train on it at 128 demonstrations</td></tr>
+<tr><td>Use of the renderer</td><td>Train a policy on rendered simulation, test in the real world</td><td>Evaluate policies in the stylized simulator; train on it at 128 demonstrations</td></tr>
 <tr><td>Tasks</td><td>Pick-and-place, drawer, fridge, mobile pick</td><td>Tight-tolerance gear insertion</td></tr>
 </tbody></table></div>
-<h3 id="g-scripts-and-logs">G. Scripts and logs</h3>
-<details class="more"><summary>Where each result comes from</summary>
-<div class="tablewrap"><table><thead><tr><th>What</th><th>Where</th></tr></thead><tbody>
+<h3 id="g-reproducibility">G. Reproducibility</h3>
+<details class="more"><summary>Scripts, logs and result directories</summary>
+<div class="tablewrap"><table><thead><tr><th>Result</th><th>Source</th></tr></thead><tbody>
 <tr><td>Raw-sim and augsim evaluations</td><td><code>jobs/sim_eval_mrc.sbatch</code>, <code>jobs/augsim_nano_eval.sbatch</code> (<code>AR=1</code> for the autoregressive loop)</td></tr>
-<tr><td>Real evaluations</td><td><code>wmrl/eval-logs/real_eval_20261019.md</code> (sim1024), <code>real_eval_20261013.md</code> (mix512), <code>real_eval_20261028_nano128_24k.md</code> (augsim128), <code>real_eval_20261030_raw128_20k.md</code> (sim128), <code>real_eval_20261030_refsim_52k.md</code> (ref_sim1024)</td></tr>
-<tr><td>Realism metrics</td><td><code>jobs/realism_metrics.py</code></td></tr>
+<tr><td>Real-world evaluations</td><td><code>wmrl/eval-logs/real_eval_20261019.md</code> (sim1024), <code>real_eval_20261013.md</code> (mix512), <code>real_eval_20261028_nano128_24k.md</code> (augsim128), <code>real_eval_20261030_raw128_20k.md</code> (sim128), <code>real_eval_20261030_refsim_52k.md</code> (ref_sim1024)</td></tr>
+<tr><td>Fidelity metrics</td><td><code>jobs/realism_metrics.py</code></td></tr>
 <tr><td>Replay, first-decision and layer probes</td><td><code>jobs/divergence_probe.py</code>, <code>jobs/consumed_regen.sbatch</code>, <code>jobs/act_layerwise.py</code></td></tr>
 <tr><td>Flicker and the autoregressive loop</td><td><code>jobs/ar_vs_perframe.py</code>; <code>augsim/infer/nano_mrc_server.py</code> (<code>NANO_AR=1</code>), <code>augsim/t25/closed_loop.py</code></td></tr>
-<tr><td>Styled training</td><td><code>jobs/act_style128_lanes.sh</code>, <code>jobs/demo_nano_src.py</code>, <code>jobs/style128.sbatch</code>, <code>jobs/assemble_parts.py</code></td></tr>
-<tr><td>Hand-matched sim</td><td><code>wmrl/wmrl/sim/mrc_gear/ref_sim.py</code>, <code>jobs/act_refsim_lanes.sh</code></td></tr>
-<tr><td>Limit tests</td><td><code>jobs/nano_limits.py</code>; camera-pose and exit-reentry study <code>jobs/nano_campose.py</code>, results in <code>wmrl/docs/nano_campose/</code></td></tr>
+<tr><td>Training on stylized demonstrations</td><td><code>jobs/act_style128_lanes.sh</code>, <code>jobs/demo_nano_src.py</code>, <code>jobs/style128.sbatch</code>, <code>jobs/assemble_parts.py</code></td></tr>
+<tr><td>Ref_sim</td><td><code>wmrl/wmrl/sim/mrc_gear/ref_sim.py</code>, <code>jobs/act_refsim_lanes.sh</code></td></tr>
+<tr><td>Robustness tests</td><td><code>jobs/nano_limits.py</code>; camera-pose and exit-reentry study <code>jobs/nano_campose.py</code>, results in <code>wmrl/docs/nano_campose/</code></td></tr>
+<tr><td>Inference latency</td><td><code>augsim/infer/nano_mrc_server.py</code> (<code>request_timings.jsonl</code> per run); <code>jobs/nano_profile.sbatch</code></td></tr>
 <tr><td>Matched-state analysis</td><td><code>jobs/e12_where_what.py</code>, <code>jobs/e12_where_what.sbatch</code>; results in <code>wmrl/docs/wrapup/e12/</code></td></tr>
-<tr><td>Figures and videos</td><td><code>jobs/gap_attribution.awk</code>, <code>jobs/combine_videos.py</code>, <code>jobs/real_vs_sim_figs.sh</code>; per-seed TSVs in <code>wmrl/docs/wrapup/</code></td></tr>
+<tr><td>Figures and videos</td><td><code>jobs/gap_attribution.awk</code>, <code>jobs/combine_videos.py</code>, <code>jobs/real_vs_sim_figs.sh</code>; per-scene TSVs in <code>wmrl/docs/wrapup/</code></td></tr>
 </tbody></table></div>
 </details>
   </article>
