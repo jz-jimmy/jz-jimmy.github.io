@@ -96,6 +96,7 @@
       <li><a href="#1-why-improve-simulated-visual-observations">1. Why improve simulated visuals</a></li>
       <li><a href="#2-building-augmented-simulation">2. Building augmented simulation</a></li>
       <li><a href="#3-why-video-models-and-scene-adaptation">3. Why video models and scene adaptation</a></li>
+      <li><a class="sub" href="#making-inference-fast-enough">Making inference fast enough</a></li>
       <li><a href="#4-predicting-real-world-performance">4. Predicting real-world performance</a></li>
       <li><a href="#5-training-policies-that-transfer">5. Training policies that transfer</a></li>
       <li><a href="#6-how-visual-transfer-changes-policy-decisions">6. How transfer changes decisions</a></li>
@@ -154,6 +155,17 @@
 <figure><img src="img/realism_kid.svg" alt="How to read. Distance to the real cameras per frame (KID on Inception features, lower is closer), one bar per camera: raw sim, hand-matched sim, Nano, and at the far left the floor, one half of the real data against the other. Takeaway: Nano halves the distance; what remains is still about twenty times the floor."><figcaption><strong>How to read.</strong> Distance to the real cameras per frame (KID on Inception features, lower is closer), one bar per camera: raw sim, hand-matched sim, Nano, and at the far left the floor, one half of the real data against the other. <strong>Takeaway:</strong> Nano halves the distance; what remains is still about twenty times the floor.</figcaption></figure>
 <figure><video controls preload="metadata" playsinline src="videos/ar_vs_perframe.mp4" aria-label="How to read. Raw render, per-frame Nano, autoregressive Nano on two scenes. Watch for: in the middle column the table texture and the glare on the gripper change every frame; on the right they hold still while the arm moves."></video><figcaption><strong>How to read.</strong> Raw render, per-frame Nano, autoregressive Nano on two scenes. <strong>Watch for:</strong> in the middle column the table texture and the glare on the gripper change every frame; on the right they hold still while the arm moves.</figcaption></figure>
 <aside class="takeaway"><p>Scene adaptation from a few minutes of video works. The repainted stream is clearly closer to the real cameras, not identical to them, and autoregressive repainting keeps it stable. Whether that is close enough is what sections 4 and 5 test.</p></aside>
+<h3 id="making-inference-fast-enough">Making inference fast enough</h3>
+<p>For the repainted simulator to be a usable training and evaluation space, repainting has to be cheap enough to run on every frame of every demonstration and on every decision in the closed loop. Out of the box it was not: our first closed-loop renderer, Cosmos-Transfer2.5 at 720 pixels and 35 denoising steps, took 7 s per decision frame.</p>
+<p>What made the difference, in order of effect:</p>
+<ul>
+<li><strong>Fewer denoising steps.</strong> 35 to 10, the count the training data was repainted with. The largest single gain, and it made the closed loop consistent with training.</li>
+<li><strong>A smaller model at the policy's resolution.</strong> Cosmos3-Nano at 256 pixels, the size the policy consumes, instead of Transfer2.5 at 720.</li>
+<li><strong>Repainting streams, not frames.</strong> An autoregressive window amortizes the fixed cost of a request over its frames: 0.05 s per frame against 1.8 s for a single decision frame repainted on its own. This is what makes repainting whole demonstration sets affordable.</li>
+<li><strong>Caching across diffusion steps.</strong> cache_dit removes 14 percent of the model time at 34 dB PSNR against the uncached output. Flash attention and torch.compile were already on in the serving stack. Request batching is unsupported by the Cosmos3 pipeline, so throughput scales only by running one server per GPU.</li>
+</ul>
+<figure><img src="img/nano_latency_v1.svg" alt="How to read. Left: GPU seconds per output frame for each renderer and mode, log scale, lower is faster; blue bars are the adapted Cosmos3-Nano. Right: how one closed-loop request splits between preparing the control images and running the diffusion model. Takeaway: streaming autoregressive repainting at 256 pixels is two orders of magnitude cheaper than the first renderer, which is what made repainting 128 demonstrations a matter of GPU-hours. Control preparation is a tenth of a request or less; the model is the cost, and a single decision frame in the closed loop still takes about 2 s."><figcaption><strong>How to read.</strong> Left: GPU seconds per output frame for each renderer and mode, log scale, lower is faster; blue bars are the adapted Cosmos3-Nano. Right: how one closed-loop request splits between preparing the control images and running the diffusion model. <strong>Takeaway:</strong> streaming autoregressive repainting at 256 pixels is two orders of magnitude cheaper than the first renderer, which is what made repainting 128 demonstrations a matter of GPU-hours. Control preparation is a tenth of a request or less; the model is the cost, and a single decision frame in the closed loop still takes about 2 s.</figcaption></figure>
+<p>Inside the model we did not profile further: the step count is the lever we have measured, and the per-step cost dominates everything else. One operational finding: sharing a GPU between the style server and a second evaluation lane slowed each request from 1.9 to about 5 s, so each server needs its own GPU.</p>
 <details class="more"><summary>Other style transfer backends we tried</summary>
 <div class="tablewrap"><table><thead><tr><th>Method</th><th>What it gave us</th></tr></thead><tbody>
 <tr><td>Raw sim, matched by hand (ref_sim)</td><td>Color and lighting close to the real cameras after nine calibration rounds; no texture</td></tr>
@@ -344,6 +356,7 @@
 <tr><td>Closed-loop decision frame, autoregressive 101-frame window</td><td>6.2 s per window</td></tr>
 <tr><td>Cosmos-Transfer2.5, 35 steps, 720 pixels</td><td>3.6 s per frame (7.2 s in the closed loop)</td></tr>
 <tr><td>img2img-turbo, 1 step, 512 pixels</td><td>0.148 s per frame</td></tr>
+<tr><td>Closed-loop decision frame with the style server sharing its GPU with a second evaluation lane</td><td>about 5 s</td></tr>
 </tbody></table></div>
 <p>Most of the speed came from cutting the sampling steps from 35 to 10, then from caching the transformer's attention (cache_dit, 14 percent faster at 34 dB PSNR against the uncached output).</p>
 </details>
