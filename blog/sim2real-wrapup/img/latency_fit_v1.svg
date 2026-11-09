@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" font-family="Liberation Sans, Arial, Helvetica, sans-serif" font-size="12">
+<text x="24.0" y="18.0" font-size="13" fill="#1f2328" text-anchor="start" font-weight="700">Request time vs denoising steps (25-frame clip)</text>
+<line x1="64.0" y1="266.0" x2="364.0" y2="266.0" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="56.0" y="270.0" font-size="11" fill="#59636e" text-anchor="end">0 s</text>
+<line x1="64.0" y1="224.9" x2="364.0" y2="224.9" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="56.0" y="228.9" font-size="11" fill="#59636e" text-anchor="end">1 s</text>
+<line x1="64.0" y1="183.8" x2="364.0" y2="183.8" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="56.0" y="187.8" font-size="11" fill="#59636e" text-anchor="end">2 s</text>
+<line x1="64.0" y1="142.7" x2="364.0" y2="142.7" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="56.0" y="146.7" font-size="11" fill="#59636e" text-anchor="end">3 s</text>
+<line x1="64.0" y1="101.6" x2="364.0" y2="101.6" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="56.0" y="105.6" font-size="11" fill="#59636e" text-anchor="end">4 s</text>
+<line x1="64.0" y1="60.5" x2="364.0" y2="60.5" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="56.0" y="64.5" font-size="11" fill="#59636e" text-anchor="end">5 s</text>
+<line x1="64.0" y1="231.5" x2="364.0" y2="99.8" stroke="#e8710a" stroke-width="2"/>
+<rect x="64.0" y="231.5" width="300.0" height="34.5" rx="0" fill="#e8710a" fill-opacity="0.1"/>
+<text x="229.0" y="247.5" font-size="11" fill="#e8710a" text-anchor="start">fixed cost</text>
+<rect x="67.3" y="225.3" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="64.3" y="234.3" font-size="10.5" fill="#0b57d0" text-anchor="end">0.87</text>
+<text x="72.3" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">1</text>
+<rect x="75.7" y="220.3" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="88.7" y="229.3" font-size="10.5" fill="#0b57d0" text-anchor="start">0.99</text>
+<rect x="100.7" y="205.9" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="105.7" y="200.9" font-size="10.5" fill="#0b57d0" text-anchor="middle">1.34</text>
+<text x="105.7" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">5</text>
+<rect x="142.3" y="187.9" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="147.3" y="182.9" font-size="10.5" fill="#0b57d0" text-anchor="middle">1.78</text>
+<text x="147.3" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">10</text>
+<rect x="225.7" y="151.7" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="230.7" y="146.7" font-size="10.5" fill="#0b57d0" text-anchor="middle">2.66</text>
+<text x="230.7" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">20</text>
+<rect x="350.7" y="99.1" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="355.7" y="94.1" font-size="10.5" fill="#0b57d0" text-anchor="middle">3.94</text>
+<text x="355.7" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">35</text>
+<text x="214.0" y="298.0" font-size="11.5" fill="#1f2328" text-anchor="middle">denoising steps</text>
+<text x="364.0" y="44.0" font-size="11.5" fill="#e8710a" text-anchor="end" font-weight="700">0.84 s + 0.089 s per step</text>
+<text x="384.0" y="18.0" font-size="13" fill="#1f2328" text-anchor="start" font-weight="700">Request time vs clip length (10 steps)</text>
+<line x1="424.0" y1="266.0" x2="724.0" y2="266.0" stroke="#d0d7de" stroke-width="1.2"/>
+<text x="416.0" y="270.0" font-size="11" fill="#59636e" text-anchor="end">0 s</text>
+<line x1="424.0" y1="224.9" x2="724.0" y2="224.9" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="416.0" y="228.9" font-size="11" fill="#59636e" text-anchor="end">1 s</text>
+<line x1="424.0" y1="183.8" x2="724.0" y2="183.8" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="416.0" y="187.8" font-size="11" fill="#59636e" text-anchor="end">2 s</text>
+<line x1="424.0" y1="142.7" x2="724.0" y2="142.7" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="416.0" y="146.7" font-size="11" fill="#59636e" text-anchor="end">3 s</text>
+<line x1="424.0" y1="101.6" x2="724.0" y2="101.6" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="416.0" y="105.6" font-size="11" fill="#59636e" text-anchor="end">4 s</text>
+<line x1="424.0" y1="60.5" x2="724.0" y2="60.5" stroke="#d0d7de" stroke-width="0.6"/>
+<text x="416.0" y="64.5" font-size="11" fill="#59636e" text-anchor="end">5 s</text>
+<line x1="424.0" y1="239.3" x2="724.0" y2="58.5" stroke="#e8710a" stroke-width="2"/>
+<rect x="424.0" y="239.3" width="300.0" height="26.7" rx="0" fill="#e8710a" fill-opacity="0.1"/>
+<text x="589.0" y="255.3" font-size="11" fill="#e8710a" text-anchor="start">fixed cost</text>
+<rect x="491.1" y="188.7" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="496.1" y="183.7" font-size="10.5" fill="#0b57d0" text-anchor="middle">1.76</text>
+<text x="496.1" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">25</text>
+<rect x="571.9" y="145.9" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="576.9" y="140.9" font-size="10.5" fill="#0b57d0" text-anchor="middle">2.80</text>
+<text x="576.9" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">53</text>
+<rect x="710.3" y="57.2" width="10.0" height="10.0" rx="5" fill="#0b57d0" fill-opacity="1.0"/>
+<text x="715.3" y="52.2" font-size="10.5" fill="#0b57d0" text-anchor="middle">4.96</text>
+<text x="715.3" y="282.0" font-size="11" fill="#59636e" text-anchor="middle">101</text>
+<text x="574.0" y="298.0" font-size="11.5" fill="#1f2328" text-anchor="middle">frames per request</text>
+<text x="724.0" y="44.0" font-size="11.5" fill="#e8710a" text-anchor="end" font-weight="700">0.65 s + 0.042 s per frame</text>
+</svg>
