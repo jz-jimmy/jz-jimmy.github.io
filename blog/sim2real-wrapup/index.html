@@ -93,7 +93,7 @@
     <summary>Contents</summary>
     <ol>
       <li><a href="#summary">Summary</a></li>
-      <li><a href="#1-problem-the-visual-domain-gap-in-simulation-based-policy-evaluation">1. Problem: the visual domain gap</a></li>
+      <li><a href="#1-problem-rendering-gap-and-dynamics-gap">1. Problem: rendering and dynamics gaps</a></li>
       <li><a href="#2-method-augmented-simulation-with-a-fine-tuned-video-world-model">2. Method: augmented simulation</a></li>
       <li><a href="#3-scene-adaptation-of-the-video-world-model">3. Scene adaptation of the video world model</a></li>
       <li><a class="sub" href="#31-inference-latency-and-optimization">3.1 Inference latency and optimization</a></li>
@@ -117,7 +117,7 @@
       <p class="byline"><time datetime="2026-11-09">November 9, 2026</time> &middot; Jiayu Zhou</p>
     </header>
 
-<p class="dek">Can a video world model fine-tuned on a few minutes of real-world video serve as the renderer of a physics simulator and close the visual domain gap for policy evaluation and training? On tight-tolerance gear insertion, yes.</p>
+<p class="dek">Can a video world model fine-tuned on a few minutes of real-world video serve as the renderer of a physics simulator and bridge the rendering gap, making simulation realistic enough for policy evaluation and training? On tight-tolerance gear insertion, yes.</p>
 <h2 id="summary">Summary</h2>
 <p class="lede">Ten minutes of real-world video are enough.<br>Fine-tuned on them, a video world model renders simulation realistically enough that simulated evaluation ranks policies as real-world evaluation does, and policies trained on its renderings transfer better than policies trained on native or manually calibrated renderings.</p>
 <p><strong>Setting.</strong> Physics stays in the simulator.<br>A video world model (Cosmos3-Nano), fine-tuned on real-world video from our cameras, renders what the policy sees.<br>We call this augmented simulation, or augsim.<br>Our task is tight-tolerance gear insertion with a Franka FR3, three cameras, and ACT policies trained by behavior cloning on scripted demonstrations.<br>Every policy runs on 16 fixed scenes in raw sim, in augsim, and in the real world.</p>
@@ -127,12 +127,13 @@
 </div>
 <aside class="takeaway"><p><strong>As an evaluation space.</strong> Augsim ranks policies as real-world evaluation does and identifies which one fails.<br>Raw sim ranks them in reverse.<br>Neither predicts absolute success rate.</p></aside>
 <aside class="takeaway"><p><strong>As a training space.</strong> Same demonstrations, same actions, only pixels changed: training on style-transferred observations gives the best real-world success, and training in a manually calibrated renderer gives zero grasps.</p></aside>
-<h2 id="1-problem-the-visual-domain-gap-in-simulation-based-policy-evaluation">1. Problem: the visual domain gap in simulation-based policy evaluation</h2>
-<p class="lede">Correct physics does not make a simulator trustworthy.<br>A visuomotor policy sees pixels, not physics.</p>
-<p>Our first policy seated the gear in every simulated scene and in half of real ones.<br>Worse, when we compared three policies, raw sim ranked them in reverse of real-world order and would have selected a policy that never grasps a gear.</p>
+<h2 id="1-problem-rendering-gap-and-dynamics-gap">1. Problem: rendering gap and dynamics gap</h2>
+<p class="lede">The sim-to-real gap has two components, a rendering gap and a dynamics gap.<br>We hold the dynamics gap as small as we can and ask whether a fine-tuned video world model can bridge the rendering gap, so that simulation becomes realistic enough for policy training and evaluation.</p>
+<p><strong>Rendering gap.</strong> Our first policy seated the gear in every simulated scene and in half of real ones.<br>When we compared three policies, raw sim ranked them in reverse of real-world order and would have selected a policy that never grasps a gear.</p>
 <p>Manual appearance calibration did not help.<br>We matched table, lighting and camera response to real frames and randomized around them.<br>The resulting policy was our worst in the real world.<br>Real tables have wood grain; no randomized parameter produces texture.</p>
-<p>A video world model conditioned on edges and depth does produce texture, keeps it consistent over time, and leaves geometry alone.<br>If a few minutes of real-world video can adapt such a model to one scene, simulation inherits that scene's appearance and becomes a realistic space for training and evaluation.<br>This post tests that claim.</p>
-<aside class="takeaway"><p>We chose sub-millimeter insertion deliberately.<br>Every error source shows, so appearance can be separated from geometry and dynamics.</p></aside>
+<p>A video world model conditioned on edges and depth does produce texture, keeps it consistent over time, and leaves geometry alone.<br>If a few minutes of real-world video adapt such a model to one scene, simulation inherits that scene's appearance.<br>This post tests whether that bridges the rendering gap.</p>
+<p><strong>Dynamics gap, held fixed.</strong> One simulator serves every condition: a port of the real robot's controller, signed-distance-field contacts, cameras from current calibration (section 2, appendix B).<br>What remains of the dynamics gap appears in section 6 as residual error.</p>
+<aside class="takeaway"><p>We chose sub-millimeter insertion deliberately.<br>Both gaps are exposed, so the contribution of rendering can be separated from dynamics.</p></aside>
 <h2 id="2-method-augmented-simulation-with-a-fine-tuned-video-world-model">2. Method: augmented simulation with a fine-tuned video world model</h2>
 <p class="lede">Simulation keeps state; the world model replaces only rendered observations.</p>
 <figure><img src="pipeline.png" alt="Pipeline diagram"><figcaption><strong>Figure 1.</strong> Overview.<br>Real-world calibration, a calibrated simulator, scripted demonstrations and ACT training (top row).<br>The world model renders the simulator's observations, so the same policy and scenes are evaluated in raw sim, in augsim and in the real world.</figcaption></figure>
