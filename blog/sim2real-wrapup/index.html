@@ -251,7 +251,7 @@
 <h2 id="appendix">Appendix</h2>
 <h3 id="a-per-scene-outcomes">A. Per-scene outcomes</h3>
 <p>Each cell is the furthest stage reached: no grasp, grasped, lifted, engaged (on the shaft), or seated.</p>
-<figure><img src="img/real_vs_sim_violins_v5.svg" alt="Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition. Finding: raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones."><figcaption><strong>Figure 12.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition.<br><strong>Finding:</strong> raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones.</figcaption></figure>
+<figure><img src="img/real_vs_sim_violins_v7.svg" alt="Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition. Finding: raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones."><figcaption><strong>Figure 12.</strong> Score per scene (0 no grasp, 0.25 grasped, 0.5 lifted, 0.75 engaged, 1 seated), one violin per policy, grouped by evaluation condition.<br><strong>Finding:</strong> raw sim loses scenes late, where real rollouts lose them early; the augsim distributions lie closer to the real ones.</figcaption></figure>
 <details class="more"><summary>sim1024, 16 scenes: raw sim, augsim, real world</summary>
 <div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim, its cameras (round 27b)</th><th>Raw sim, recalibrated after the test (round 29)</th><th>Augsim (round 29)</th><th>Real world</th></tr></thead><tbody>
 <tr><td>1000000</td><td>seated</td><td>seated</td><td>engaged</td><td>no grasp</td></tr>
@@ -315,6 +315,27 @@
 <tr><td><strong>Seated</strong></td><td><strong>4/16</strong></td><td><strong>5/16</strong></td><td><strong>4/16</strong></td></tr>
 </tbody></table></div>
 </details>
+<details class="more"><summary>augsim1024, 16 scenes: raw sim, augsim, real world</summary>
+<div class="tablewrap"><table><thead><tr><th>Seed</th><th>Raw sim</th><th>Augsim (Cosmos3-Nano)</th><th>Real world</th></tr></thead><tbody>
+<tr><td>1000000</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000001</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000002</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000003</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000004</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000005</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000006</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000007</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000008</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000009</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000010</td><td>seated</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000011</td><td>engaged</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000012</td><td>lifted</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000013</td><td>no grasp</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000014</td><td>engaged</td><td>seated</td><td>seated</td></tr>
+<tr><td>1000015</td><td>lifted</td><td>seated</td><td>no grasp</td></tr>
+<tr><td><strong>Seated</strong></td><td><strong>11/16</strong></td><td><strong>16/16</strong></td><td><strong>15/16</strong></td></tr>
+</tbody></table></div>
+</details>
 <details class="more"><summary>Per-scene agreement with the real-world outcome</summary>
 <div class="tablewrap"><table><thead><tr><th>Policy</th><th>Raw sim</th><th>Augsim</th></tr></thead><tbody>
 <tr><td>sim1024</td><td>8/16 (predicts every scene seated, κ 0)</td><td>9/16 (κ 0.13)</td></tr>
@@ -322,6 +343,7 @@
 <tr><td>augsim128</td><td>10/16 (κ 0.19)</td><td>8/16 (κ 0.02)</td></tr>
 <tr><td>ref_sim1024</td><td>8/16</td><td>16/16</td></tr>
 <tr><td>mix512</td><td>κ 0.00</td><td>κ 0.54</td></tr>
+<tr><td>augsim1024</td><td>12/16 (κ 0.26)</td><td>15/16 (predicts every scene seated, κ 0)</td></tr>
 <tr><td><strong>Pooled, three newer policies</strong></td><td><strong>27/48 (κ 0.07)</strong></td><td><strong>37/48 (κ 0.37)</strong></td></tr>
 </tbody></table></div>
 </details>
