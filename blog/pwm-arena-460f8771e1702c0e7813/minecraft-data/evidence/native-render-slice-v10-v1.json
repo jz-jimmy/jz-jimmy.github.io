@@ -1,0 +1,30 @@
+{
+  "evidence_version": "pwm-public-recorded-source-v1",
+  "source_evidence_version": "pwm-native-render-slice-evidence-v1",
+  "source_evidence_sha256": "dd6be3bec66deb4816dd017320dbddef294098c4984f06a3b8e2f74309f6234c",
+  "source_evidence_status": "completed_unscored_interface_pilot",
+  "source_native_kind": null,
+  "source_original_status": null,
+  "is_engine_rerun": null,
+  "derivation": "Public read-only provenance subset; original private audit retained on Delta.",
+  "sample_ids": [
+    "s12-a",
+    "s12-b",
+    "s01-single"
+  ],
+  "result_section": "Minecraft",
+  "test_mode": "R",
+  "execution_mode": "offline_oracle_proxy",
+  "live_demo": false,
+  "semantic_score": null,
+  "information_budget": "oracle/proxy RGB video + target first frame + prompt",
+  "dynamics_responsibility": "Native engine supplies oracle/proxy dynamics; EdenLive generates appearance.",
+  "remaining_gates": [
+    "Actual reader implementation and frozen reader revision.",
+    "Two independent human annotations with disagreement adjudication; Codex is not a human annotator.",
+    "Representative native/generated-domain state, failure, occlusion and temporal-boundary coverage.",
+    "Held-out validation, per-class error, uncertainty and release protocol review before visual benchmark scores.",
+    "Full native snapshot isolation remains pending; this reuses the accepted constrained v10 oracle bundle.",
+    "This is offline R interface evidence, without learned-dynamics, model-live-demo or official benchmark acceptance."
+  ]
+}

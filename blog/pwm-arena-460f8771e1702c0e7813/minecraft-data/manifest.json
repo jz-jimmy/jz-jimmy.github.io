@@ -1,0 +1,5043 @@
+{
+  "schema_version": "pwm-minecraft-web-evidence-v1",
+  "created_utc": "2026-11-14T19:20:09.071795+00:00",
+  "mode": "recorded",
+  "is_benchmark_release": false,
+  "live_demo": false,
+  "clock_note": "Media presentation, API observations and native counters are separate clocks. Checkpoint links identify saved observations, not calibrated pixel effects or display latency.",
+  "semantic_score": null,
+  "entries": [
+    {
+      "id": "s12-a",
+      "task_id": "S12",
+      "title": "Change the binding",
+      "description": "将门的控制源从 L2 替换为 L3",
+      "branch": "A",
+      "pairing": "paired",
+      "condition_id": "92302922a8a844a395171a405535bf32",
+      "run_id": "native-render-slice-v10-v1:92302922a8a844a395171a405535bf32",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + prompt",
+      "dynamics_responsibility": "Native engine supplies oracle/proxy dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-arm64-lwjgl333",
+      "native_job_id": "3600890",
+      "model_job_id": "3600927",
+      "frames": 53,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/1da9b286305227f0734c41e65985a97639ccf3e801774ed1fb6d7f121e4758ee.mp4",
+        "sha256": "1da9b286305227f0734c41e65985a97639ccf3e801774ed1fb6d7f121e4758ee",
+        "bytes": 253445,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/dd4ac91b03ea2d347a1428a95d5de557d36a6db6dfa6b469193ba2743fb39e7c.mp4",
+        "sha256": "dd4ac91b03ea2d347a1428a95d5de557d36a6db6dfa6b469193ba2743fb39e7c",
+        "bytes": 200605,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0.png",
+        "sha256": "5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0",
+        "bytes": 107944
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory room with white walls, two iron doors, and blue and red lever pedestals. Preserve geometry, objects, camera motion, door states, and lever states from the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": null,
+          "api_step": 38,
+          "observation_frame": null,
+          "native_state": {
+            "L2_powered": 0,
+            "L3_powered": 0,
+            "target_lower_open": 0,
+            "target_upper_open": 0,
+            "distractor_lower_open": 0,
+            "nonce": 1,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_L2",
+          "logical_step": 4,
+          "api_step": 60,
+          "observation_frame": 21,
+          "native_state": {
+            "L2_powered": 1,
+            "L3_powered": 0,
+            "target_lower_open": 0,
+            "target_upper_open": 0,
+            "distractor_lower_open": 0,
+            "nonce": 2,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_L3",
+          "logical_step": 10,
+          "api_step": 84,
+          "observation_frame": 45,
+          "native_state": {
+            "L2_powered": 1,
+            "L3_powered": 1,
+            "target_lower_open": 1,
+            "target_upper_open": 1,
+            "distractor_lower_open": 0,
+            "nonce": 3,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 39,
+          "logical_step": 0,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 40,
+          "logical_step": 1,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 41,
+          "logical_step": 2,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 42,
+          "logical_step": 3,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 43,
+          "logical_step": 4,
+          "phase": "lever_input",
+          "native_player_tick_counter": 70,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 44,
+          "logical_step": 4,
+          "phase": "actuator_padding",
+          "native_player_tick_counter": 71,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 45,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 72,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 46,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 73,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 47,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 74,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 48,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 75,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 49,
+          "logical_step": 4,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 76,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 50,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 77,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 51,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 78,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 52,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 79,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 53,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 80,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 54,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 81,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 55,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 82,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 17,
+          "api_step": 56,
+          "logical_step": 4,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 83,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 18,
+          "api_step": 57,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 84,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 19,
+          "api_step": 58,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 85,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 20,
+          "api_step": 59,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 86,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 21,
+          "api_step": 60,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 87,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 22,
+          "api_step": 61,
+          "logical_step": 4,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 88,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 23,
+          "api_step": 62,
+          "logical_step": 5,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 89,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 24,
+          "api_step": 63,
+          "logical_step": 6,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 90,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 25,
+          "api_step": 64,
+          "logical_step": 7,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 91,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 26,
+          "api_step": 65,
+          "logical_step": 8,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 92,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 27,
+          "api_step": 66,
+          "logical_step": 9,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 93,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 28,
+          "api_step": 67,
+          "logical_step": 10,
+          "phase": "lever_input",
+          "native_player_tick_counter": 94,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 29,
+          "api_step": 68,
+          "logical_step": 10,
+          "phase": "native_door_actuator",
+          "native_player_tick_counter": 95,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 30,
+          "api_step": 69,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 96,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 31,
+          "api_step": 70,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 97,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 32,
+          "api_step": 71,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 98,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 33,
+          "api_step": 72,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 99,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 34,
+          "api_step": 73,
+          "logical_step": 10,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 100,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 35,
+          "api_step": 74,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 101,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 36,
+          "api_step": 75,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 102,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 37,
+          "api_step": 76,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 103,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 38,
+          "api_step": 77,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 104,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 39,
+          "api_step": 78,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 105,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 40,
+          "api_step": 79,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 106,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 41,
+          "api_step": 80,
+          "logical_step": 10,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 107,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 42,
+          "api_step": 81,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 108,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 43,
+          "api_step": 82,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 109,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 44,
+          "api_step": 83,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 110,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 45,
+          "api_step": 84,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 111,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 46,
+          "api_step": 85,
+          "logical_step": 10,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 112,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 47,
+          "api_step": 86,
+          "logical_step": 11,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 113,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 48,
+          "api_step": 87,
+          "logical_step": 12,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 114,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 49,
+          "api_step": 88,
+          "logical_step": 13,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 115,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 50,
+          "api_step": 89,
+          "logical_step": 14,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 116,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 51,
+          "api_step": 90,
+          "logical_step": 15,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 117,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 52,
+          "api_step": 91,
+          "logical_step": 16,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 118,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        }
+      ],
+      "events": [
+        {
+          "kind": "custom_rule_replace",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 0,
+          "source": null,
+          "active_source": "L3",
+          "old_source": "L2"
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock -2 81 3 minecraft:lever[face=floor,facing=north,powered=true]",
+          "phase": "lever_input",
+          "logical_step": 4,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "custom_binding_probe",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 4,
+          "source": "L2",
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 2 81 3 minecraft:lever[face=floor,facing=north,powered=true]",
+          "phase": "lever_input",
+          "logical_step": 10,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 0 80 5 minecraft:redstone_block",
+          "phase": "native_door_actuator",
+          "logical_step": 10,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "custom_binding_probe",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 10,
+          "source": "L3",
+          "active_source": null,
+          "old_source": null
+        }
+      ],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-slice-v10-v1.json",
+        "sha256": "a434e7db0dccf81f51f5e3fce69003f0da19c0d9d8df9517be7b0355563f3650",
+        "source_evidence_sha256": "dd6be3bec66deb4816dd017320dbddef294098c4984f06a3b8e2f74309f6234c"
+      },
+      "limits": [
+        "Actual reader implementation and frozen reader revision.",
+        "Two independent human annotations with disagreement adjudication; Codex is not a human annotator.",
+        "Representative native/generated-domain state, failure, occlusion and temporal-boundary coverage.",
+        "Held-out validation, per-class error, uncertainty and release protocol review before visual benchmark scores.",
+        "Full native snapshot isolation remains pending; this reuses the accepted constrained v10 oracle bundle.",
+        "This is offline R interface evidence, without learned-dynamics, model-live-demo or official benchmark acceptance."
+      ],
+      "source_hashes": {
+        "native_states": "fa98badd04164aa11de4f52e88326ddf6ac62c4cec88e0b04096be78a11c354d",
+        "native_events": "062fdefe3deed60e5bd6e53659f473c3b0b304b4c4262f124e8f352aae72e050",
+        "model_media_inspection": "af5c52c7eaa86adbb1c04907e86c995405ca8edbddb63124399edada70389094"
+      }
+    },
+    {
+      "id": "s12-b",
+      "task_id": "S12",
+      "title": "Change the binding",
+      "description": "将门的控制源从 L2 替换为 L3",
+      "branch": "B",
+      "pairing": "paired",
+      "condition_id": "134f4bb2ff1f45e7b954638ed10fb6bb",
+      "run_id": "native-render-slice-v10-v1:134f4bb2ff1f45e7b954638ed10fb6bb",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + prompt",
+      "dynamics_responsibility": "Native engine supplies oracle/proxy dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-arm64-lwjgl333",
+      "native_job_id": "3600890",
+      "model_job_id": "3600927",
+      "frames": 53,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/daa64131f687678b2fd64f9db4c1eaf3943201f4002c2d9dbf0b049f425b9ffb.mp4",
+        "sha256": "daa64131f687678b2fd64f9db4c1eaf3943201f4002c2d9dbf0b049f425b9ffb",
+        "bytes": 254430,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/265fbef9422e8a44275e5f94a00fddc66ccab55ec5be9a7765d2978f8445901f.mp4",
+        "sha256": "265fbef9422e8a44275e5f94a00fddc66ccab55ec5be9a7765d2978f8445901f",
+        "bytes": 202893,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0.png",
+        "sha256": "5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0",
+        "bytes": 107944
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory room with white walls, two iron doors, and blue and red lever pedestals. Preserve geometry, objects, camera motion, door states, and lever states from the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": null,
+          "api_step": 38,
+          "observation_frame": null,
+          "native_state": {
+            "L2_powered": 0,
+            "L3_powered": 0,
+            "target_lower_open": 0,
+            "target_upper_open": 0,
+            "distractor_lower_open": 0,
+            "nonce": 1,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_L2",
+          "logical_step": 4,
+          "api_step": 60,
+          "observation_frame": 21,
+          "native_state": {
+            "L2_powered": 1,
+            "L3_powered": 0,
+            "target_lower_open": 1,
+            "target_upper_open": 1,
+            "distractor_lower_open": 0,
+            "nonce": 2,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_L3",
+          "logical_step": 10,
+          "api_step": 84,
+          "observation_frame": 45,
+          "native_state": {
+            "L2_powered": 1,
+            "L3_powered": 1,
+            "target_lower_open": 1,
+            "target_upper_open": 1,
+            "distractor_lower_open": 0,
+            "nonce": 3,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 39,
+          "logical_step": 0,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 40,
+          "logical_step": 1,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 41,
+          "logical_step": 2,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 42,
+          "logical_step": 3,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 43,
+          "logical_step": 4,
+          "phase": "lever_input",
+          "native_player_tick_counter": 70,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 44,
+          "logical_step": 4,
+          "phase": "native_door_actuator",
+          "native_player_tick_counter": 71,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 45,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 72,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 46,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 73,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 47,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 74,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 48,
+          "logical_step": 4,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 75,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 49,
+          "logical_step": 4,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 76,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 50,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 77,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 51,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 78,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 52,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 79,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 53,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 80,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 54,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 81,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 55,
+          "logical_step": 4,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 82,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 17,
+          "api_step": 56,
+          "logical_step": 4,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 83,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 18,
+          "api_step": 57,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 84,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 19,
+          "api_step": 58,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 85,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 20,
+          "api_step": 59,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 86,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 21,
+          "api_step": 60,
+          "logical_step": 4,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 87,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 22,
+          "api_step": 61,
+          "logical_step": 4,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 88,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 23,
+          "api_step": 62,
+          "logical_step": 5,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 89,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 24,
+          "api_step": 63,
+          "logical_step": 6,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 90,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 25,
+          "api_step": 64,
+          "logical_step": 7,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 91,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 26,
+          "api_step": 65,
+          "logical_step": 8,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 92,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 27,
+          "api_step": 66,
+          "logical_step": 9,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 93,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 28,
+          "api_step": 67,
+          "logical_step": 10,
+          "phase": "lever_input",
+          "native_player_tick_counter": 94,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 29,
+          "api_step": 68,
+          "logical_step": 10,
+          "phase": "actuator_padding",
+          "native_player_tick_counter": 95,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 30,
+          "api_step": 69,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 96,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 31,
+          "api_step": 70,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 97,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 32,
+          "api_step": 71,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 98,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 33,
+          "api_step": 72,
+          "logical_step": 10,
+          "phase": "post_input_observation",
+          "native_player_tick_counter": 99,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 34,
+          "api_step": 73,
+          "logical_step": 10,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 100,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 35,
+          "api_step": 74,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 101,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 36,
+          "api_step": 75,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 102,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 37,
+          "api_step": 76,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 103,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 38,
+          "api_step": 77,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 104,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 39,
+          "api_step": 78,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 105,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 40,
+          "api_step": 79,
+          "logical_step": 10,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 106,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 41,
+          "api_step": 80,
+          "logical_step": 10,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 107,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 42,
+          "api_step": 81,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 108,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 43,
+          "api_step": 82,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 109,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 44,
+          "api_step": 83,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 110,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 45,
+          "api_step": 84,
+          "logical_step": 10,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 111,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 46,
+          "api_step": 85,
+          "logical_step": 10,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 112,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 47,
+          "api_step": 86,
+          "logical_step": 11,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 113,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 48,
+          "api_step": 87,
+          "logical_step": 12,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 114,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 49,
+          "api_step": 88,
+          "logical_step": 13,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 115,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 50,
+          "api_step": 89,
+          "logical_step": 14,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 116,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 51,
+          "api_step": 90,
+          "logical_step": 15,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 117,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 52,
+          "api_step": 91,
+          "logical_step": 16,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 118,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        }
+      ],
+      "events": [
+        {
+          "kind": "custom_rule_noop",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 0,
+          "source": null,
+          "active_source": "L2",
+          "old_source": "L2"
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock -2 81 3 minecraft:lever[face=floor,facing=north,powered=true]",
+          "phase": "lever_input",
+          "logical_step": 4,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 0 80 5 minecraft:redstone_block",
+          "phase": "native_door_actuator",
+          "logical_step": 4,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "custom_binding_probe",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 4,
+          "source": "L2",
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 2 81 3 minecraft:lever[face=floor,facing=north,powered=true]",
+          "phase": "lever_input",
+          "logical_step": 10,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        },
+        {
+          "kind": "custom_binding_probe",
+          "canonical_command": null,
+          "phase": null,
+          "logical_step": 10,
+          "source": "L3",
+          "active_source": null,
+          "old_source": null
+        }
+      ],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-slice-v10-v1.json",
+        "sha256": "a434e7db0dccf81f51f5e3fce69003f0da19c0d9d8df9517be7b0355563f3650",
+        "source_evidence_sha256": "dd6be3bec66deb4816dd017320dbddef294098c4984f06a3b8e2f74309f6234c"
+      },
+      "limits": [
+        "Actual reader implementation and frozen reader revision.",
+        "Two independent human annotations with disagreement adjudication; Codex is not a human annotator.",
+        "Representative native/generated-domain state, failure, occlusion and temporal-boundary coverage.",
+        "Held-out validation, per-class error, uncertainty and release protocol review before visual benchmark scores.",
+        "Full native snapshot isolation remains pending; this reuses the accepted constrained v10 oracle bundle.",
+        "This is offline R interface evidence, without learned-dynamics, model-live-demo or official benchmark acceptance."
+      ],
+      "source_hashes": {
+        "native_states": "596c8111eba83a57cdb9bfc336f15d0219803373c22e52308ad509d118a0aa2f",
+        "native_events": "859673354f2e800b4e37d99c5fc8dd95d47b259cab959df70c460631ef1ef3a4",
+        "model_media_inspection": "75e2f2128bfeeab6bdd48256a4e61f8fc56372e3b692c6ac6ef57f90d43e8113"
+      }
+    },
+    {
+      "id": "s01-single",
+      "task_id": "S01",
+      "title": "Move through the world",
+      "description": "移动与相机接口",
+      "branch": "single",
+      "pairing": "single",
+      "condition_id": "7d3de6c3226944f2ab6bf5f61e92a37b",
+      "run_id": "native-render-slice-v10-v1:7d3de6c3226944f2ab6bf5f61e92a37b",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + prompt",
+      "dynamics_responsibility": "Native engine supplies oracle/proxy dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-arm64-lwjgl333",
+      "native_job_id": "3600890",
+      "model_job_id": "3600927",
+      "frames": 17,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/16af1548358355e5300a181e3dbdf85b6d11c2cde415a173a010bf72dd7e6c8b.mp4",
+        "sha256": "16af1548358355e5300a181e3dbdf85b6d11c2cde415a173a010bf72dd7e6c8b",
+        "bytes": 93720,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/63919fc92168e64f81973b40799c35a85446a25f6b8e6182bf36c88ee31c9db0.mp4",
+        "sha256": "63919fc92168e64f81973b40799c35a85446a25f6b8e6182bf36c88ee31c9db0",
+        "bytes": 195348,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0.png",
+        "sha256": "5f120334f29aa274dea193ea390f0048192b3010a13e772707228655f9ee39c0",
+        "bytes": 107944
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory room with white walls, two iron doors, and blue and red lever pedestals. Preserve geometry, objects, camera motion, door states, and lever states from the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": null,
+          "api_step": 38,
+          "observation_frame": null,
+          "native_state": {
+            "L2_powered": 0,
+            "L3_powered": 0,
+            "target_lower_open": 0,
+            "target_upper_open": 0,
+            "distractor_lower_open": 0,
+            "nonce": 1,
+            "distractor_upper_open": 0
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 39,
+          "logical_step": 0,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 40,
+          "logical_step": 1,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.401999996632,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 41,
+          "logical_step": 2,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.250491985211,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 42,
+          "logical_step": 3,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.0697685979985,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 43,
+          "logical_step": 4,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 70,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.8730936137517,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 44,
+          "logical_step": 5,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 71,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.667709056512,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 45,
+          "logical_step": 6,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 72,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.555569075234,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 46,
+          "logical_step": 7,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 73,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.494340638344,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 47,
+          "logical_step": 8,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 74,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4609099079194,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 48,
+          "logical_step": 9,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 75,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.442656726987,
+            "pitch": 0.0,
+            "yaw": 5.0000005
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 49,
+          "logical_step": 10,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 76,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4326904890404,
+            "pitch": 0.0,
+            "yaw": 10.000001
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 50,
+          "logical_step": 11,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 77,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 15.000001
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 51,
+          "logical_step": 12,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 78,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 20.000002
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 52,
+          "logical_step": 13,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 79,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 25.000002
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 53,
+          "logical_step": 14,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 80,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 25.000002
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 54,
+          "logical_step": 15,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 81,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 25.000002
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 55,
+          "logical_step": 16,
+          "phase": "rollout_action",
+          "native_player_tick_counter": 82,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3684.4272489224895,
+            "pitch": 0.0,
+            "yaw": 25.000002
+          }
+        }
+      ],
+      "events": [],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-slice-v10-v1.json",
+        "sha256": "a434e7db0dccf81f51f5e3fce69003f0da19c0d9d8df9517be7b0355563f3650",
+        "source_evidence_sha256": "dd6be3bec66deb4816dd017320dbddef294098c4984f06a3b8e2f74309f6234c"
+      },
+      "limits": [
+        "Actual reader implementation and frozen reader revision.",
+        "Two independent human annotations with disagreement adjudication; Codex is not a human annotator.",
+        "Representative native/generated-domain state, failure, occlusion and temporal-boundary coverage.",
+        "Held-out validation, per-class error, uncertainty and release protocol review before visual benchmark scores.",
+        "Full native snapshot isolation remains pending; this reuses the accepted constrained v10 oracle bundle.",
+        "This is offline R interface evidence, without learned-dynamics, model-live-demo or official benchmark acceptance."
+      ],
+      "source_hashes": {
+        "native_states": "3c68b672167af4ddd783eca520e1ce76dc60827dbb199263ea29b56e553ebc5e",
+        "native_events": "c9ba49990a92248c2c41cba0d6c1633a502d00e7d8b422d6ed7e2a0d29cfcaa2",
+        "model_media_inspection": "ac7be4b8ba889848622cf00cfae1c09ee5ac02f015ad0e7bd5423219698243df"
+      }
+    },
+    {
+      "id": "s07-single",
+      "task_id": "S07",
+      "title": "Delete by relation",
+      "description": "关系指代与目标删除",
+      "branch": "single",
+      "pairing": "single",
+      "condition_id": "8f34753b197446739d5f39cbd3e93654",
+      "run_id": "native-render-s07-v1:8f34753b197446739d5f39cbd3e93654",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + generic scene prompt",
+      "dynamics_responsibility": "Native engine supplies proxy dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-s07-relational-delete-v1",
+      "native_job_id": null,
+      "model_job_id": "3601054",
+      "frames": 21,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/78d76681de3c966978bedc2f57a7963bfb9cb40be58f65c491a38c8f656dd959.mp4",
+        "sha256": "78d76681de3c966978bedc2f57a7963bfb9cb40be58f65c491a38c8f656dd959",
+        "bytes": 79955,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/2c9a8d7ab0f0f2c2ae7cd15c1dc244b11e0706ac75f26f0b802c1dd2f81f9ee9.mp4",
+        "sha256": "2c9a8d7ab0f0f2c2ae7cd15c1dc244b11e0706ac75f26f0b802c1dd2f81f9ee9",
+        "bytes": 83641,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/749b9586461bc23c5b215d8c6b910b6a275ce885bcd82f26b18794416fa0e5d8.png",
+        "sha256": "749b9586461bc23c5b215d8c6b910b6a275ce885bcd82f26b18794416fa0e5d8",
+        "bytes": 112153
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory with white walls, gold cubes and a blue cube. Preserve the camera, geometry, object identities and state changes in the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": 0,
+          "api_step": 31,
+          "observation_frame": 9,
+          "native_state": {
+            "distractor_present": 1,
+            "marker_present": 1,
+            "target_air": 0,
+            "target_present": 1,
+            "nonce": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_delete",
+          "logical_step": 1,
+          "api_step": 42,
+          "observation_frame": 20,
+          "native_state": {
+            "target_air": 1,
+            "target_present": 0,
+            "distractor_present": 1,
+            "nonce": 2,
+            "marker_present": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 22,
+          "logical_step": 0,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 49,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 23,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 50,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 24,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 51,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 25,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 52,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 26,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 53,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 27,
+          "logical_step": 0,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 54,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 28,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 55,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 29,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 56,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 30,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 57,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 31,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 58,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 32,
+          "logical_step": 1,
+          "phase": "relational_delete",
+          "native_player_tick_counter": 59,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 33,
+          "logical_step": 1,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 60,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 34,
+          "logical_step": 1,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 61,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 35,
+          "logical_step": 1,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 62,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 36,
+          "logical_step": 1,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 63,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 37,
+          "logical_step": 1,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 64,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 38,
+          "logical_step": 1,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 65,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 17,
+          "api_step": 39,
+          "logical_step": 1,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 18,
+          "api_step": 40,
+          "logical_step": 1,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 19,
+          "api_step": 41,
+          "logical_step": 1,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 20,
+          "api_step": 42,
+          "logical_step": 1,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        }
+      ],
+      "events": [
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 2 81 5 minecraft:air",
+          "phase": "relational_delete",
+          "logical_step": 1,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        }
+      ],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-s07-v1.json",
+        "sha256": "37691ee1bc11bb92994944cbf1d38a3158e48614e40938968de1141c0da9dfcc",
+        "source_evidence_sha256": "6e4a454a7145257a6b9f80aa025b98276ae8536034fc6eb07bd37c731abe7248"
+      },
+      "limits": [
+        "Independent human annotation and disagreement resolution remain absent; Codex visual review is not human calibration.",
+        "A separately developed reader must be invoked under a frozen revision, then validated on held-out representative native/generated domains before scoring.",
+        "Cover state classes, failures, occlusions, boundary times and more independent semantic instances; convenience frames remain correlated.",
+        "Root qualitative visual review of this generated clip is pending separately; no formal visual correctness or readability score is claimed here.",
+        "Full snapshot/random-source isolation remains unvalidated.",
+        "Offline R rendering establishes neither learned dynamics nor model live-demo or official benchmark acceptance."
+      ],
+      "source_hashes": {
+        "native_states": "73b5bc2b5fed7530aef9d83bfaa490a241b323940d4e6ac582e1243807192bc2",
+        "native_events": "75067469bfd9b0badc486b70cd47eb5144a4126c212361c1220514c59801d9a7",
+        "model_media_inspection": "ae5f1f154d2a145cd582c0d41656d93d7a15aeec21f28a8d05cc99a536f6f4a2"
+      }
+    },
+    {
+      "id": "s10-a",
+      "task_id": "S10",
+      "title": "Remove the support",
+      "description": "支撑删除与原生下落",
+      "branch": "A",
+      "pairing": "paired",
+      "condition_id": "9a88fcdb6bc84573abeed59457ea18db",
+      "run_id": "native-render-s10-v1:9a88fcdb6bc84573abeed59457ea18db",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + generic scene prompt",
+      "dynamics_responsibility": "Native engine supplies support-removal/no-op dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-s10-support-fall-v1",
+      "native_job_id": "3601099",
+      "model_job_id": "3601182",
+      "frames": 57,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/0327a67ef41fb23bf4385bdc8390690f903db372878df086877821df25c36034.mp4",
+        "sha256": "0327a67ef41fb23bf4385bdc8390690f903db372878df086877821df25c36034",
+        "bytes": 281359,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6,
+          2.65,
+          2.7,
+          2.75,
+          2.8
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/afff700b90ec137e3a257e689280ced0ed112a7d3eb7a2fd148b8f53d02d6a1b.mp4",
+        "sha256": "afff700b90ec137e3a257e689280ced0ed112a7d3eb7a2fd148b8f53d02d6a1b",
+        "bytes": 226301,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6,
+          2.65,
+          2.7,
+          2.75,
+          2.8
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/68063f4345918f177a5ba27eea72746b738a84d1e57f66e3af919b4b7abeb8c6.png",
+        "sha256": "68063f4345918f177a5ba27eea72746b738a84d1e57f66e3af919b4b7abeb8c6",
+        "bytes": 109025
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory with elevated sand blocks on stone supports and a blue cube. Preserve the camera, geometry and native object motions in the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": 0,
+          "api_step": 40,
+          "observation_frame": 16,
+          "native_state": {
+            "floor_present": 1,
+            "source_air": 0,
+            "landing_sand": 0,
+            "landing_air": 1,
+            "support_air": 0,
+            "marker_present": 1,
+            "neighbor_sand": 1,
+            "neighbor_support": 1,
+            "source_sand": 1,
+            "support_present": 1,
+            "neighbor_landing_air": 1,
+            "nonce": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_fall",
+          "logical_step": 2,
+          "api_step": 78,
+          "observation_frame": 54,
+          "native_state": {
+            "source_air": 1,
+            "landing_air": 0,
+            "marker_present": 1,
+            "nonce": 2,
+            "floor_present": 1,
+            "landing_sand": 1,
+            "support_air": 1,
+            "neighbor_sand": 1,
+            "neighbor_support": 1,
+            "source_sand": 0,
+            "support_present": 0,
+            "neighbor_landing_air": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 24,
+          "logical_step": 0,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 51,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 25,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 52,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 26,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 53,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 27,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 54,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 28,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 55,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 29,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 56,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 30,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 57,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 31,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 58,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 32,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 59,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 33,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 60,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 34,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 61,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 35,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 62,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 36,
+          "logical_step": 0,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 63,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 37,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 64,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 38,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 65,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 39,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 40,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 17,
+          "api_step": 41,
+          "logical_step": 1,
+          "phase": "support_removal",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 18,
+          "api_step": 42,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 19,
+          "api_step": 43,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 70,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 20,
+          "api_step": 44,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 71,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 21,
+          "api_step": 45,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 72,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 22,
+          "api_step": 46,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 73,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 23,
+          "api_step": 47,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 74,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 24,
+          "api_step": 48,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 75,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 25,
+          "api_step": 49,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 76,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 26,
+          "api_step": 50,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 77,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 27,
+          "api_step": 51,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 78,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 28,
+          "api_step": 52,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 79,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 29,
+          "api_step": 53,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 80,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 30,
+          "api_step": 54,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 81,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 31,
+          "api_step": 55,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 82,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 32,
+          "api_step": 56,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 83,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 33,
+          "api_step": 57,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 84,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 34,
+          "api_step": 58,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 85,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 35,
+          "api_step": 59,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 86,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 36,
+          "api_step": 60,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 87,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 37,
+          "api_step": 61,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 88,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 38,
+          "api_step": 62,
+          "logical_step": 2,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 89,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 39,
+          "api_step": 63,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 90,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 40,
+          "api_step": 64,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 91,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 41,
+          "api_step": 65,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 92,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 42,
+          "api_step": 66,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 93,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 43,
+          "api_step": 67,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 94,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 44,
+          "api_step": 68,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 95,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 45,
+          "api_step": 69,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 96,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 46,
+          "api_step": 70,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 97,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 47,
+          "api_step": 71,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 98,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 48,
+          "api_step": 72,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 99,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 49,
+          "api_step": 73,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 100,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 50,
+          "api_step": 74,
+          "logical_step": 2,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 101,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 51,
+          "api_step": 75,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 102,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 52,
+          "api_step": 76,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 103,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 53,
+          "api_step": 77,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 104,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 54,
+          "api_step": 78,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 105,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 55,
+          "api_step": 79,
+          "logical_step": 2,
+          "phase": "cadence_padding",
+          "native_player_tick_counter": 106,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 56,
+          "api_step": 80,
+          "logical_step": 2,
+          "phase": "cadence_padding",
+          "native_player_tick_counter": 107,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        }
+      ],
+      "events": [
+        {
+          "kind": "engine_command",
+          "canonical_command": "/setblock 2 83 5 minecraft:air",
+          "phase": "support_removal",
+          "logical_step": 1,
+          "source": null,
+          "active_source": null,
+          "old_source": null
+        }
+      ],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-s10-v1.json",
+        "sha256": "ca74368359b4496472ef208a8a22fe48c266e04d3ede131aeed85c156e49ad18",
+        "source_evidence_sha256": "bcb78c3e3a0b7ef12e38daf5b0f75cbec8799961efe3cb9eea9d70c286914052"
+      },
+      "limits": [
+        "Root qualitative review of both generated clips remains pending separately; no visual correctness or readability score is claimed.",
+        "Independent human annotation and disagreement resolution are absent; Codex review is not human calibration.",
+        "Sand-position reader remains unimplemented; frozen reader development and held-out native/generated-domain calibration are required before semantic scoring.",
+        "Development convenience frames are correlated and do not establish independent-instance confidence intervals or rankings.",
+        "Effective camera projection remains uncalibrated; raw nominal-90 wording and actual mission/runtime setting70 stay distinct under the separate erratum.",
+        "Full snapshot/random-source isolation remains unvalidated.",
+        "Offline R appearance generation establishes neither learned dynamics, a model live demo, an official benchmark result nor a formal model score."
+      ],
+      "source_hashes": {
+        "native_states": "6ff710632b1bd79472ebbcd2ce0c2a4800d5120398699158aa39723cb8c4bba0",
+        "native_events": "2d1de4429da1bf148a33a719017ef89abe9198f4ec9757d0a603466189af8e1e",
+        "model_media_inspection": "289aba296d6f46ab79bed6af139ae3dc304fd6a1b1c5fb0959d59ee265473d78"
+      }
+    },
+    {
+      "id": "s10-b",
+      "task_id": "S10",
+      "title": "Remove the support",
+      "description": "支撑删除与原生下落",
+      "branch": "B",
+      "pairing": "paired",
+      "condition_id": "21acc5b975f2461e93d707d0d72f8ebc",
+      "run_id": "native-render-s10-v1:21acc5b975f2461e93d707d0d72f8ebc",
+      "mode": "recorded",
+      "result_section": "Minecraft",
+      "test_mode": "R",
+      "capability": "R",
+      "model_id": "edenlive_5b",
+      "model_name": "EdenLive 5B",
+      "model_source_revision": "2ea01626e6eaa32592a3b466d99d9739ceca35b0",
+      "model_weights_revision": "4efc2c4c33af7863f6048e36c2bceb2c30bfae97",
+      "model_profile": "native-full-recording-offline-r-v1",
+      "status": "completed_unscored_interface_pilot",
+      "semantic_score": null,
+      "semantic_readout": "uncalibrated",
+      "live_demo": false,
+      "information_budget": "oracle/proxy RGB video + target first frame + generic scene prompt",
+      "dynamics_responsibility": "Native engine supplies support-removal/no-op dynamics; EdenLive generates appearance.",
+      "native_profile": "minecraft-1.16.5-s10-support-fall-v1",
+      "native_job_id": "3601099",
+      "model_job_id": "3601182",
+      "frames": 57,
+      "width": 832,
+      "height": 480,
+      "fps": 20,
+      "native": {
+        "url": "/minecraft-data/media/6f4c04fa30e6350914b8ef4806de7b0c475e740c73384a87afcd116c7bb756b6.mp4",
+        "sha256": "6f4c04fa30e6350914b8ef4806de7b0c475e740c73384a87afcd116c7bb756b6",
+        "bytes": 279612,
+        "width": 640,
+        "height": 360,
+        "dimension_source": "native cover IHDR; video dimensions checked in browser QA",
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6,
+          2.65,
+          2.7,
+          2.75,
+          2.8
+        ],
+        "timestamp_source": "encoded presentation cadence i/media_fps; not engine time"
+      },
+      "model": {
+        "url": "/minecraft-data/media/434c64aad465b97db5637f29ce9810ca286d45c32f5ae710674b9f84c5cea2f9.mp4",
+        "sha256": "434c64aad465b97db5637f29ce9810ca286d45c32f5ae710674b9f84c5cea2f9",
+        "bytes": 192168,
+        "width": 832,
+        "height": 480,
+        "timestamps_seconds": [
+          0.0,
+          0.05,
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3,
+          0.35,
+          0.4,
+          0.45,
+          0.5,
+          0.55,
+          0.6,
+          0.65,
+          0.7,
+          0.75,
+          0.8,
+          0.85,
+          0.9,
+          0.95,
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25,
+          1.3,
+          1.35,
+          1.4,
+          1.45,
+          1.5,
+          1.55,
+          1.6,
+          1.65,
+          1.7,
+          1.75,
+          1.8,
+          1.85,
+          1.9,
+          1.95,
+          2.0,
+          2.05,
+          2.1,
+          2.15,
+          2.2,
+          2.25,
+          2.3,
+          2.35,
+          2.4,
+          2.45,
+          2.5,
+          2.55,
+          2.6,
+          2.65,
+          2.7,
+          2.75,
+          2.8
+        ],
+        "timestamp_source": "retained full-clip decoded PTS inspection"
+      },
+      "poster": {
+        "url": "/minecraft-data/media/68063f4345918f177a5ba27eea72746b738a84d1e57f66e3af919b4b7abeb8c6.png",
+        "sha256": "68063f4345918f177a5ba27eea72746b738a84d1e57f66e3af919b4b7abeb8c6",
+        "bytes": 109025
+      },
+      "prompt": {
+        "staticPrompt": "A Minecraft laboratory with elevated sand blocks on stone supports and a blue cube. Preserve the camera, geometry and native object motions in the reference.",
+        "dynamicPrompts": []
+      },
+      "checkpoints": [
+        {
+          "checkpoint": "baseline",
+          "logical_step": 0,
+          "api_step": 40,
+          "observation_frame": 16,
+          "native_state": {
+            "floor_present": 1,
+            "source_air": 0,
+            "landing_sand": 0,
+            "landing_air": 1,
+            "support_air": 0,
+            "marker_present": 1,
+            "neighbor_sand": 1,
+            "neighbor_support": 1,
+            "source_sand": 1,
+            "support_present": 1,
+            "neighbor_landing_air": 1,
+            "nonce": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        },
+        {
+          "checkpoint": "after_fall",
+          "logical_step": 2,
+          "api_step": 78,
+          "observation_frame": 54,
+          "native_state": {
+            "source_air": 0,
+            "landing_air": 1,
+            "marker_present": 1,
+            "nonce": 2,
+            "floor_present": 1,
+            "landing_sand": 0,
+            "support_air": 0,
+            "neighbor_sand": 1,
+            "neighbor_support": 1,
+            "source_sand": 1,
+            "support_present": 1,
+            "neighbor_landing_air": 1
+          },
+          "verified": true,
+          "pixel_state_verified": false
+        }
+      ],
+      "observations": [
+        {
+          "recorded_frame": 0,
+          "api_step": 24,
+          "logical_step": 0,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 51,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 1,
+          "api_step": 25,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 52,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 2,
+          "api_step": 26,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 53,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 3,
+          "api_step": 27,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 54,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 4,
+          "api_step": 28,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 55,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 5,
+          "api_step": 29,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 56,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 6,
+          "api_step": 30,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 57,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 7,
+          "api_step": 31,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 58,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 8,
+          "api_step": 32,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 59,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 9,
+          "api_step": 33,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 60,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 10,
+          "api_step": 34,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 61,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 11,
+          "api_step": 35,
+          "logical_step": 0,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 62,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 12,
+          "api_step": 36,
+          "logical_step": 0,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 63,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 13,
+          "api_step": 37,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 64,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 14,
+          "api_step": 38,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 65,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 15,
+          "api_step": 39,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 66,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 16,
+          "api_step": 40,
+          "logical_step": 0,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 67,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 17,
+          "api_step": 41,
+          "logical_step": 1,
+          "phase": "support_noop",
+          "native_player_tick_counter": 68,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 18,
+          "api_step": 42,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 69,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 19,
+          "api_step": 43,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 70,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 20,
+          "api_step": 44,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 71,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 21,
+          "api_step": 45,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 72,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 22,
+          "api_step": 46,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 73,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 23,
+          "api_step": 47,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 74,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 24,
+          "api_step": 48,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 75,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 25,
+          "api_step": 49,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 76,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 26,
+          "api_step": 50,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 77,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 27,
+          "api_step": 51,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 78,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 28,
+          "api_step": 52,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 79,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 29,
+          "api_step": 53,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 80,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 30,
+          "api_step": 54,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 81,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 31,
+          "api_step": 55,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 82,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 32,
+          "api_step": 56,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 83,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 33,
+          "api_step": 57,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 84,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 34,
+          "api_step": 58,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 85,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 35,
+          "api_step": 59,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 86,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 36,
+          "api_step": 60,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 87,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 37,
+          "api_step": 61,
+          "logical_step": 1,
+          "phase": "passive_native_physics",
+          "native_player_tick_counter": 88,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 38,
+          "api_step": 62,
+          "logical_step": 2,
+          "phase": "native_state_initialize",
+          "native_player_tick_counter": 89,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 39,
+          "api_step": 63,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 90,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 40,
+          "api_step": 64,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 91,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 41,
+          "api_step": 65,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 92,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 42,
+          "api_step": 66,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 93,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 43,
+          "api_step": 67,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 94,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 44,
+          "api_step": 68,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 95,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 45,
+          "api_step": 69,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 96,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 46,
+          "api_step": 70,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 97,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 47,
+          "api_step": 71,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 98,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 48,
+          "api_step": 72,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 99,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 49,
+          "api_step": 73,
+          "logical_step": 2,
+          "phase": "native_state_predicate",
+          "native_player_tick_counter": 100,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 50,
+          "api_step": 74,
+          "logical_step": 2,
+          "phase": "native_state_get",
+          "native_player_tick_counter": 101,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 51,
+          "api_step": 75,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 102,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 52,
+          "api_step": 76,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 103,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 53,
+          "api_step": 77,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 104,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 54,
+          "api_step": 78,
+          "logical_step": 2,
+          "phase": "native_state_settling",
+          "native_player_tick_counter": 105,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 55,
+          "api_step": 79,
+          "logical_step": 2,
+          "phase": "cadence_padding",
+          "native_player_tick_counter": 106,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        },
+        {
+          "recorded_frame": 56,
+          "api_step": 80,
+          "logical_step": 2,
+          "phase": "cadence_padding",
+          "native_player_tick_counter": 107,
+          "player_pos": {
+            "x": 1826.5,
+            "y": 69.0,
+            "z": -3685.5,
+            "pitch": 0.0,
+            "yaw": 0.0
+          }
+        }
+      ],
+      "events": [],
+      "evidence": {
+        "url": "/minecraft-data/evidence/native-render-s10-v1.json",
+        "sha256": "ca74368359b4496472ef208a8a22fe48c266e04d3ede131aeed85c156e49ad18",
+        "source_evidence_sha256": "bcb78c3e3a0b7ef12e38daf5b0f75cbec8799961efe3cb9eea9d70c286914052"
+      },
+      "limits": [
+        "Root qualitative review of both generated clips remains pending separately; no visual correctness or readability score is claimed.",
+        "Independent human annotation and disagreement resolution are absent; Codex review is not human calibration.",
+        "Sand-position reader remains unimplemented; frozen reader development and held-out native/generated-domain calibration are required before semantic scoring.",
+        "Development convenience frames are correlated and do not establish independent-instance confidence intervals or rankings.",
+        "Effective camera projection remains uncalibrated; raw nominal-90 wording and actual mission/runtime setting70 stay distinct under the separate erratum.",
+        "Full snapshot/random-source isolation remains unvalidated.",
+        "Offline R appearance generation establishes neither learned dynamics, a model live demo, an official benchmark result nor a formal model score."
+      ],
+      "source_hashes": {
+        "native_states": "a8e21fdc1596e62fcc9bf8f4d1aec3afef802d28184d52f255da446e02202dac",
+        "native_events": "991ff804435df8d4840a6fb57129ec1c2333c7b0bafbc08965025513d66e6bec",
+        "model_media_inspection": "ad7bd2a083cdbd80bed6cb7c46b002ae416b3e00fd692d2b62709fde2b01bc35"
+      }
+    }
+  ],
+  "provenance": [
+    {
+      "source": "native-render-slice-v10-v1",
+      "evidence_sha256": "dd6be3bec66deb4816dd017320dbddef294098c4984f06a3b8e2f74309f6234c",
+      "native_summary_sha256": "ef44d12e1f9306a65080736de7a8297aa8f4a87d2d7dc7742b0453ae2b1b4bb1",
+      "render_summary_sha256": "ba6c96a73a7f4c6cb433d99c38b30ffa6fadf77536d117a48fccf4e9ab0907b2"
+    },
+    {
+      "source": "native-render-s07-v1",
+      "evidence_sha256": "6e4a454a7145257a6b9f80aa025b98276ae8536034fc6eb07bd37c731abe7248",
+      "native_summary_sha256": "4127b580288dcb06f7d31469722ba180a131135f218857faaf4b36e3a6aa6bd3",
+      "render_summary_sha256": "64f2b42a07caccd17f17704e3b00423dfa6074de8e7a1f343db1e77c359a72d2"
+    },
+    {
+      "source": "native-render-s10-v1",
+      "evidence_sha256": "bcb78c3e3a0b7ef12e38daf5b0f75cbec8799961efe3cb9eea9d70c286914052",
+      "native_summary_sha256": "b7900e1d7046ba520f9b4912b765a770a24bc14442fe9e8f96e567eabcbfc7c8",
+      "render_summary_sha256": "645a95abe77fca7b3966d8de54a9deda959495dc8008c1c6adc5d1bfa6245a0d"
+    }
+  ],
+  "publication": {
+    "kind": "unlisted_static_readonly",
+    "semantic_score": null,
+    "source_manifest_sha256": "7dc8e1470213389642dabb3edca11857d6211aadf9d40d9437d74a6537255af9"
+  }
+}
