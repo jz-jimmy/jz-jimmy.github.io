@@ -219,6 +219,7 @@ export function renderResults(ctx, params, sectionId, viewName) {
             h("p", { class: "group-members" }, t("results.group.members", { n: list.length, systems: members.join(" · ") })),
             fixture ? h("p", { class: "group-fixture" }, labelBadge("infrastructure-fixture"), " ", t("results.group.fixture")) : null),
           h("p", { class: "group-note" }, t("results.group.note"))),
+        matrix(ctx, list),
         h("div", { class: "table-scroll" }, table));
       frag.push(details);
     }
@@ -233,6 +234,38 @@ export function renderResults(ctx, params, sectionId, viewName) {
   drawTable();
   root.append(controls, toolbar, out);
   return root;
+}
+
+// One group at a glance: systems down, categories across, one cell per task row. Nothing
+// is computed here: a cell repeats the row's own counts. Systems keep the order of the
+// rows below (evaluated systems, then baselines, then references), never an order by value.
+function matrix(ctx, list) {
+  const rows = list.filter((r) => r.scope === "task" && r.task_id);
+  const tasks = uniq(rows.map((r) => r.task_id)).sort();
+  const tier = (id) => TIER[ctx.idx.systems.get(id)?.kind] ?? 0;
+  const systems = uniq(rows.map((r) => r.system_id)).map((id, i) => [id, i])
+    .sort((a, b) => tier(a[0]) - tier(b[0]) || a[1] - b[1]).map(([id]) => id);
+  if (tasks.length < 2 || systems.length < 2) return null;
+  const cell = (id, task) => {
+    const r = rows.find((x) => x.system_id === id && x.task_id === task);
+    if (!r) return h("td", { class: "mx-none" }, "");
+    if (r.value === null) return h("td", { class: "mx-unscored", title: r.reason ?? "" }, "—");
+    const unresolved = r.label_summary?.unresolved ?? 0;
+    const text = r.numerator !== null && r.denominator !== null ? `${r.numerator}/${r.denominator}` : fmtValue(r.value, r.unit);
+    const share = r.unit === "fraction" ? Math.max(0, Math.min(1, r.value)) : 0;
+    return h("td", { class: "mx-value", style: `--share: ${share.toFixed(3)}`,
+      title: unresolved ? t("matrix.unresolved", { n: unresolved }) : null },
+      text, unresolved ? h("span", { class: "mx-mark", "aria-label": t("matrix.unresolved", { n: unresolved }) }, "†") : null);
+  };
+  const marked = rows.some((r) => (r.label_summary?.unresolved ?? 0) > 0);
+  return h("div", { class: "mx-wrap" },
+    h("div", { class: "table-scroll" }, h("table", { class: "mx-table" },
+      h("caption", { class: "visually-hidden" }, t("matrix.caption")),
+      h("thead", null, h("tr", null, h("th", { scope: "col" }, t("col.system")), tasks.map((task) => h("th", { scope: "col" }, task)))),
+      h("tbody", null, systems.map((id) => h("tr", { class: `mx-tier-${tier(id)}` },
+        h("th", { scope: "row" }, (ctx.idx.systems.get(id)?.name ?? id).split(" (")[0]),
+        tasks.map((task) => cell(id, task))))))),
+    h("p", { class: "fine mx-note" }, t("matrix.note"), marked ? ` ${t("matrix.note.marked")}` : ""));
 }
 
 function optionLabel(ctx, key, value) {
