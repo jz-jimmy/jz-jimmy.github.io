@@ -75,7 +75,7 @@ function chartSvg(ctx, chart, axis, slotOf, tip, geo) {
     // plot, right-aligned just above the line. Either way a label never overlaps the last.
     const ly = Math.max(narrow ? py - 4 : py + 4, lastLabelY + 12);
     lastLabelY = ly;
-    const label = `${name(p.system_id).replace(/^Degenerate: /, "").split(" (")[0]} ${p.value.toFixed(2)}`;
+    const label = `${name(p.system_id).replace(/^(Degenerate|Trivial baseline): /, "").split(" (")[0]} ${p.value.toFixed(2)}`;
     parts.push(s("line", { x1: M.left, x2: W - M.right, y1: py, y2: py, class: `pz-ref pz-${p.role}` }),
       narrow ? s("text", { x: W - M.right - 2, y: ly, class: "pz-reflabel", "text-anchor": "end" }, label)
         : s("text", { x: W - M.right + 6, y: ly, class: "pz-reflabel" }, label));
@@ -180,7 +180,8 @@ function chartCard(ctx, chart, axisId, slotOf) {
     h("p", { class: "fine" }, `${axis.name}: ${axis.note}.`),
     h("p", { class: "fine pz-unc" }, chart.uncertainty_note),
     table,
-    h("ul", { class: "fine pz-notes" }, chart.notes.map((n) => h("li", null, n))));
+    chart.notes.length ? h("details", { class: "pz-more" }, h("summary", null, t("pareto.notes")),
+      h("ul", { class: "fine pz-notes" }, chart.notes.map((n) => h("li", null, n)))) : null);
 }
 
 export function renderPareto(ctx, params) {
@@ -205,11 +206,22 @@ export function renderPareto(ctx, params) {
   }
   root.append(h("div", { class: "pz-axes", role: "group", "aria-label": t("pareto.xaxis") },
     h("span", { class: "fine" }, `${t("pareto.xaxis")}: `),
-    axes.map((a) => h("a", { class: "btn seg", href: buildHash("pareto", { x: a.axis_id }), "aria-current": a.axis_id === axisId ? "true" : null }, a.name))));
-  for (const chart of charts) root.append(chartCard(ctx, chart, axisId, slotOf));
+    axes.map((a) => h("a", { class: "btn seg", href: buildHash("pareto", { x: a.axis_id, c: params.c }), "aria-current": a.axis_id === axisId ? "true" : null }, a.name))));
+  // One chart at a time: the others stay in the page (hidden) and are a click away.
+  const shown = charts.find((c) => c.chart_id === params.c) || charts[0];
+  if (charts.length > 1) {
+    root.append(h("nav", { class: "pz-charts", "aria-label": t("pareto.charts") }, charts.map((c) =>
+      h("a", { class: "pz-chart-tab", href: buildHash("pareto", { x: params.x, c: c.chart_id }), "aria-current": c === shown ? "true" : null },
+        h("span", null, c.metric_name), h("span", { class: "fine" }, c.categories.join(" · "))))));
+  }
+  for (const chart of charts) {
+    const card = chartCard(ctx, chart, axisId, slotOf);
+    card.hidden = chart !== shown;
+    root.append(card);
+  }
   const costs = doc.costs || [];
   if (costs.length) {
-    root.append(h("section", { class: "block pz-costs" }, h("h2", null, t("pareto.costs.title")),
+    root.append(h("details", { class: "block pz-costs" }, h("summary", null, h("h2", null, t("pareto.costs.title")), h("span", { class: "fine" }, ` ${costs.length} ${t("pareto.costs.rows")}`)),
       h("p", { class: "fine" }, `${t("pareto.costs.what")}: ${costs[0].measured}.`),
       costs.some((c) => c.phases) ? h("p", { class: "fine" }, `${t("pareto.costs.phases")}: ${costs.find((c) => c.phases).phases.measured}.`) : null,
       h("div", { class: "table-scroll" }, h("table", { class: "pz-table" },

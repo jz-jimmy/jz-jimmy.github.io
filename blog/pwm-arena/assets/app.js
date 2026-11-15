@@ -4,6 +4,7 @@ import { buildHash, byId, h, parseHash } from "./util.js";
 import { renderOverview, renderSection } from "./overview.js";
 import { renderResults } from "./results.js";
 import { renderPareto } from "./pareto.js";
+import { renderLeaderboard } from "./leaderboard.js";
 import { renderPlayer, stopPlayer } from "./player.js";
 import { renderInstance } from "./detail.js";
 import { renderSystems, stopSessions } from "./systems.js";
@@ -11,6 +12,7 @@ import { renderLabelling, stopLabelling } from "./labelling.js";
 import { openGlossary } from "./glossary.js";
 
 const VIEWS = {
+  leaderboard: renderLeaderboard,
   minecraft: renderOverview,
   results: (ctx, p) => renderResults(ctx, p, "minecraft", "results"),
   pareto: renderPareto,
@@ -22,8 +24,8 @@ const VIEWS = {
   challenge: (ctx, p) => renderSection(ctx, p, "challenge"),
 };
 const SECTION_OF = { existing: "existing", challenge: "challenge" };
-const VIEW_NAV = [["minecraft", "view.overview"], ["results", "view.results"], ["pareto", "view.pareto"], ["player", "view.player"],
-  ["systems", "view.systems"], ["labelling", "view.labelling"]];
+const VIEW_NAV = [["leaderboard", "view.leaderboard"], ["pareto", "view.pareto"], ["minecraft", "view.overview"], ["results", "view.results"],
+  ["player", "view.player"], ["systems", "view.systems"], ["labelling", "view.labelling"]];
 
 const app = document.getElementById("app");
 const ctx = { doc: null, idx: null, bundle: readBundleMeta() };
@@ -119,7 +121,7 @@ function renderShell(route) {
   const viewNav = document.getElementById("view-nav");
   viewNav.hidden = section !== "minecraft";
   viewNav.setAttribute("aria-label", t("nav.views"));
-  const active = route.view === "instance" ? "minecraft" : route.view || "minecraft";
+  const active = route.view === "instance" ? "minecraft" : route.view || "leaderboard";
   viewNav.replaceChildren(h("div", { class: "wrap view-tabs" }, ...VIEW_NAV.map(([id, key]) =>
     h("a", { href: `#${id}`, class: "view-tab", "aria-current": id === active ? "page" : null }, t(key)))));
   // Notice band
@@ -127,10 +129,12 @@ function renderShell(route) {
   const fixture = notice.data_label === "infrastructure-fixture" || doc.build?.fixture === true || ctx.bundle?.fixture;
   const build = doc.build || {};
   const commit = build.git_commit ? String(build.git_commit).slice(0, 10) : t("meta.uncommitted");
-  document.getElementById("notice").replaceChildren(h("div", { class: `wrap notice-inner${fixture ? " is-fixture" : ""}` },
-    h("p", { class: "notice-flag" },
+  // One quiet line; what the preview does and does not claim opens on request.
+  document.getElementById("notice").replaceChildren(h("details", { class: `wrap notice-inner${fixture ? " is-fixture" : ""}` },
+    h("summary", { class: "notice-flag" },
       h("strong", null, notice.is_benchmark_release === true ? (notice.stage || "release") : t("notice.preview")),
-      fixture ? h("span", { class: "fixture-flag" }, t("notice.fixture")) : null),
+      fixture ? h("span", { class: "fixture-flag" }, t("notice.fixture")) : null,
+      h("span", { class: "notice-more" }, t("notice.more"))),
     notice.text ? h("p", { class: "notice-text" }, notice.text) : null,
     h("p", { class: "notice-meta" },
       h("span", null, `${t("meta.generated")} `, h("time", { datetime: doc.generated_utc }, doc.generated_utc ?? "—")),
@@ -148,7 +152,7 @@ let lastView = null;
 function route() {
   if (!ctx.doc) return;
   const r = parseHash(location.hash);
-  if (!VIEWS[r.view]) r.view = "minecraft";
+  if (!VIEWS[r.view]) r.view = "leaderboard";
   stopPlayer();
   stopSessions();
   stopLabelling();

@@ -90,8 +90,11 @@ export function renderPlayer(ctx, params) {
     const v = run.media.video;
     const ts = Array.isArray(v.timestamps_seconds) && v.timestamps_seconds.length ? v.timestamps_seconds
       : Array.from({ length: v.frames || 0 }, (_, i) => i / (v.fps || 1));
-    const video = h("video", { muted: true, playsinline: true, preload: "none", poster: run.media.poster?.url ?? null,
-      src: v.url, "aria-label": `${sys?.name ?? run.system_id}, branch ${run.branch}`, width: v.width, height: v.height });
+    // A stream without a poster image would sit black until played: let the browser fetch
+    // enough to paint its first frame instead (the "#t" fragment makes Safari do so too).
+    const poster = run.media.poster?.url ?? null;
+    const video = h("video", { muted: true, playsinline: true, preload: poster ? "none" : "metadata", poster,
+      src: poster ? v.url : `${v.url}#t=0.001`, "aria-label": `${sys?.name ?? run.system_id}, branch ${run.branch}`, width: v.width, height: v.height });
     video.muted = true;
     const overlay = s("svg", { class: "roi", viewBox: `0 0 ${v.width || 16} ${v.height || 9}`, preserveAspectRatio: "none", "aria-hidden": "true" });
     const msg = h("p", { class: "tile-msg", hidden: true });
